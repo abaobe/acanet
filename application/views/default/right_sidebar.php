@@ -3,7 +3,7 @@
 
                    <?php
                         if(isset($html))
-                            echo $html;
+                            $this->load->view($html);
                     ?>
 
                 </div>
