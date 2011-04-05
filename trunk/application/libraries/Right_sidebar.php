@@ -28,5 +28,9 @@ class Right_sidebar {
         return $this->CI->page->rSidebarFormat("Login", $this->CI->forms->login());
     }
 
+    function login2(){
+        return $this->CI->page->rSidebarFormat("Login", "meogjbsdfdf");
+    }
+
 }
 ?>
