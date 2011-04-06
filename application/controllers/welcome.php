@@ -8,37 +8,35 @@ class Welcome extends CI_Controller {
 	}
 
 	function index(){
-            $this->page->set(array('css/layout_setup.css', 'css/layout_text.css'),'css');
             $this->page->title = "Welcome to AcaNet";
 
-            $this->page->loadAllViews();
-//            $this->load->view('sdfsd');
+            $this->page->loadViews(
+                    null,
+                    array(
+                        array("Log in please!", "forms/login")
+                    ),
+                    null);
 	}
 
         function registration(){
             
 
-            $this->page->set(array('css/layout_setup.css', 'css/layout_text.css'),'css');
             $this->page->title = "Registration";
 
-            $this->load->view('default/header');
-            $this->load->view('default/left_sidebar');
-            $this->load->view('default/content');
-            $this->load->view('default/right_sidebar',array("html"=>"default/loginView"));
-            $this->load->view('default/footer');
-            
-            // Generate Contents
-//            $html = $this->page->contentFormat("Registration", $this->forms->registration());
-//            // Generate RightSidebar
-//            $this->load->library('right_sidebar');
-//            $rSidebarHtml = $this->right_sidebar->login()
-//                           .$this->right_sidebar->login2();
-//
-//
-////            $rSideBarHtml = "hello";
-//            $this->page->loadAllViews(null, null,
-//                    array('file' => 'default/content', 'arr' => array('html' => $html)),
-//                array('file' => 'default/right_sidebar', 'arr' => array('html' => $rSidebarHtml)));
+
+            $this->page->loadViews(
+                    array(
+                        array('Dummy 1', "sidebars/dummyList"),
+                        array('Dummy 2', "sidebars/dummyList")
+                    ),
+                    array(
+                        array("Registration", "forms/registration")
+                    ),
+                    array(
+                        array("Login Side", "forms/login"),
+                        array("Events", "sidebars/events"),
+                        array("News", "sidebars/news")
+                    ));
         }
 }
 
