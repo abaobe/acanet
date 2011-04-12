@@ -31,6 +31,8 @@ class Page {
     public $nav1;
 
     public $nav2;
+    public $breadcrumbs;
+    
 
     function  __construct() {
         $this->CI = & get_instance();
@@ -38,10 +40,16 @@ class Page {
 
         $this->nav1 = array(
             "Home" => base_url(),
-            "Registration" => site_url('welcome/registration')
+            "Registration" => site_url('registration')
+        );
+        // dummy breadcrumb
+        $this->breadcrumbs = array(
+            "Home" => base_url(),
+            "Members" => "#",
+            "Something" => "#"
         );
 
-        // dummy nav2
+        // dummy nav2 : Should be set in the controller page
         $this->nav2 = array(
             array(
                 array(
