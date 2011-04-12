@@ -56,7 +56,7 @@
                     <div class="sitename">
                         <h1><a href="index.php" title="Go to Start page">Academic Network</a></h1>
 
-                        <h2>An academic social network</h2>
+                        <h2>Under Construction :(</h2>
                     </div>
 
                     <!-- Navigation Level 0 -->
@@ -89,6 +89,7 @@
                     <div class="nav2">
 
                         <?php
+                        if(isset($this->page->nav2)){
                             foreach($this->page->nav2 as $i){
                                 // $i[0] contains menu, $1 contains submenu as array
                                 echo "<ul>\n";
@@ -105,6 +106,8 @@
                                 }
                                 echo "</li></ul>\n";
                             }
+                        }
+                            
                         ?>
 
                     </div>
@@ -116,10 +119,11 @@
                 <div class="header-breadcrumbs">
                     <ul>
 
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Webdesign</a></li>
-                        <li><a href="#">Templates</a></li>
-                        <li>Multiflex-3</li>
+                        <?php
+                            foreach($this->page->breadcrumbs as $text=>$link)
+                                    echo "<li><a href = '$link' > $text &nbsp;</a></li>";
+                        ?>
+                        <li>Here</li>
                     </ul>
 
                     <!-- Search form -->
