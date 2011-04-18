@@ -4,5 +4,5 @@
     $this->load->view($this->page->theme . $file, $params);
 ?>
 
-<br />
+
                    

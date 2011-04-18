@@ -1,6 +1,6 @@
 <!-- B.1 MAIN NAVIGATION -->
                 <div class="main-navigation">
-                    <?php
+                    <?php                        
                         if(isset($sidebars)){
                             $isFirstSidebar = true;
 

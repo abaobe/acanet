@@ -7,6 +7,15 @@
            {
                    parent::__construct();
            }
+           function LoadCreateNewsView()
+           {
+
+           }
+           function ProcessNews()
+           {
+              
+           }
+           
    }
 
 ?>
