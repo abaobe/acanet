@@ -15,7 +15,7 @@
                             }
                         }
                     ?>
-                    <hr class="clear-contentunit" />
+<!--                    <hr class="clear-contentunit" />-->
 
                     <!-- Content unit - Two columns -->
 

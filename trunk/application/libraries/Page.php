@@ -52,11 +52,14 @@ class Page {
         // dummy nav2 : Should be set in the controller page
         $this->nav2 = array(
             array(
-                array(
-                    "Home", base_url())),
+                  array(
+                        "Home", base_url()
+                       )
+                ),
             array(
                 array(
-                    "Communities", "community/index"),
+                      "Communities", "community/index"
+                    ),
                     array(
                         "CSE" => "community/cse",
                         "EEE" => "community/eee",
@@ -65,7 +68,8 @@ class Page {
                 ),
             array(
                 array(
-                    "Institutions", "institution/index"),
+                       "Institutions", "institution/index"
+                    ),
                     array(
                         "BUET" => "community/buet",
                         "DU" => "community/du",
