@@ -1,9 +1,9 @@
 <!-- B.1 MAIN NAVIGATION -->
+               
                 <div class="main-navigation">
                     <?php                        
                         if(isset($sidebars)){
-                            $isFirstSidebar = true;
-
+                            $isFirstSidebar = true;                            
                             foreach ($sidebars as $i){
                                 if($isFirstSidebar){
                                     echo '<div class="round-border-topright"></div>';

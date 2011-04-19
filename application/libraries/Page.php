@@ -50,6 +50,7 @@ class Page {
         );
 
         // dummy nav2 : Should be set in the controller page
+        //multidimention array --> ([]([main name,url])([subnames]=>url))
         $this->nav2 = array(
             array(
                   array(
