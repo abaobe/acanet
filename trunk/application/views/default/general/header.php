@@ -62,10 +62,8 @@
                     <!-- Navigation Level 0 -->
                     <div class="nav0">
                         <ul>
-                            <li><a href="#" title="Pagina home in Italiano"><?php echo $this->page->img('buet_logo.png'); ?></a></li>
-                            <li><a href="#" title="Homepage auf Deutsch"><?php echo $this->page->img('nsu_logo.png'); ?></a></li>
-                            <li><a href="#" title="Hemsidan p&aring; svenska"><?php echo $this->page->img('flag_sweden.gif'); ?></a></li>
-
+                            <li><a href="#" title="BUET"><?php echo $this->page->img('buet_logo.png'); ?></a></li>
+                            <li><a href="#" title="NSU"><?php echo $this->page->img('nsu_logo.png'); ?></a></li>
                         </ul>
                     </div>
 
