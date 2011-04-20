@@ -1,6 +1,10 @@
 <div class="column1-unit">
    <div class="contactform">
-      <?php echo form_open('member/registration'); ?>
+
+      <?php
+      //print_r($inst_list);
+      echo validation_errors();
+      echo form_open('register'); ?>
       <fieldset><legend>&nbsp;CONTACT DETAILS&nbsp;</legend>
 
          <p><label for="contact_title" class="left">Title:</label>
@@ -8,19 +12,50 @@
                <option value="choose"> Select... </option>
                <option value="mrs"> Mrs. </option>
                <option value="mr"> Mr. </option>
-
+               <option value="ms"> Mr. </option>
                <option value="dr"> Dr. </option></select></p>
          <p><label for="contact_firstname" class="left">First name:</label>
-            <input type="text" name="contact_firstname" id="contact_firstname" class="field" value="" tabindex="1" /></p>
-         <p><label for="contact_familyname" class="left">Family name:</label>
-            <input type="text" name="contact_familyname" id="contact_familyname" class="field" value="" tabindex="1" /></p>
-         <p><label for="contact_street" class="left">Street:</label>
+            <input type="text" name="contact_firstname" id="contact_firstname" class="field" value="<?php echo set_value('contact_firstname'); ?>" tabindex="1" /></p>
+         
+         <p><label for="contact_lastname" class="left">Last name:</label>
+            <input type="text" name="contact_lastname" id="contact_lastname" class="field" value="<?php echo set_value('contact_lastname'); ?>" tabindex="1" /></p>
 
-            <input type="text" name="contact_street" id="contact_street" class="field" value="" tabindex="1" /></p>
+         <p><label for="contact_username" class="left">Username:</label>
+            <input type="text" name="contact_username" id="contact_username" class="field" value="<?php echo set_value('contact_username'); ?>" tabindex="1" /></p>
+         
+         <p><label for="contact_password" class="left">Password:</label>
+            <input type="password" name="contact_password" id="contact_password" class="field" value="<?php echo set_value('contact_password'); ?>" tabindex="1" /></p>
+         
+         <p><label for="contact_repassword" class="left">Re Enter Password:</label>
+            <input type="password" name="contact_repassword" id="contact_repassword" class="field" value="<?php echo set_value('contact_repassword'); ?>" tabindex="1" /></p>
+         <p><label for="contact_institution" class="left">Institution:</label>
+            <select name="contact_institution" id="contact_institution" class="combo">
+               <option value="Choose">Select...</option>
+               <?php 
+               
+               foreach($inst_list as $name)
+               {
+                   echo "<option value = \" " . $name . "\">" . $name ."</option>";
+               }
+                    
+               ?>
+            </select></p>
+
+
+            <p><label for="contact_field" class="left">Field:</label>
+            <select name="contact_field" id="contact_field" class="combo">
+               <option value="Choose">Select...</option>
+
+               
+            </select></p>
+
+          <p><label for="contact_street" class="left">Street:</label>
+
+            <input type="text" name="contact_street" id="contact_street" class="field" value="<?php echo set_value('contact_street'); ?>" tabindex="1" /></p>
          <p><label for="contact_postalcode" class="left">Postal code:</label>
-            <input type="text" name="contact_postalcode" id="contact_postalcode" class="field" value="" tabindex="1" /></p>
+            <input type="text" name="contact_postalcode" id="contact_postalcode" class="field" value="<?php echo set_value('contact_postalcode'); ?>" tabindex="1" /></p>
          <p><label for="contact_city" class="left">City:</label>
-            <input type="text" name="contact_city" id="contact_city" class="field" value="" tabindex="1" /></p>
+            <input type="text" name="contact_city" id="contact_city" class="field" value="<?php echo set_value('contact_city'); ?>" tabindex="1" /></p>
          <p><label for="contact_country" class="left">Country:</label>
             <select name="contact_country" id="contact_country" class="combo">
 
@@ -30,11 +65,11 @@
                <option value="China"> China </option></select></p>
          <p><label for="contact_phone" class="left">Phone:</label>
 
-            <input type="text" name="contact_phone" id="contact_phone" class="field" value="" tabindex="2" /></p>
+            <input type="text" name="contact_phone" id="contact_phone" class="field" value="<?php echo set_value('contact_phone'); ?>" tabindex="2" /></p>
          <p><label for="contact_email" class="left">Email:</label>
-            <input type="text" name="contact_email" id="contact_email" class="field" value="" tabindex="2" /></p>
+            <input type="text" name="contact_email" id="contact_email" class="field" value="<?php echo set_value('contact_email'); ?>" tabindex="2" /></p>
          <p><label for="contact_url" class="left">Website:</label>
-            <input type="text" name="contact_url" id="contact_url" class="field" value="" tabindex="3" /></p>
+            <input type="text" name="contact_url" id="contact_url" class="field" value="<?php echo set_value('contact_url'); ?>" tabindex="3" /></p>
          <p><input type="submit" name="submit" id="submit" class="button" value="Submit" tabindex="6" /></p>
       </fieldset>
 

@@ -21,7 +21,12 @@
         <meta name="distribution" content="global" />
         <meta name="description" content="Your page description here ..." />
         <meta name="keywords" content="Your keywords, keywords, keywords, here ..." />
+        <!--
+        <script type ="text/javascript">
+            $("#contact_institution").change(function(){
 
+            });
+        </script> -->
         <?php
             echo $this->page->get('css',true); //  Default CSS
             echo $this->page->get('css');
