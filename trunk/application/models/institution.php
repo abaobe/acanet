@@ -5,11 +5,13 @@
  */
  class Institution extends CI_Model {
 
+       var $institution_id = "";
        var $name ="";
-       var $sname = "";
+       var $short_name = "";
        var $campuses = "";
        var $short_description = "";
        var $location  = "";
+       var $community_id = "";
 
        function __construct()
        {
@@ -17,19 +19,31 @@
            parent::__construct();
        }
 
-       function Create(){
-           $this->name = $this->input->post('name');
-           $this->sname = $this->input->post('sname');
-           $this->campuses = $this->input->post('campuses');
-           $this->short_description = $this->input->post('short_description');
-           $this->location = $this->input->post('location');
+       function Create($name, $sname, $campuses,$short_description,$location){
+           $this->name = $name;
+           $this->short_name = $sname;
+           $this->campuses = $campuses;
+           $this->short_description = $short_description;
+           $this->location = $location;
+           
+           // Ge a community
+           $this->load->model("Community");
+           $this->community_id = $this->Community->Create($name,"institution");
 
            $this->db->insert('institution',$this);
-           return $this->db->insert_id();
+           $this->institution_id = $this->db->insert_id();
+           return $this->institution_id;
        }
 
-       function checkAvailability($name, $sname){
+       function isAvailable($name, $sname){
            // given a name & sname checks if they are available
+           $this->db->where(array(
+               "name" => $name, "short_name" => $sname
+           ));
+           if($this->db->count_all_results('institution') > 0)
+               return false;
+           else
+               return true;
        }
        
        function GetInstitutionList()
