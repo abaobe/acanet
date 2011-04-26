@@ -12,10 +12,12 @@ class Inst_field extends CI_Controller{
        parent::__construct();
        //$this->CI = & get_instance();
     }
-    function index()
+    function index($name)
     {
        $this->load->model('Institution');
-       $inst_ids = $this->Institution->GetInstitutionIdByShortname($_GET['name']);
+       //echo "nospace".$_GET['name']."nopspace";
+       
+       $inst_ids = $this->Institution->GetInstitutionIdByShortname($name);
       // print_r($inst_ids);
        $this->load->model('Field');
        $list = array();
@@ -31,7 +33,7 @@ class Inst_field extends CI_Controller{
 
        foreach( $list as $element)
        {
-           echo $element;
+           echo "<option value='". $element ."'>".$element."</option>";
        }
 
     }
