@@ -11,12 +11,18 @@
                      <option value="week"> Latest in a week </option>
                      <option value="month"> Latest in a month </option></select></p>-->
                <p><label for="contact_message" class="left">Message:</label>
-                  <textarea name="contact_message" id="contact_message" cols="45" rows="10"tabindex="5"></textarea></p>
+                  <textarea name="contact_message" id="contact_message" cols="45" rows="10"></textarea></p>
+               <p><label for="contact_title" class="left">Type:</label>
+                  <select name="make-post-community-type" id="make-post-community-type" class="combo">
+                     <option>Institution</option>
+                     <option>Field</option>
+                  </select>
+               </p>
                <p><label for="contact_title" class="left">Community:</label>
-                  <select name="contact_title" id="contact_title" class="combo">
+                  <select name="make-post-communities" id="make-post-communities" class="combo">
                      <option value="mrs"> CSE </option>
                      <option value="mr"> EEE </option>
                      <option value="dr"> MEDICAL </option></select></p>
-               <p><input type="submit" name="submit" id="submit" class="button" value="Send message" tabindex="6" /></p>
+               <p><input type="submit" name="submit" id="makePost" class="button" value="Post" tabindex="6" /></p>
             </fieldset>
          </form>

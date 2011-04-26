@@ -7,7 +7,7 @@
                         else if(isset($content)){
                             foreach ($content as $i){
                                 $params = (isset($i[2]))?($i[2]):(array());
-
+                                
                                 $this->load->view($this->page->theme . 'general/contentWrapper' ,
                                         array('title' => $i[0],
                                             'file' => $i[1],
