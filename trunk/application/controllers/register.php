@@ -118,7 +118,8 @@
            function SendVerificationEmail()
            {
                
-              // $this->load->view('verify',array('data' => $this->register_data));
+              $this->load->view('verify',array('data' => $this->register_data));
+
               
            }
 
@@ -126,7 +127,9 @@
            {
                $this->load->model('User');
                $this->User->InsertUser($this->register_data);
-               $this->SendVerificationEmail();
+               $this->load->model('user');
+               $this->User-> GetUserVerifiactionData($this->register_data['contact_username']);
+               //$this->SendVerificationEmail();
            }
            function Register()
            {

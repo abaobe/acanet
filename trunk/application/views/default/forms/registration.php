@@ -32,7 +32,7 @@
                
                foreach($inst_list as $name)
                {
-                   echo "<option value = \" " . $name . "\">" . $name ."</option>";
+                   echo "<option value =\"" . $name . "\">" . $name ."</option>";
                }
                     
                ?>
