@@ -24,19 +24,31 @@
          </form>-->
       </div>
    </div>
-   <div class="column1-unit">
+   
+   <?php foreach ($userPosts as $anUserPost): ?>
+      <div class="column1-unit">
+         <h1></h1>
+         <h3><?=  date_format(date_create($anUserPost['date_time']), 'l, d F Y H:i'); ?>,
+                     by <a href="#"><?=$anUserPost['publisher_name'] ?></a></h3>
+         <p><?=$anUserPost['description'] ?> <a href="#">Read more &raquo;</a></p>
+         <p class="details">| Posted by <a href="#"><?=$anUserPost['publisher_name'] ?> </a> | Community: <a href="#">General</a> | Comments: <a href="#">73</a> |</p>
+     </div>
+
+   <?php endforeach; ?>
+   
+<!--   <div class="column1-unit">
       <h1>Here comes the title</h1>
-      <h3>Monday, 20 November 2006 at 20:30 GMT, by <a href="#">SiteAdmin </a></h3>
+         <h3>Monday, 20 November 2006 at 20:30 GMT, by <a href="#">SiteAdmin </a></h3>
       <p>Lorem ipsum dolor sit amet, consectetuer <a href="#">adipiscing elit</a>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore <a href="#">magna aliquam</a> erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis. <a href="#">Read more &raquo;</a></p>
       <p class="details">| Posted by <a href="#">SiteAdmin </a> | Categories: <a href="#">General</a> | Comments: <a href="#">73</a> |</p>
-   </div>
+   </div>-->
    <hr class="clear-contentunit" />
-   <div class="column1-unit">
+<!--   <div class="column1-unit">
       <h1>Here comes Another title</h1>
       <h3>Monday, 20 November 2006 at 20:30 GMT, by <a href="#">SiteAdmin </a></h3>
       <p>Lorem ipsum dolor sit amet, consectetuer <a href="#">adipiscing elit</a>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore <a href="#">magna aliquam</a> erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis. <a href="#">Read more &raquo;</a></p>
       <p class="details">| Posted by <a href="#">SiteAdmin </a> | Categories: <a href="#">General</a> | Comments: <a href="#">73</a> |</p>
-   </div>
+   </div>-->
    <hr class="clear-contentunit" />
 
    <!-- Content unit - Two columns -->
