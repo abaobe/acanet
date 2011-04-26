@@ -27,6 +27,19 @@
 
             });
         </script> -->
+       <script type= "text/javascript">
+            function site_url()
+            {
+
+                return <?php echo "'" .site_url() . "'"  ;?>
+            }
+            function base_url()
+            {
+                return <?php echo "'" . base_url() . "'" ;?>
+            }
+            
+        </script>
+
         <?php
             echo $this->page->get('css',true); //  Default CSS
             echo $this->page->get('css');
