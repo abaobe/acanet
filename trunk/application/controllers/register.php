@@ -64,6 +64,8 @@
            {
                $this->form_validation->set_rules('contact_firstname','Firstname','required|min_length[3]|max_length[10]');
                $this->form_validation->set_rules('contact_lastname','Lastname','required|min_length[3]|max_length[10]');
+               $this->form_validation->set_rules('contact_username','Username','required|min_length[5]|max_length[10]');
+
                $this->form_validation->set_rules('contact_password','Password','required|min_length[6]|max_length[15]|matches[contact_repassword]');
                $this->form_validation->set_rules('contact_repassword','Re Enter Password','required|min_length[6]|max_length[15]');
                $this->form_validation->set_rules('contact_institution','Institution','callback_CheckInstitution');
@@ -115,10 +117,14 @@
                 $this->form_validation->set_message('CheckPhone', 'The %s field should be a number from 6 to 15 digit');
                 return true;
            }
-           function SendVerificationEmail()
+           function SendVerificationEmail($param,$mail_id)
            {
                
-              $this->load->view('verify',array('data' => $this->register_data));
+              $this->load->view('verify',$param);
+              $this->load->helper('email');
+              $message = "click on the below link for email verification </br>
+                          "."<a href='" .base_url()."/verifyuser/index.php/".$param .">".
+              send_email("$mail_id","Academic_network_email_verification","click on")
 
               
            }
@@ -128,8 +134,8 @@
                $this->load->model('User');
                $this->User->InsertUser($this->register_data);
                $this->load->model('user');
-               $this->User-> GetUserVerifiactionData($this->register_data['contact_username']);
-               //$this->SendVerificationEmail();
+               $param = $this->User-> GetUserVerifiactionData($this->register_data['contact_username']);
+               $this->SendVerificationEmail($param,$this->register_data['contact_email']);
            }
            function Register()
            {
