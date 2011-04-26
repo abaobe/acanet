@@ -5,33 +5,46 @@ if (!defined('BASEPATH'))
 
 class Institution extends CI_Controller {
 
+
+    public $defaultBreadcrumb;
+
    //put your code here
 
+    function __construct(){
+        parent::__construct();
+        $this->defaultBreadcrumb = array(
+        "Home" => base_url(),
+        "Institution" => site_url("Institution"));
+    }
+
    function index() {
-      $this->LoadInstitutionView();
+      $this->page->title = "Institution Page";
+      $this->page->loadViews(null,
+              array(
+                  array("html" => "Landing page of Instituions"),
+              ),
+              null);
       
    }
 
-   function LoadInstitutionView() {
+   function create(){
+       $this->load->model("Institution");
+       $this->page->title = "Create New Institution";
+       $this->defaultBreadcrumb['Create New Instituion'] = "";
+       $this->page->breadcrumbs = $this->defaultBreadcrumb;
+       $this->page->loadViews(
+               array(
+                   array("Institutions", "sidebars/inst_common")
+               ),
+               array(
+                   array("Create New Instituion", "forms/createInst")
+               ),
+               null);
+   }
+
+   function sample() {
       $this->page->title = "Institution Page";
 
-      $this->page->nav1 = array(
-          "Home" => base_url(),
-          "Login" => site_url('login'),
-          "Registration" => site_url('register')
-      );
-
-
-
-      $this->page->breadcrumbs = array(
-          "Home" => base_url(),
-          "Institution" => site_url("Institution")
-      );
-
-
-
-
-     
       $this->page->loadViews(
               null,
               array(

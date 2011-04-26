@@ -74,7 +74,7 @@
                     <div class="sitename">
                         <h1><a href="index.php" title="Go to Start page">Academic Network</a></h1>
 
-                        <h2>Under Construction :(</h2>
+                        <h2></h2>
                     </div>
 
                     <!-- Navigation Level 0 -->
@@ -136,8 +136,9 @@
                     <ul>
 
                         <?php
-                            foreach($this->page->breadcrumbs as $text=>$link)
-                                    echo "<li><a href = '$link' > $text &nbsp;</a></li>";
+                            foreach($this->page->breadcrumbs as $text=>$link){
+                                echo (empty($link))?("<li>$text</li>"):("<li><a href = '$link' > $text &nbsp;</a></li>");
+                            }
                         ?>
 <!--                        <li>Here</li>-->
                     </ul>
