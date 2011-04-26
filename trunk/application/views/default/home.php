@@ -13,7 +13,7 @@
    <h1 class="block">Recent Posts</h1>
    <div class="column1-unit">
       <div class="contactform">
-         <form method="post" action="index.html">
+<!--         <form method="post" action="index.html">
             <fieldset><legend>&nbsp;Filter by&nbsp;</legend>
                <p><label for="contact_title" class="left">Community:</label>
                   <select name="contact_title" id="contact_title" class="combo">
@@ -21,7 +21,7 @@
                      <option value="Community"> EEE </option>
                      <option value="User"> MEDICAL </option></select></p>
             </fieldset>
-         </form>
+         </form>-->
       </div>
    </div>
    <div class="column1-unit">
