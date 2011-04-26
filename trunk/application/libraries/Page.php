@@ -24,7 +24,7 @@ class Page {
     public $defaultCssArr = array();
     public $cssArr = array();
     public $jsArr = array();
-    public $defaultJsArr = array('jquery-1.5.2.min');
+    public $defaultJsArr = array('jquery-1.5.2.min','registerscript');
 
     public $title = 'Academic Network';
 
