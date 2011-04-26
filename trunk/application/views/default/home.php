@@ -2,8 +2,8 @@
 
 
    <div class="column1-unit">
-      <div class="contactform">
-         <?php $this->load->view($this->page->theme.'forms/makePost'); ?>
+      <div class="contactform" id="make-post-form-container">
+         <?php $this->load->view($this->page->theme.'forms/makePost',array('username'=>$username)); ?>
       </div>
    </div>
    <!-- Pagetitle -->
@@ -12,8 +12,8 @@
    <!-- Content unit - One column -->
    <h1 class="block">Recent Posts</h1>
    <div class="column1-unit">
-      <div class="contactform">
-<!--         <form method="post" action="index.html">
+<!--      <div class="contactform">
+         <form method="post" action="index.html">
             <fieldset><legend>&nbsp;Filter by&nbsp;</legend>
                <p><label for="contact_title" class="left">Community:</label>
                   <select name="contact_title" id="contact_title" class="combo">
@@ -21,20 +21,12 @@
                      <option value="Community"> EEE </option>
                      <option value="User"> MEDICAL </option></select></p>
             </fieldset>
-         </form>-->
-      </div>
+         </form>
+      </div>-->
    </div>
-   
-   <?php foreach ($userPosts as $anUserPost): ?>
-      <div class="column1-unit">
-         <h1></h1>
-         <h3><?=  date_format(date_create($anUserPost['date_time']), 'l, d F Y H:i'); ?>,
-                     by <a href="#"><?=$anUserPost['publisher_name'] ?></a></h3>
-         <p><?=$anUserPost['description'] ?> <a href="#">Read more &raquo;</a></p>
-         <p class="details">| Posted by <a href="#"><?=$anUserPost['publisher_name'] ?> </a> | Community: <a href="#">General</a> | Comments: <a href="#">73</a> |</p>
-     </div>
+   <div id="recent-post-load-div">
 
-   <?php endforeach; ?>
+   </div>
    
 <!--   <div class="column1-unit">
       <h1>Here comes the title</h1>
@@ -42,7 +34,7 @@
       <p>Lorem ipsum dolor sit amet, consectetuer <a href="#">adipiscing elit</a>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore <a href="#">magna aliquam</a> erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis. <a href="#">Read more &raquo;</a></p>
       <p class="details">| Posted by <a href="#">SiteAdmin </a> | Categories: <a href="#">General</a> | Comments: <a href="#">73</a> |</p>
    </div>-->
-   <hr class="clear-contentunit" />
+   
 <!--   <div class="column1-unit">
       <h1>Here comes Another title</h1>
       <h3>Monday, 20 November 2006 at 20:30 GMT, by <a href="#">SiteAdmin </a></h3>

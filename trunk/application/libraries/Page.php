@@ -69,7 +69,7 @@ class Page {
                 ),
             array(
                 array(
-                       "Institutions", "institution/index"
+                       "Institutions", "institute/index"
                     ),
                     array(
                         "BUET" => "community/buet",

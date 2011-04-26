@@ -124,7 +124,7 @@
               $this->load->helper('email');
               $message = "click on the below link for email verification </br>
                           "."<a href='" .base_url()."/verifyuser/index.php/".$param .">".
-              send_email("$mail_id","Academic_network_email_verification","click on")
+              send_email("$mail_id","Academic_network_email_verification","click on");
 
               
            }
