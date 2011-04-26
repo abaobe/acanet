@@ -2,7 +2,7 @@
 
       <?php
           echo validation_errors();
-          echo form_open('register');
+          echo form_open('institute/create/process');
 
 //          // generate table
           $this->table->clear();

@@ -133,6 +133,15 @@ class Page {
         }
     }
 
+    function showMessage($content){
+       // Set CSS
+        $this->set(array('layout1_setup', 'layout1_text'),'css');
+        // Load actual views
+        $this->CI->load->view($this->theme . "general/header");
+        $this->CI->load->view($this->theme . "general/content",array('html' => $content));
+        $this->CI->load->view($this->theme . "general/footer");
+    }
+
     
 
 
