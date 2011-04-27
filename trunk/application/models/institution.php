@@ -79,4 +79,12 @@
 
 
        }
+	    function GetCommunityId($inst_id) {
+        $this->db->select('community_id');
+        $this->db->where('institution_id', $inst_id);
+        $query = $this->db->get('institution');
+        $list = $query->result_array();
+        $result = $list[0]['community_id'];
+        return $result;
+        }
  }
