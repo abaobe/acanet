@@ -1,42 +1,27 @@
 <?php
-/* 
+
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 
-class Inst_field extends CI_Controller{
-   // public $CI;
+class Inst_field extends CI_Controller {
 
-    function  __construct()
-    {
-       parent::__construct();
-       //$this->CI = & get_instance();
+    // public $CI;
+
+    function __construct() {
+        parent::__construct();
     }
-    function index($name)
-    {
-       $this->load->model('Institution');
-       //echo "nospace".$_GET['name']."nopspace";
-       
-       $inst_ids = $this->Institution->GetInstitutionIdByShortname($name);
-      // print_r($inst_ids);
-       $this->load->model('Field');
-       $list = array();
-       foreach($inst_ids as $aInst)
-       {
-            $temp = $this->Field->GetFieldByInst($aInst);
-            foreach($temp as $aTemp)
-            array_push($list,$aTemp);
-       }
 
-       //print_r ($list);
-      // echo "hello";
-
-       foreach( $list as $element)
-       {
-           echo "<option value='". $element ."'>".$element."</option>";
-       }
-
+    function index($inst_id) {
+        $this->load->model('Institution');
+        $this->load->model('Field');
+        $list = $this->Field->GetFieldByInst($inst_id);
+        foreach ($list as $element) {
+            echo "<option value='" . $element['field_id'] . "'>" . $element['short_name'] . "</option>";
+        }
     }
+
 }
 ?>
 
