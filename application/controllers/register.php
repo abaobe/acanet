@@ -61,7 +61,7 @@ class register extends CI_Controller {
         //rules for register form validation
         $this->form_validation->set_rules('contact_firstname', 'Firstname', 'required|min_length[3]|max_length[10]');
         $this->form_validation->set_rules('contact_lastname', 'Lastname', 'required|min_length[3]|max_length[10]');
-        $this->form_validation->set_rules('contact_username', 'Username', 'required|min_length[5]|max_length[10]');
+        $this->form_validation->set_rules('contact_username', 'Username', 'callback_CheckUsername');
         $this->form_validation->set_rules('contact_password', 'Password', 'required|min_length[6]|max_length[15]|matches[contact_repassword]');
         $this->form_validation->set_rules('contact_repassword', 'Re Enter Password', 'required|min_length[6]|max_length[15]');
         $this->form_validation->set_rules('contact_institution', 'Institution', 'callback_CheckInstitution');
@@ -70,7 +70,16 @@ class register extends CI_Controller {
         $this->form_validation->set_rules('contact_phone', 'Phone', 'callback_CheckPhone');
         $this->form_validation->set_rules('contact_email', 'Email', 'callback_CheckMail');
     }
+    function CheckUsername($username)
+    {
+        $this->load->model('User');
+        if(!$this->User->IsUsernameValid($username)){
+            $this->form_validation->set_message('CheckUsername', 'The %s is used already please try another username');
+            return false;
+        }
+        return true;
 
+    }
     function CheckInstitution($inst) {
         $this->form_validation->set_message('CheckInstitution', 'The %s field must be present in Database');
         $this->GetInstitutionList();

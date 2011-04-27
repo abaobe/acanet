@@ -48,15 +48,13 @@
        
        function GetInstitutionList()
        {
-           $this->db->select('short_name');
+           $this->db->where('institution_id !=',0);
+           $this->db->select('institution_id,short_name');
            $query = $this->db->get('institution');
+
            $list = $query->result_array();
-           $result = array();
-           foreach($list as $element)
-           {    if($element['short_name'] != null)
-                    array_push($result, $element['short_name']);
-           }
-           return $result;
+
+           return $list;
        }
 
        function getAll(){
