@@ -59,6 +59,11 @@
            return $result;
        }
 
+       function getAll(){
+           $query = $this->db->get('institution');
+           return $query->result();
+       }
+
        function GetInstitutionIdByShortname($name)
        {
            $this->db->select('institution_id');

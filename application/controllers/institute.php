@@ -83,6 +83,55 @@ class Institute extends CI_Controller {
                null);
    }
 
+   function join($mode = "", $id = ""){
+       // Join an Institution
+       $this->page->title = "Join An Institution";
+       $this->defaultBreadcrumb['Join An Institution'] = "";
+       $this->page->breadcrumbs = $this->defaultBreadcrumb;
+
+       if(isset($mode)){
+           if($mode == "id_chosen"){
+               if(!isset($id)){
+                   $this->page->showMessage("Error: Must Choose An ID");
+                   return;
+               }
+               
+           }else if($mode == "ref_chosen"){
+               $this->form_validation->set_rules('id', 'Institute ID', 'required|');
+               $this->form_validation->set_rules('referer', 'Referer Username', 'required|max_length[100]');
+
+               if($this->form_validation->run()){
+                   // success!
+               }
+           }
+           $this->defaultBreadcrumb['Join An Institution'] = site_url('institute/join');
+           $this->defaultBreadcrumb['Choose Referer'] = "";
+           $this->page->breadcrumbs = $this->defaultBreadcrumb;
+           $this->page->loadViews(
+                array(
+                   array("Institutions", "sidebars/inst_common")
+                ),
+                array(
+                   array("Choose A Referer", "forms/choose_referer", array("id" => $id)),
+                ),
+                null);
+           return;
+       }
+
+       // Load  Models
+       $this->load->model('Institution');
+       $instList = $this->Institution->getAll();
+
+       $this->page->loadViews(
+            array(
+               array("Institutions", "sidebars/inst_common")
+            ),
+            array(
+               array("Join An Instituion", "institution/join", array("list" => $instList)),
+            ),
+            null);
+   }
+
    function sample() {
       $this->page->title = "Institution Page";
 
