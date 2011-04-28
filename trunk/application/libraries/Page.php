@@ -31,7 +31,7 @@ class Page {
     public $nav1;
 
     public $nav2;
-    public $breadcrumbs;
+    public $breadcrumbs; 
     
 
     function  __construct() {
