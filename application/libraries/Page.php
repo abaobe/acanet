@@ -80,15 +80,15 @@ class Page {
         );
     }
 
-    function set($array, $type='css'){
+    function set($array, $type='css'){       
         if($type=='css'){
-            $this->cssArr = $array;
+            $this->cssArr = array_merge($this->cssArr ,$array);
         }else if($type == "js"){
-            $this->jsArr = $array;
-        }
+            $this->jsArr = array_merge($this->jsArr,$array);
+        }        
     }
 
-    function get($type="css",$default=false){
+    function get($type="css",$default=false){       
         $html = "<!-- Inserting $type -->";
         if($type == "css"){
             $arr = ($default)?($this->defaultCssArr):($this->cssArr);

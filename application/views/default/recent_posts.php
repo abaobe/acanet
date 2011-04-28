@@ -1,5 +1,5 @@
    <?php foreach ($allPosts as $aPost): ?>
-         <div class="column1-unit">
+         <div class="posts" postId="<?=$aPost['post_id']?>">
             <h1></h1>
             <h3><?=  date_format(date_create($aPost['date_time']), 'l, d F Y \a\t H:i'); ?>,
                         by <a href="#"><?=$aPost['publisher_name'] ?></a></h3>

@@ -80,8 +80,8 @@
                     <!-- Navigation Level 0 -->
                     <div class="nav0">
                         <ul>
-                            <li><a href="#" title="BUET"><?php echo $this->page->img('buet_logo.png'); ?></a></li>
-                            <li><a href="#" title="NSU"><?php echo $this->page->img('nsu_logo.png'); ?></a></li>
+                            <li><a href="#" title="BUET"><?php echo $this->page->img('buet_logo.png',15,20); ?></a></li>
+                            <li><a href="#" title="NSU"><?php echo $this->page->img('nsu_logo.png',15,20); ?></a></li>
                         </ul>
                     </div>
 
