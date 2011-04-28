@@ -6,6 +6,14 @@
 
 $(document).ready(function(){
 
+   
+
+   $("#recent-post-load-div .posts").live("mouseover",function(){
+         $(this).css("background-color","#EA3");
+   }).live("mouseout",function(){
+         $(this).css("background-color","");
+   });
+
    LoadCommunities();
    LoadRecentPosts();
 
@@ -55,7 +63,7 @@ $(document).ready(function(){
 //               $("#make-post-community-id").html(data);
 //          //     $("#make-post-community-id").attr("disabled","");
 //            }
-//         });
+//         });         
          $("#make-post-community-id").load(site_url()+"/community/GetByType",{"type":type});
          $("#make-post-community-id").attr("disabled","");
    }
@@ -70,13 +78,15 @@ $(document).ready(function(){
          data : ({
                     username : ""
                }),
-         success : function(data){            
+         success : function(data){
+            //alert(data);
+            $("#recent-post-load-div").attr("disabled","");
+            $("#recent-post-load-div").animate({opacity: 1}, 1500 );
             $("#recent-post-load-div").html(data);
-            $("#recent-post-load-div").slideDown(slow);
+            $("#recent-post-load-div").slideDown('slow');
          }
       })
       //$("#recent-post-load-div").load(,{username:""});
-      $("#recent-post-load-div").attr("disabled","");
-      $("#recent-post-load-div").animate({opacity: 1}, 1500 );
+      
    }
 });
