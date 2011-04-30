@@ -14,7 +14,9 @@
            {                        
               $this->page->title = "Community";
               $this->page->set(array('jquery-ui-1.8.12.custom'),'css');
+              $this->page->set(array('timepicker-addon'),'css');
               $this->page->set(array('community','jquery-ui-1.8.12.custom.min'),'js');
+              $this->page->set(array('community','jquery-ui-timepicker-addon'),'js');
               //set js
               //get js
 
