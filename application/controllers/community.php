@@ -35,6 +35,8 @@
 
               $left_sidebar[0] = array('Actions','sidebars/community_tab_action');
               $left_sidebar[1] = array('Information','sidebars/community_tab_info');
+			  
+			  
 
 
               $main_content[0] = array("Community", "community");
