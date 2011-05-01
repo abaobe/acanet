@@ -54,6 +54,9 @@ class User_inst extends CI_Model {
         $this->db->update('user_institution', $this);
     }
 
+    function GetPendingMembers(){
+    }
+
 }
 
 ?>
