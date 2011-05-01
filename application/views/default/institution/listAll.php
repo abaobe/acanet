@@ -14,12 +14,20 @@
 
     // View for joining One.
     if(isset($list)){
+
+        if(!isset($action))
+            $action = "join";
+
         $this->table->clear();
         $data = array();
         $data[] = array("Name", "Short Name", "Location", "Campuses", "Description", "Status", "Action");
         foreach($list as $i){
+            $actionText = anchor('institute/join/id_chosen/' . $i->institution_id, "Join!");
+            if($action == "modify")
+                $actionText = anchor('institute/modify/id_chosen/' . $i->institution_id, "Modify");
+            
             $data[] = array($i->name, $i->short_name, $i->location, $i->campuses, $i->short_description,
-                $i->status, anchor('institute/join/id_chosen/' . $i->institution_id, "Join!"));
+                $i->status, $actionText);
         }
         echo $this->table->generate($data);
     }else{
