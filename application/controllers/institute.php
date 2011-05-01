@@ -53,19 +53,26 @@ class Institute extends CI_Controller {
                    // Success. insert into db
                    $this->load->model('Institution');
                    // Create Object
+                   if($option == "modify"){
+                       // validate permissions -- TBD
+                       $this->Institution->institution_id = $this->input->post('institution_id');
+                       if(!$this->Institution->Load()){
+                           $this->page->showMessage("The institution was not found for modifying");
+                           return;
+                       }
+                   }
                    $this->Institution->name = $this->input->post('name');
                    $this->Institution->short_name = $this->input->post('sname');
                    $this->Institution->campuses = $this->input->post('campuses');
                    $this->Institution->short_description = $this->input->post('short_description');
                    $this->Institution->location = $this->input->post('location');
                    if($option == "modify"){
-                       // validate permissions
-                       $this->Institution->institution_id = $this->input->post('institution_id');
                        $this->Institution->status = $this->input->post('status');
                        $this->Institution->Update();
                        $this->page->showMessage("Institution Updated!");
                        return;
                    }
+                   $this->Institution->status = "pending";
                    $this->Institution->Insert();    //  Insert Into DB
                    if($this->Institution->institution_id){
                        // Insert it into user_inst
@@ -238,13 +245,36 @@ class Institute extends CI_Controller {
             null);
    }
 
-   function sample() {
-      $this->page->title = "Institution Page";
+   function view($institution_id,$option="") {
+       
+      $this->load->model('Institution');
+      $this->Institution->institution_id = $institution_id;
+      if(!$this->Institution->Load()){
+          $this->page->showMessage("The Institution you specified was not found");
+          return;
+      }
+
+
+
+      if($option == "community"){
+          // Load this page's community
+          $this->defaultBreadcrumb[$this->Institution->short_name] = site_url('institute/view/' . $this->Institution->institution_id);
+          $this->defaultBreadcrumb["Community"] = "";
+          $this->page->breadcrumbs = $this->defaultBreadcrumb;
+          $this->page->title = "Official Community Page For " . $this->Institution->name . " ";
+
+          $this->page->showMessage("Load community: " . $this->Institution->community_id);
+          return;
+      }
+
+      $this->defaultBreadcrumb[$this->Institution->short_name] = "";
+      $this->page->breadcrumbs = $this->defaultBreadcrumb;
+      $this->page->title = $this->Institution->name . " | Institution";
 
       $this->page->loadViews(
               null,
               array(
-                  array("Institution Name: BUET", "single/institution")
+                  array($this->Institution->name, "institution/view", array("instData" => $this->Institution))
               ),
               null);
    }

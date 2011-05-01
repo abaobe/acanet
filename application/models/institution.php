@@ -112,6 +112,7 @@
                    $this->campuses = $row->campuses;
                    $this->location = $row->location;
                    $this->status = $row->status;
+                   $this->community_id = $row->community_id;
                }
                return true;
            }
