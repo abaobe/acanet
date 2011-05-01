@@ -18,7 +18,7 @@ class User_inst extends CI_Model {
 
     
 
-    function Create(){
+    function Insert(){
 
         $this->db->insert('user_institution', $this);
     }
@@ -35,7 +35,18 @@ class User_inst extends CI_Model {
         }
     }
 
-    function update(){
+    function IsAvailable(){
+        $this->db->where(array(
+            'username' => $this->username,
+            'institution_id' => $this->institution_id
+        ));
+        if($this->db->count_all_results('user_institution') > 0)
+            return false;
+        else
+            return true;
+    }
+
+    function Update(){
         $this->db->where(array(
             'username' => $this->username,
             'institution_id' => $this->institution_id
