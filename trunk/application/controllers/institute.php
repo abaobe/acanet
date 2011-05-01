@@ -14,13 +14,13 @@ class Institute extends CI_Controller {
         parent::__construct();
         $this->defaultBreadcrumb = array(
         "Home" => base_url(),
-        "Institution" => site_url("Institution"));
+        "Institution" => site_url("institute"));
     }
 
    // Validation Functions
    function validate_availability(){
        $this->load->model('Institution');
-       return $this->Institution->isAvailable(
+       return $this->Institution->IsAvailable(
                $this->input->post('name'),
                $this->input->post('sname')
                );
@@ -43,7 +43,7 @@ class Institute extends CI_Controller {
        $this->defaultBreadcrumb['Create New Instituion'] = "";
        $this->page->breadcrumbs = $this->defaultBreadcrumb;
 
-       if(isset ($mode)){
+       if(!empty ($mode)){
            if($mode == "process"){
                // Process Submitted request
                $this->form_validation->set_rules('name', 'Name', 'required|max_length[100]|callback_validate_availability');
@@ -56,17 +56,26 @@ class Institute extends CI_Controller {
                if($this->form_validation->run()){
                    // Success. insert into db
                    $this->load->model('Institution');
-                   $institution_id = $this->Institution->Create(
-                           $this->input->post('name'),
-                           $this->input->post('sname'),
-                           $this->input->post('campuses'),
-                           $this->input->post('short_description'),
-                           $this->input->post('location')
-                           );
-                   if($institution_id)
-                       $this->page->showMessage("Successfully created community! ID is: $institution_id");
-                   else
+                   // Create Object
+                   $this->Institution->name = $this->input->post('name');
+                   $this->Institution->short_name = $this->input->post('sname');
+                   $this->Institution->campuses = $this->input->post('campuses');
+                   $this->Institution->short_description = $this->input->post('short_description');
+                   $this->Institution->location = $this->input->post('location');
+                   $this->Institution->Insert();    //  Insert Into DB
+                   if($this->Institution->institution_id){
+                       // Insert it into user_inst
+                       $this->load->model('User_inst');
+                       $uname = "ibrahim";  //  Dummy Username
+                       // Prepare Object
+                       $this->User_inst->username = $uname;
+                       $this->User_inst->institution_id = $this->Institution->institution_id;
+                       $this->User_inst->role = "owner";
+                       $this->User_inst->Create();  // Create
+                       $this->page->showMessage("Successfully created community! ID is: " . $this->Institution->institution_id);
+                   }else{
                        $this->page->showMessage("Error! Instituion name/short name alredy taken.");
+                   }
                    return;
                }
            }
@@ -89,7 +98,7 @@ class Institute extends CI_Controller {
        $this->defaultBreadcrumb['Join An Institution'] = "";
        $this->page->breadcrumbs = $this->defaultBreadcrumb;
 
-       if(isset($mode)){
+       if(!empty($mode)){
            if($mode == "id_chosen"){
                if(!isset($id)){
                    $this->page->showMessage("Error: Must Choose An ID");
@@ -101,7 +110,8 @@ class Institute extends CI_Controller {
                $this->form_validation->set_rules('referer', 'Referer Username', 'required|max_length[100]');
 
                if($this->form_validation->run()){
-                   // success!
+                   // success! Check if institute exists
+                   $this->load->model('User_institute');
                }
            }
            $this->defaultBreadcrumb['Join An Institution'] = site_url('institute/join');
