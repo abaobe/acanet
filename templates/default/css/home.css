@@ -12,6 +12,9 @@
 */
 
 #recent-post-load-div{
-   padding : 2px;
- 
+   padding : 2px; 
+}
+.posts{
+   padding-left: 5px;
+   padding-top: 2px;
 }
