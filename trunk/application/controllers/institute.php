@@ -35,6 +35,11 @@ class Institute extends CI_Controller {
        $this->page->title = "Create New Institution";
        $this->defaultBreadcrumb['Create New Instituion'] = "";
        $this->page->breadcrumbs = $this->defaultBreadcrumb;
+       if(!$this->session->userdata('username'))
+                       {
+                           $this->page->showMessage('You are not logged in');
+                           return;
+                       }
 
        if(!empty ($mode)){
            if($mode == "process"){
@@ -77,7 +82,9 @@ class Institute extends CI_Controller {
                    if($this->Institution->institution_id){
                        // Insert it into user_inst
                        $this->load->model('User_inst');
-                       $uname = "ibrahim";  //  Dummy Username, put here logged in user's username
+                       //$this->load->model('User');
+                       
+                       $uname =$this->session->userdata('username');  //  Dummy Username, put here logged in user's username
                        // Prepare Object
                        $this->User_inst->username = $uname;
                        $this->User_inst->institution_id = $this->Institution->institution_id;
@@ -117,6 +124,11 @@ class Institute extends CI_Controller {
        $this->page->title = "Join An Institution";
        $this->defaultBreadcrumb['Join An Institution'] = "";
        $this->page->breadcrumbs = $this->defaultBreadcrumb;
+       if(!$this->session->userdata('username'))
+                       {
+                           $this->page->showMessage('You are not logged in');
+                           return;
+                       }
 
        if(!empty($mode)){
            if($mode == "id_chosen"){
@@ -193,7 +205,11 @@ class Institute extends CI_Controller {
        $this->page->title = "Modify An Institution";
        $this->defaultBreadcrumb['Modify An Institution'] = "";
        $this->page->breadcrumbs = $this->defaultBreadcrumb;
-
+       if(!$this->session->userdata('username'))
+                       {
+                           $this->page->showMessage('You are not logged in');
+                           return;
+                       }
        if(!empty($mode)){
            if($mode == "id_chosen"){
                if(empty($id)){
