@@ -42,6 +42,8 @@ $(document).ready(function(){
       var publisherName = $("#make-post-publisher-name").val();
       var postBody = $("#post-body").val();
       var communityId = $("#make-post-community-id").val();
+      var title = $("#make-post-title").val();
+      alert(title);
 
       $("#make-post-form-container p,input,select,textarea").attr("disabled","disabled");
       $("#make-post-form-container").animate({opacity: 0.4});
@@ -52,7 +54,8 @@ $(document).ready(function(){
          data: ({
                   description : postBody,
                   cId: communityId,
-                  publisherName : publisherName
+                  publisherName : publisherName,
+                  title : title
                }),
          success: function(msg){
             $("#make-post-form-container p,input,select,textarea").removeAttr('disabled');
