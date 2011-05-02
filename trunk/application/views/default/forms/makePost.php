@@ -1,8 +1,8 @@
          <?php  echo form_open('make_post',array('id'=>'makePostForm')); ?>
             <fieldset><legend>&nbsp;MAKE A POST&nbsp;</legend>
                
-<!--               <p><label for="contact_subject" class="left">Subject:</label>-->
-<!--                  <input type="text" name="contact_subject" id="contact_subject" class="field" value="" tabindex="4" /></p>-->
+               <p><label for="contact_title" class="left">Title:</label>
+                  <input type="text" name="make-post-title" id="make-post-title" class="field" value="" tabindex="1" /></p>
 <!--               <p><label for="contact_urgency" class="left">Please reply:</label>
                   <select name="contact_urgency" id="contact_urgency" class="combo">
                      <option value="today"> Latest today </option>
