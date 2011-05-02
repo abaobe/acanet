@@ -44,7 +44,7 @@ $(document).ready(function(){
       var postBody = $("#post-body").val();
       var communityId = $("#make-post-community-id").val();
       var title = $("#make-post-title").val();
-      alert(title);
+      //alert(title);
 
       $("#make-post-form-container p,input,select,textarea").attr("disabled","disabled");
       $("#make-post-form-container").animate({opacity: 0.4});
