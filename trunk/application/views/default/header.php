@@ -31,7 +31,7 @@
             echo "<title>" . $this->page->title . "</title>";
         ?>
 
-        <link rel="icon" type="image/x-icon" href="./img/favicon.ico" />
+<!--        <link rel="icon" type="image/x-icon" href="./img/favicon.ico" />-->
 
     </head>
 
