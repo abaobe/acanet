@@ -64,29 +64,29 @@ class register extends CI_Controller {
         $this->form_validation->set_rules('contact_username', 'Username', 'callback_CheckUsername');
         $this->form_validation->set_rules('contact_password', 'Password', 'required|min_length[6]|max_length[15]|matches[contact_repassword]');
         $this->form_validation->set_rules('contact_repassword', 'Re Enter Password', 'required|min_length[6]|max_length[15]');
-        $this->form_validation->set_rules('contact_institution', 'Institution', 'callback_CheckInstitution');
-        $this->form_validation->set_rules('contact_field', 'Field', 'callback_CheckField');
+        //$this->form_validation->set_rules('contact_institution', 'Institution', 'callback_CheckInstitution');
+        //$this->form_validation->set_rules('contact_field', 'Field', 'callback_CheckField');
         $this->form_validation->set_rules('contact_address', 'Address', 'required|min_length[6]|max_length[100]');
         $this->form_validation->set_rules('contact_phone', 'Phone', 'callback_CheckPhone');
         $this->form_validation->set_rules('contact_email', 'Email', 'callback_CheckMail');
     }
-    function CheckUsername($username)
-    {
+
+    function CheckUsername($username) {
         $this->load->model('User');
-        if(!$this->User->IsUsernameValid($username)){
+        if (!$this->User->IsUsernameValid($username)) {
             $this->form_validation->set_message('CheckUsername', 'The %s is used already please try another username');
             return false;
         }
         return true;
-
     }
+
     function CheckInstitution($inst) {
         $this->form_validation->set_message('CheckInstitution', 'The %s field must be present in Database');
         $this->GetInstitutionList();
         // echo $inst;
 
         foreach ($this->institution_list as $aInst) {
-           
+
             if (trim($aInst['institution_id']) == trim($inst))
                 return true;
         }
@@ -134,19 +134,19 @@ class register extends CI_Controller {
 
     function StoreData() {
         $this->load->model('User');
-        $this->load->model('Inst_user');
-        $this->load->model('Field_user');
+        // $this->load->model('Inst_user');
+        //$this->load->model('Field_user');
         $this->load->model('Field');
         $this->load->model('Institution');
         $this->load->model('User_community');
-        
+
         $this->User->InsertUser($this->register_data);
         $param = $this->User->GetUserVerifiactionData($this->register_data['contact_username']);
-       
-        $this->Inst_user->Insert($this->register_data['contact_username'], $this->register_data['contact_institution']);
-        $this->Field_user->Insert($this->register_data['contact_username'], $this->register_data['contact_field']);
-        $this->User_community->Insert($this->register_data['contact_username'], $this->Institution->GetCommunityId($this->register_data['contact_institution']));
-        $this->User_community->Insert($this->register_data['contact_username'], $this->Field->GetCommunityId($this->register_data['contact_field']));
+
+        // $this->Inst_user->Insert($this->register_data['contact_username'], $this->register_data['contact_institution']);
+        // $this->Field_user->Insert($this->register_data['contact_username'], $this->register_data['contact_field']);
+        // $this->User_community->Insert($this->register_data['contact_username'], $this->Institution->GetCommunityId($this->register_data['contact_institution']));
+        // $this->User_community->Insert($this->register_data['contact_username'], $this->Field->GetCommunityId($this->register_data['contact_field']));
         $this->SendVerificationEmail($this->register_data['contact_username'], $param, $this->register_data['contact_email']);
     }
 
