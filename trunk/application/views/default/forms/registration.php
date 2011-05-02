@@ -24,23 +24,22 @@
 
             <p><label for="contact_repassword" class="left">Re Enter Password:</label>
                 <input type="password" name="contact_repassword" id="contact_repassword" class="field" value="<?php echo set_value('contact_repassword'); ?>" tabindex="1" /></p>
-            <p><label for="contact_institution" class="left">Institution:</label>
+<!--            <p><label for="contact_institution" class="left">Institution:</label>
                 <select name="contact_institution" id="contact_institution" class="combo">
-                    <option value="Choose">Select...</option>
+                    <option value="Choose">Select...</option> -->
                     <?php
-                    foreach ($inst_list as $name) {
-                        echo "<option value =\"" . $name['institution_id'] . "\">" . $name['short_name'] . "</option>";
-                    }
+                    //foreach ($inst_list as $name) {
+                    //    echo "<option value =\"" . $name['institution_id'] . "\">" . $name['short_name'] . "</option>";
+                    //}
                     ?>
-                </select></p>
+               <!-- </select></p> -->
 
-
-            <p><label for="contact_field" class="left">Field:</label>
+            <!--<p><label for="contact_field" class="left">Field:</label>
                 <select name="contact_field" id="contact_field" class="combo">
                     <option value="Choose">Select...</option>
 
 
-                </select></p>
+                </select></p> -->
 
             <p><label for="contact_address" class="left">Address :</label>
 
