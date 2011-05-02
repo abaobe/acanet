@@ -62,9 +62,9 @@ class Page {
                       "Communities", "community/index"
                     ),
                     array(
-                        "CSE" => "community/cse",
-                        "EEE" => "community/eee",
-                        "MME" => "community/mme"
+                        "CSE" => "community/index/cse",
+                        "EEE" => "community/index/eee",
+                        "MME" => "community/index/mme"
                     )
                 ),
             array(
