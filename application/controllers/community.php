@@ -24,7 +24,10 @@ class Community extends CI_Controller {
         $this->page->title = "List of Communities By Type";
 
         $this->db->select("*");        
-        $data['query'] = $this->db->get_where('community',  array('type' => "institution", 'community_id !=' => 0), 5);
+        $data['query1'] = $this->db->get_where('community',  array('type' => "institution", 'community_id !=' => 0), 5);
+        $data['query2'] = $this->db->get_where('community',  array('type' => "field", 'community_id !=' => 0), 5);
+        $data['query3'] = $this->db->get_where('community',  array('type' => "subject", 'community_id !=' => 0), 5);
+        $data['query4'] = $this->db->get_where('community',  array('type' => "course", 'community_id !=' => 0), 5);
 
         $main_content[0] = array("Community List", "community_list_view_all",$data);
 
