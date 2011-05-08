@@ -1,7 +1,7 @@
-<h3><a href=#>Event 1</a> </h3>
-                        <h3>Monday, 20 November 2006</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-                        <h3><a href=#>Event 2</a></h3>
-                        <h3>Monday, 20 November 2006</h3>
+<?php foreach($event as $row): ?>
+<h3><a href=#><?=$row['title']?></a> </h3>
+<p><?=$row['description']?></p>
+                        <h3>Start:<br/> <?=$row['start_date_time']?><br/> End:<br/> <?=$row['end_date_time']?></h3>
+                        
 
-                        <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
+<?php endforeach;?>

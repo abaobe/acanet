@@ -1,4 +1,3 @@
-
 <?php
 
 if (!defined('BASEPATH'))
@@ -8,43 +7,16 @@ class Community extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->model('Model_community');
     }
 
-    function index($community_name_or_type = null, $list=null) {
-        if (isset($community_name_or_type) && !isset($list)) {
-            $this->LoadCommunityView($community_name_or_type);
-        } else if (isset($list) && $community_name_or_type == 'all') {
-            $this->LoadCommunityListView($community_name_or_type);
-        } else {
-            $this->LoadCommunityListViewAll();
-        }
+    function index($community_name) {
+        $this->LoadCommunityView($community_name);
     }
 
-    function LoadCommunityListViewAll() {
-        $this->page->title = "List of Communities By Type";
-
-        $this->db->select("*");        
-        $data['query1'] = $this->db->get_where('community',  array('type' => "institution", 'community_id !=' => 0), 5);
-        $data['query2'] = $this->db->get_where('community',  array('type' => "field", 'community_id !=' => 0), 5);
-        $data['query3'] = $this->db->get_where('community',  array('type' => "subject", 'community_id !=' => 0), 5);
-        $data['query4'] = $this->db->get_where('community',  array('type' => "course", 'community_id !=' => 0), 5);
-
-        $main_content[0] = array("Community List", "community_list_view_all",$data);
-
-
-        $this->page->loadViews(null, $main_content, null);
-    }
-
-    function LoadCommunityListView($community_type=null) {
-        $this->page->title = "List of Communities";
-
-
-
-        $this->page->loadViews(null, $main_content, null);
-    }
-
+    
     function LoadCommunityView($community_name) {
-        $this->page->title = "Community";
+        $this->page->title = $community_name;
         $this->page->set(array('jquery-ui-1.8.12.custom'), 'css');
         $this->page->set(array('timepicker-addon'), 'css');
         $this->page->set(array('community', 'jquery-ui-1.8.12.custom.min'), 'js');
@@ -70,10 +42,21 @@ class Community extends CI_Controller {
 
 
 
+//        $this->db->select("community_id");
+//        $query = $this->db->get_where('community',  array('name' => $community_name, 'community_id !=' => 0));
+//        $community_id = $query->result();
 
-        $main_content[0] = array("Community", "community");
-        $right_sidebar[0] = array("Events", "sidebars/events");
-        $right_sidebar[1] = array("News", "sidebars/news");
+        $data['post'] = $this->Model_community->get_post_by_name($community_name);
+        $data['news'] = $this->Model_community->get_news_by_name($community_name);
+        $data['event'] = $this->Model_community->get_event_by_name($community_name);
+        
+
+        $main_content[0] = array("Community: $community_name", "community_view",$data);
+
+        
+        $right_sidebar[0] = array("Events", "sidebars/events",$data);
+        $right_sidebar[1] = array("News", "sidebars/news",$data);
+
 
 
         $this->page->loadViews($left_sidebar, $main_content, $right_sidebar);
