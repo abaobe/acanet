@@ -15,6 +15,8 @@ class Institute extends CI_Controller {
         $this->defaultBreadcrumb = array(
         "Home" => base_url(),
         "Institution" => site_url("institute"));
+        // Load User Model
+        $this->load->model('User');
     }
 
    // Validation Functions
@@ -35,12 +37,9 @@ class Institute extends CI_Controller {
        $this->page->title = "Create New Institution";
        $this->defaultBreadcrumb['Create New Instituion'] = "";
        $this->page->breadcrumbs = $this->defaultBreadcrumb;
-       if(!$this->session->userdata('username'))
-                       {
-                           $this->page->showMessage('You are not logged in');
-                           return;
-                       }
-
+       $uname = $this->User->Authenticate();
+       if(!$uname)
+           return;
        if(!empty ($mode)){
            if($mode == "process"){
                // Process Submitted request
@@ -82,9 +81,6 @@ class Institute extends CI_Controller {
                    if($this->Institution->institution_id){
                        // Insert it into user_inst
                        $this->load->model('User_inst');
-                       //$this->load->model('User');
-                       
-                       $uname =$this->session->userdata('username');  //  Dummy Username, put here logged in user's username
                        // Prepare Object
                        $this->User_inst->username = $uname;
                        $this->User_inst->institution_id = $this->Institution->institution_id;
@@ -124,11 +120,9 @@ class Institute extends CI_Controller {
        $this->page->title = "Join An Institution";
        $this->defaultBreadcrumb['Join An Institution'] = "";
        $this->page->breadcrumbs = $this->defaultBreadcrumb;
-       if(!$this->session->userdata('username'))
-                       {
-                           $this->page->showMessage('You are not logged in');
-                           return;
-                       }
+       $uname = $this->User->Authenticate();
+       if(!$uname)
+           return;
 
        if(!empty($mode)){
            if($mode == "id_chosen"){
@@ -156,7 +150,6 @@ class Institute extends CI_Controller {
                    }
                    // Future implementation: check if the referer valid
                    $this->load->model('User_inst');
-                   $uname = "giga"; //  dummy username, put here logged in user's username
                    $this->User_inst->username = $uname;
                    $this->User_inst->institution_id = $id;
                    $this->User_inst->referer = $this->input->post('referer');
@@ -205,11 +198,9 @@ class Institute extends CI_Controller {
        $this->page->title = "Modify An Institution";
        $this->defaultBreadcrumb['Modify An Institution'] = "";
        $this->page->breadcrumbs = $this->defaultBreadcrumb;
-       if(!$this->session->userdata('username'))
-                       {
-                           $this->page->showMessage('You are not logged in');
-                           return;
-                       }
+       $uname = $this->User->Authenticate();
+       if(!$uname)
+           return;
        if(!empty($mode)){
            if($mode == "id_chosen"){
                if(empty($id)){
@@ -262,6 +253,8 @@ class Institute extends CI_Controller {
    }
 
    function view($institution_id,$option="") {
+
+       // validations not required since this is general view
        
       $this->load->model('Institution');
       $this->Institution->institution_id = $institution_id;
@@ -273,7 +266,7 @@ class Institute extends CI_Controller {
 
 
       if($option == "community"){
-          // Load this page's community
+          // Load this page's community. Here we may need validation if the user joined this community
           $this->defaultBreadcrumb[$this->Institution->short_name] = site_url('institute/view/' . $this->Institution->institution_id);
           $this->defaultBreadcrumb["Community"] = "";
           $this->page->breadcrumbs = $this->defaultBreadcrumb;
