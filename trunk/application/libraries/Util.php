@@ -27,22 +27,7 @@ class Util {
         return $str;
     }
 
-    function redirect($page='index.php?', $byHeader = true) {
-        if ($byHeader) {
-            header("Location: $page");
-        }
-        exit();
-    }
-
-
-    function messageExit($message,$type=3,$pageURL=''){
-//            die("$message");
-        if(empty($pageURL))
-            $pageURL = $_SERVER['HTTP_REFERER'];
-        $this->setSessData('displayMessage', array($message,$type));
-//            $this->redirect($pageURL . "&message=$message&type=$type");
-        $this->redirect($pageURL);
-    }
+    
 
 
     function setSessData($id,$data){
