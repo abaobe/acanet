@@ -3,7 +3,7 @@
 
    <div class="column1-unit">
       <div class="contactform" id="make-post-form-container">
-         <?php $this->load->view($this->page->theme.'forms/makePost',array('username'=>$username)); ?>
+         <?php $this->load->view($this->page->theme.'forms/make_post',array('username'=>$username)); ?>
       </div>
    </div>
    <!-- Pagetitle -->
@@ -41,6 +41,7 @@
       <p>Lorem ipsum dolor sit amet, consectetuer <a href="#">adipiscing elit</a>, sed diam nonummy nibh euismod tincidunt ut laoreet dolore <a href="#">magna aliquam</a> erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis. <a href="#">Read more &raquo;</a></p>
       <p class="details">| Posted by <a href="#">SiteAdmin </a> | Categories: <a href="#">General</a> | Comments: <a href="#">73</a> |</p>
    </div>-->
+<br>
    <hr class="clear-contentunit" />
 
    <!-- Content unit - Two columns -->

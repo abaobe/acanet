@@ -13,8 +13,8 @@ $(document).ready(function(){
 //date_time":"2011-05-01 20:46:23"}}//';
 //
 //alert(eval(js));
-    
-
+   
+   
    function post(id,cId,publisherName,desc){
       this.id = id;
       this.cId = cId;
@@ -26,7 +26,7 @@ $(document).ready(function(){
 
    $("#recent-post-load-div .posts")
      .live("mouseover",function(){
-         $(this).css("background-color","#F0F5ED");
+         $(this).css("background-color","#F2F2F2");
    }).live("mouseout",function(){
          $(this).css("background-color","");
    });
@@ -88,9 +88,12 @@ $(document).ready(function(){
    }
    function LoadRecentPosts(){
 
+      
       $("#recent-post-load-div").attr("opacity","0.4");
       $("#recent-post-load-div").attr("disabled","disabled");
+
       //var postIds = GetJsonString(allRecentPosts);
+      //",
       $.ajax({
          url : site_url()+"/home/PrintRecentPosts",
          type : "POST",

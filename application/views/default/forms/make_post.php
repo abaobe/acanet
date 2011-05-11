@@ -3,13 +3,6 @@
                
                <p><label for="contact_title" class="left">Title:</label>
                   <input type="text" name="make-post-title" id="make-post-title" class="field" value="" tabindex="1" /></p>
-<!--               <p><label for="contact_urgency" class="left">Please reply:</label>
-                  <select name="contact_urgency" id="contact_urgency" class="combo">
-                     <option value="today"> Latest today </option>
-                     <option value="tomorrow"> Latest tomorrow </option>
-                     <option value="threedays"> Latest in 3 days </option>
-                     <option value="week"> Latest in a week </option>
-                     <option value="month"> Latest in a month </option></select></p>-->
                <p>
                   <label for="Message" class="left">Message:</label>
                   <textarea name="contact_message" id="post-body" cols="45" rows="10"></textarea></p>
