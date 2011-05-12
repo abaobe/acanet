@@ -11,7 +11,7 @@ class Verifyuser extends CI_Controller{
 
     function index($username,$param)
     {
-        $this->load->model('User');
+        $this->load->model('model_user','User');
         if($this->User->CheckParamAndSetValue($username,$param))
         {
             $this->load->view('home');

@@ -16,7 +16,7 @@ class Institute extends CI_Controller {
         "Home" => base_url(),
         "Institution" => site_url("institute"));
         // Load User Model
-        $this->load->model('User');
+        $this->load->model('model_user','User');
     }
 
    // Validation Functions
