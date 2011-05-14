@@ -53,6 +53,12 @@
            $query = $this->db->get_where('post',array('publisher_name'=>$username));
            return  $query->result_array();           
        }
+       function GetByCommunityName($community_name)
+       {
+           $query_str = "SELECT post_id,title,description,publisher_name,date_time FROM post NATURAL JOIN post_community NATURAL JOIN community WHERE community.name = '$community_name'";
+           $query = $this->db->query($query_str);
+           return $query->result();
+       }
    }
 
 ?>
