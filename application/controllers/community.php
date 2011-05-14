@@ -70,14 +70,14 @@ class Community extends CI_Controller {
         $this->page->loadViews($left_sidebar, $main_content, $right_sidebar);
     }
 
-//    function GetByType() {
-//        $this->type = $this->input->post('type');
-//
-//        $this->db->select("name,community_id");
-//        $query = $this->db->get_where('community', array('type' => $this->type, 'community_id >' => 0));
-//        $this->load->view($this->page->theme . 'ajax_request/community_load_list.php',
-//                array("allCommunity" => $query->result_array()));
-//    }
+    function GetByType() {
+        $this->type = $this->input->post('type');
+
+        $this->db->select("name,community_id");
+        $query = $this->db->get_where('community', array('type' => $this->type, 'community_id >' => 0));
+        $this->load->view($this->page->theme . 'ajax_request/community_load_list.php',
+                array("allCommunity" => $query->result_array()));
+    }
 
 }
 
