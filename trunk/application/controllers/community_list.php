@@ -8,7 +8,7 @@ class Community_list extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('community');
+        $this->load->model('Model_community');
     }
 
     function index($community_type=null) {
@@ -23,10 +23,10 @@ class Community_list extends CI_Controller {
     function LoadCommunityListViewAll() {
         $this->page->title = "List of Communities By Type";
         
-        $data['query1_result'] = $this->community->get_community_by_type('institution',5);
-        $data['query2_result'] = $this->community->get_community_by_type('field',5);
-        $data['query3_result'] = $this->community->get_community_by_type('subject',5);
-        $data['query4_result'] = $this->community->get_community_by_type('course',5);
+        $data['query1_result'] = $this->Model_community->GetByType('institution',5);
+        $data['query2_result'] = $this->Model_community->GetByType('field',5);
+        $data['query3_result'] = $this->Model_community->GetByType('subject',5);
+        $data['query4_result'] = $this->Model_community->GetByType('course',5);
 
         $main_content[0] = array("Community List", "community_list_view_all",$data);
 
@@ -39,7 +39,7 @@ class Community_list extends CI_Controller {
         switch($community_type){case 'institution': case 'field': case 'subject': case 'course': break; default: echo '<h1>bad community type<h1>';return;break;}
         $this->page->title = "List of Communities of type : $community_type";
 
-        $data['query_result'] = $this->community->get_community_by_type($community_type);
+        $data['query_result'] = $this->Model_community->GetByType($community_type);
         $data['type'] = $community_type;
 
         $main_content[0] = array("Community List", "community_list_view",$data);
