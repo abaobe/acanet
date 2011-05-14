@@ -11,7 +11,7 @@ class Community extends CI_Controller {
         $this->load->model('Model_news');
         $this->load->model('Model_post');
         $this->load->model('Model_event');
-        $this->load->model('Model_user','user');
+        $this->load->model('Model_user');
     }
 
     function index($community_name) {
@@ -49,13 +49,16 @@ class Community extends CI_Controller {
 //        $query = $this->db->get_where('community',  array('name' => $community_name, 'community_id !=' => 0));
 //        $community_id = $query->result();
 
+        
+        $data['communityId'] = $this->Model_community->GetByName($community_name);
+        $data['communityId'] = $data['communityId'][0]->community_id;
+        $data['userName'] ="ibrahim";
+
+        $main_content[0] = array("Community: $community_name", "forms/community_form_view",$data);
+
         $data['post'] = $this->Model_post->GetByCommunityName($community_name);
         $data['news'] = $this->Model_news->GetByCommunityName($community_name);
         $data['event'] = $this->Model_event->GetByCommunityName($community_name);
-
-        
-
-        $main_content[0] = array("Community: $community_name", "forms/community_form_view",$data);
         $main_content[1] = array(null, "community_view",$data);
 
         

@@ -11,7 +11,7 @@ $(document).ready(function(){
 //$("#contact_event_start_date").datepicker();
 //$("#contact_event_end_date").datepicker();
 
-$('#contact_event_start_date').datetimepicker({
+$('#contact_event_start_date,#contact_event_end_date').datetimepicker({
 	showSecond: true,
 	timeFormat: 'hh:mm:ss',
         dateFormat: 'dd-mm-yy',
