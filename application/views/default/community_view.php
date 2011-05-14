@@ -1,4 +1,3 @@
-
 <div id="jq_action_form_hide"><a href="#" ><p class="right" style="margin: 0;">hide</p></a></div>
 
 <!--MAKE POST-->

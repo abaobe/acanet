@@ -8,6 +8,7 @@ class Community extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('Model_community');
+        $this->load->model('Model_user','user');
     }
 
     function index($community_name) {
@@ -21,9 +22,8 @@ class Community extends CI_Controller {
         $this->page->set(array('timepicker-addon'), 'css');
         $this->page->set(array('community', 'jquery-ui-1.8.12.custom.min'), 'js');
         $this->page->set(array('community', 'jquery-ui-timepicker-addon'), 'js');
-        //set js
-        //get js
 
+        
         $this->page->nav1 = array(
             "Home" => base_url(),
             "Login" => site_url('login'),
