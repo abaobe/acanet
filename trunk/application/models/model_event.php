@@ -10,6 +10,27 @@
            parent::__construct();
        }
 
+
+
+       function Add($title,$description,$start_time,$end_time,$publisherName)
+       {
+           $this->db->set('title',$title);
+           $this->db->set('description',$description);
+           $this->db->set('start_date_time',$start_time);
+           $this->db->set('end_date_time',$end_time);
+           $this->db->set('publisher_name',$publisherName);
+           $result = $this->db->insert('event');
+           return $this->db->insert_id();
+       }
+       function SetEventCommunityRelation($eventId,$cId)
+       {
+           $this->db->set('event_id',$eventId);
+           $this->db->set('community_id',$cId);
+           return $result = $this->db->insert('event_community');
+       }
+
+       
+
        function GetByCommunityName($communityName)
        {
            $query_str = "SELECT event.event_id, event.title, event.description, event.start_date_time, event.end_date_time, event.publisher_name
