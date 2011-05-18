@@ -53,12 +53,15 @@ class Community extends CI_Controller {
         $data['communityId'] = $this->Model_community->GetByName($community_name);
         $data['communityId'] = $data['communityId'][0]->community_id;
         $data['userName'] ="ibrahim";
+        $data['communityName'] = $community_name;
 
         $main_content[0] = array("Community: $community_name", "forms/community_form_view",$data);
 
         $data['post'] = $this->Model_post->GetByCommunityName($community_name);
         $data['news'] = $this->Model_news->GetByCommunityName($community_name);
         $data['event'] = $this->Model_event->GetByCommunityName($community_name);
+        $data['communityInfo'] = $this->Model_community->GetByName($community_name);
+        $data['communityInfo'] = $data['communityInfo'][0];
         $main_content[1] = array(null, "community_view",$data);
 
         
