@@ -8,7 +8,7 @@ class Model_event extends CI_Model {
     }
 
     //@order is given as associative array .ex. array('title'=>'ASC','date'=>'DESC');
-    function Get($id=null, $order="", $start=0, $limit=10) {
+    function Get($id=null, $order="", $start=0, $limit=10,$obj=false) {
         $this->db->select('*');
         $query = "";
         if ($id != null) {
