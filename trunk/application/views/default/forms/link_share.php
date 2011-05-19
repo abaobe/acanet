@@ -6,7 +6,6 @@
 
 ?>
 <!--LINK SHARE-->
-<div class="column1-unit" id ="jq_linkShare">
    <div class="contactform">
        <?php  echo form_open('link_share',array('id'=>'linkShareForm')); ?>
          <fieldset><legend>&nbsp;SHARE LINK&nbsp;</legend>
@@ -20,5 +19,4 @@
          </fieldset>
       </form>
    </div>
-</div>
 <!--END OF LINK SHARE-->
