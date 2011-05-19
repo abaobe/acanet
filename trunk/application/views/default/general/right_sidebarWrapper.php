@@ -3,6 +3,6 @@
                         <h1><?php echo $title; ?></h1>
                         
                         <?php
-                            $this->load->view($this->page->theme . "$file");
+                            $this->load->view($this->page->theme . "$file",$params);
                         ?>
 </div>
