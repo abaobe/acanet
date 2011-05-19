@@ -14,7 +14,7 @@
                      <option>Subject</option>
                   </select>
                </p>
-               <p><label for="Communities" class="left">Community:</label>
+               <p><label for="Communities" class="left">Community: </label>
                   <select name="make-post-community-id" id="make-post-community-id" class="combo">
                      <option>Select Type</option>
                   </select></p>

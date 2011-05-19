@@ -58,11 +58,12 @@ class Community extends CI_Controller {
         $main_content[0] = array("Community: $community_name", "forms/community_form_view",$data);
 
         $data['post'] = $this->Model_post->GetByCommunityName($community_name);
-        $data['news'] = $this->Model_news->GetByCommunityName($community_name);
+        $data['news'] = $this->Model_news->GetByCommunityName($community_name);        
         $data['event'] = $this->Model_event->GetByCommunityName($community_name);
         $data['communityInfo'] = $this->Model_community->GetByName($community_name);
         $data['communityInfo'] = $data['communityInfo'][0];
         $main_content[1] = array(null, "community_view",$data);
+        
 
         
         $right_sidebar[0] = array("Events", "sidebars/events",$data);
@@ -74,12 +75,10 @@ class Community extends CI_Controller {
     }
 
     function GetByType() {
-        $this->type = $this->input->post('type');
-
-        $this->db->select("name,community_id");
-        $query = $this->db->get_where('community', array('type' => $this->type, 'community_id >' => 0));
+        $type = $this->input->post('type');
+        $allCommunity = $this->Model_community->GetByType($type);
         $this->load->view($this->page->theme . 'ajax_request/community_load_list.php',
-                array("allCommunity" => $query->result_array()));
+                array("allCommunity" => $allCommunity));
     }
 
 }

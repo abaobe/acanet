@@ -68,6 +68,19 @@ class Util {
     function replaceNonAlphaNumerics($stringToBeReplaced, $replaceWith = "-"){
         return preg_replace("@[^A-Za-z0-9]@", $replaceWith, $stringToBeReplaced);
     }
+    function FreshPrint($array)
+    {
+        echo "<pre>";
+        print_r($array);
+        echo "</pre>";
+    }
+    function FormatMySqlDateTime($datetime,$format="")
+    { 
+        if(format=="")
+            return date_format(date_create($datetime), 'l, d F Y \a\t H:i');
+        else
+            return date_format(date_create($datetime), $format);
+    }
 
 }
 ?>

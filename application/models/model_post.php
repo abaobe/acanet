@@ -12,27 +12,39 @@
            parent::__construct();
        }
        //@order is given as associative array .ex. array('title'=>'ASC','date'=>'DESC');
-       function Get($id=null,$order="",$start=0,$limit=10)
+       function Get($id=null,$order="",$start=0,$limit=10,$obj=false)
        {
-         $this->db->select('*');
+         $select = 'post.post_id,post_community.community_id,
+                           publisher_name,description,date_time,
+                           name,type,title';         
+                  
+         $this->db->select($select)
+                    ->from('post')
+                    ->join('post_community','post.post_id=post_community.post_id')
+                    ->join('community','community.community_id=post_community.community_id')                    
+                    ->limit($limit,$start);         
          $query = "";
-         if($id!=null){         
-           $query = $this->db->get_where('post',array('post_id'=>$id),1);           
+         if($id!=null){            
+           $this->db->where("post_id='$id'");           
          }
-         else{
+         else{                       
             if($order!="" && is_array($order))
             {
                foreach($order as $key=>$val)
-               {
+               {    
                   $this->db->order_by($key,$val);
                }
-            }
-
-            $query = $this->db->get('post',$limit,$start);
-         }         
-         return  $query->result_array();
+            }                                
+         }
+         $query = $this->db->get();         
+         if(!$obj)
+            return  $query->result_array();
+         else
+            return $query->result();
+         
         
        }
+       
        function Add($title,$description,$publisherName)
        {
            $this->db->set('title',$title);

@@ -27,7 +27,11 @@
 }
 .posts .post-description{
 
-    padding-left: 8px;
+    padding-left: 2px;
+   
+    text-align: left;
+    white-space: normal;
+    font-size: 10pt;
 }
 
 .odd{

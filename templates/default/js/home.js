@@ -123,4 +123,72 @@ $(document).ready(function(){
              return value;
          });
    }
+   
+   
+   
+    //*****************SIFAT COMUNITY COPY START****************//
+    //========ACTION TABS=============================
+
+    var init_done = false;
+    var tab_no = 0;
+
+    var actiontab = [];
+    actiontab[1] = "#jq_makePost";
+    actiontab[2] = "#jq_linkShare";
+    actiontab[3] = "#jq_createEvent";
+    actiontab[4] = "#jq_createNews";
+    function hideAll(new_tab_no){
+        if(tab_no == new_tab_no) return;
+        if(init_done){
+            $(actiontab[tab_no]).slideUp("fast");
+            $("#jq_action_form_hide").hide();
+        }else{
+
+            for ( var i = 1 ; i < 5 ; i++){
+                $(actiontab[i]).hide();
+            }
+            $("#jq_action_form_hide").hide();
+            init_done = true;
+        }
+    }
+    
+    //hide button
+    hideAll(-1);
+
+   
+    $("#jq_action_form_hide").click(function(){
+        $(actiontab[tab_no]).slideUp("fast");
+        $(this).hide();
+    });
+
+    $("#jq_tab_post").click(function(){
+        hideAll(1);
+        $("#jq_makePost").slideDown("fast");
+        $("#jq_action_form_hide").show();
+        tab_no = 1;
+    });
+
+    $("#jq_tab_link").click(function(){
+        hideAll(2);
+        $("#jq_linkShare").slideDown("fast");
+        $("#jq_action_form_hide").show();
+        tab_no = 2;
+    });
+
+    $("#jq_tab_event").click(function(){
+        hideAll(3);
+        $("#jq_createEvent").slideDown("fast");
+        $("#jq_action_form_hide").show();
+        tab_no = 3;
+    });
+
+    $("#jq_tab_news").click(function(){
+        hideAll(4);
+        $("#jq_createNews").slideDown("fast");
+        $("#jq_action_form_hide").show();
+        tab_no = 4;
+    });
+
+   //*****************SIFAT COMUNITY COPY END****************//
+   
 });
