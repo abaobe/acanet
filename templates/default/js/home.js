@@ -61,6 +61,7 @@ $(document).ready(function(){
          success: function(msg){
             $("#make-post-form-container p,input,select,textarea").removeAttr('disabled');
             $("#make-post-form-container").animate({opacity: 1});
+            $("#make-post-form-container :input").val("");
             LoadRecentPosts();
          }
       })
@@ -128,6 +129,18 @@ $(document).ready(function(){
    
     //*****************SIFAT COMUNITY COPY START****************//
     //========ACTION TABS=============================
+    
+      //=========Date Time Picker for Event Form==================
+
+    $('#event_start_date,#event_end_date').datetimepicker({
+        showSecond: true,
+        timeFormat: 'hh:mm:ss',
+        dateFormat: 'yy-mm-dd',
+        stepHour: 2,
+        stepMinute: 10,
+        stepSecond: 10
+    });
+
 
     var init_done = false;
     var tab_no = 0;
