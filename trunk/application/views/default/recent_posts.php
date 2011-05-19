@@ -8,8 +8,7 @@
          <div class="posts <?=$class?> rounded" postId="<?=$aPost->post_id ?>">
             <h1><?=$aPost->title ?></h1>
             <h3><?=  date_format(date_create($aPost->date_time), 'l, d F Y \a\t H:i'); ?>,
-                        by <a href="#"><?=$aPost->publisher_name ?></a></h3>
-            <br/>
+                        by <a href="#"><?=$aPost->publisher_name ?></a></h3>            
             <p>
                 <div class="post-description">
                     <?php
@@ -25,11 +24,9 @@
                     if($len>80)
                         echo "Read more &raquo;";
                 ?>
-                </a>
-                
-                
+                </a>                
             </p>
-            <br/>
+            
             <p class="details">
                 
                 

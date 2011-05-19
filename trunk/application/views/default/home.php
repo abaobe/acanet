@@ -15,12 +15,12 @@
    </div>
    <div class="column1-unit" id ="jq_createEvent">
       <?php if($username!==false): ?>      
-         <?php $this->load->view($this->page->theme.'forms/create_news',array('username'=>$username)); ?>      
+         <?php $this->load->view($this->page->theme.'forms/create_event',array('username'=>$username)); ?>      
       <?php endif ?>
    </div>
    <div class="column1-unit" id ="jq_createNews">
       <?php if($username!==false): ?>      
-         <?php $this->load->view($this->page->theme.'forms/create_event',array('username'=>$username)); ?>      
+         <?php $this->load->view($this->page->theme.'forms/create_news',array('username'=>$username)); ?>      
       <?php endif ?>
    </div>
  
