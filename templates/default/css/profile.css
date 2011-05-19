@@ -1,0 +1,26 @@
+/* 
+    Document   : profile
+    Created on : May 20, 2011, 12:06:05 AM
+    Author     : oly
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+.list {
+    list-style: none;
+    display: inline;
+}
+.list li{
+    
+   display: inline;
+    list-style: none;
+}
+
