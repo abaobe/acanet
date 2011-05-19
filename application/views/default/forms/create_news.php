@@ -6,7 +6,6 @@
 
 ?>
 <!--CREATE NEWS-->
-<div class="column1-unit" id ="jq_createNews">
    <div class="contactform">
      <?php  echo form_open('create_news',array('id'=>'createNewsForm')); ?>
          <fieldset><legend>&nbsp;CREATE NEWS&nbsp;</legend>
@@ -18,5 +17,5 @@
          </fieldset>
       </form>
    </div>
-</div>
+
 <!--END OF CREATE NEWS-->

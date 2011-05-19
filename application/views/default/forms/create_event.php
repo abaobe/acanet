@@ -6,7 +6,6 @@
 
 ?>
 <!--CREATE EVENT-->
-<div class="column1-unit" id ="jq_createEvent">
    <div class="contactform">
       <?php  echo form_open('create_event',array('id'=>'createEventForm')); ?>
          <fieldset><legend>&nbsp;CREATE EVENT&nbsp;</legend>
@@ -22,5 +21,5 @@
          </fieldset>
       </form>
    </div>
-</div>
+
 <!--END OF CREATE EVENT-->

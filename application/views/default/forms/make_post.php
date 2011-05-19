@@ -1,4 +1,5 @@
-         <?php  echo form_open('make_post',array('id'=>'makePostForm')); ?>
+         
+        <?php  echo form_open('make_post',array('id'=>'makePostForm')); ?>
             <fieldset><legend>&nbsp;MAKE A POST&nbsp;</legend>
                
                <p><label for="contact_title" class="left">Title:</label>

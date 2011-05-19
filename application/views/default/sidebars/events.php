@@ -1,8 +1,32 @@
 
 <?php foreach ($event as $row): ?>
-    <h3><a href=#><?= $row->title ?></a> </h3>
-    <p><?= $row->description ?></p>
-    <h3>Start:<br/> <?= $row->start_date_time ?><br/> End:<br/> <?= $row->end_date_time ?></h3>
+    <div id= 'event-<?= $row->event_id ?>' class="events" style="padding:4px;margin: 4px">
+        <h2 class="rounded"><a href=#><?= ucfirst($row->title) ?></a></h2>
+        <br/>
+        <span class="rounded" style="background-color:antiquewhite;color:black;margin:5px;padding:10px;font-family:verdana,arial,sans-serif">
+            <?= $row->description ?>
+        </span>
+        <br/>
+        <br/>
+        <span style="font-size:8pt">Duration :</span>
+        <br/>
+        <span style="color:darkgreen;">
+            <?=
+               $this->util->FormatMySqlDateTime($row->start_date_time)
+            ?>
+        </span>        
+        <br/>
+        <span style="font-size:8pt">To</span>
+        <br/>
+        <span style="color:darkgoldenrod;">
+           <?= 
+              $this->util->FormatMySqlDateTime($row->end_date_time)
+           ?>
+        </span>
+        
+       
+    </div>
+    
 
 
 <?php endforeach; ?> 

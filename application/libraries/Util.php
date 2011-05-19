@@ -76,7 +76,7 @@ class Util {
     }
     function FormatMySqlDateTime($datetime,$format="")
     { 
-        if(format=="")
+        if($format=="")
             return date_format(date_create($datetime), 'l, d F Y \a\t H:i');
         else
             return date_format(date_create($datetime), $format);
