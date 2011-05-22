@@ -5,6 +5,6 @@
  */
 
 echo "click on the below link for email verification </br>
-                          "."<a href='" . site_url()."/verifyuser/index/".$username."/".$param .">".$param."</a>";
+                          "."<a href='" . site_url()."/verifyuser/index/".$username."/".$param ."'>".$param."</a>";
 
 ?>
