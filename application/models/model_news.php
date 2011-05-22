@@ -57,7 +57,7 @@
 
        function GetByCommunityName($community_name)
        {
-           $query_str = "SELECT news.news_id,news.heading,news.content,news.type,news.publiser_name,news.date_time
+           $query_str = "SELECT news.news_id,news.heading,news.content,news.type,news.publisher_name,news.date_time
                         FROM (news JOIN news_community ON news.news_id = news_community.news_id)
                             JOIN community on news_community.community_id = community.community_id
                         WHERE community.name = '$community_name'";
