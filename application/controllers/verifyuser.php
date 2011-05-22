@@ -15,6 +15,7 @@ class Verifyuser extends CI_Controller{
         if($this->User->CheckParamAndSetValue($username,$param) == true)
         {
             //$this->load->view('home');
+
             redirect('home');
         }
         else{
