@@ -224,4 +224,19 @@ $(document).ready(function(){
 
    //*****************SIFAT COMUNITY COPY END****************//
    
+   /*
+    * 
+      $(".dsf").fancybox({
+                        'type'          :   'iframe',
+			'transitionIn'  :   'elastic',
+			'transitionOut' :   'elastic',
+			'speedIn'       :   600,
+			'speedOut'      :   200,
+			'overlayShow'   :   true,
+			'height'        :   500,
+			'width'         :   820,
+			'showCloseButton':  true
+    });
+    */
+   
 });
