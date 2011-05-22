@@ -7,7 +7,7 @@
 ?>
 <!--CREATE NEWS-->
    <div class="contactform">
-     <?php  echo form_open('create_news',array('id'=>'createNewsForm')); ?>
+     <?php  echo form_open('make_news',array('id'=>'createNewsForm')); ?>
          <fieldset><legend>&nbsp;CREATE NEWS&nbsp;</legend>
             <p><label for="contact_event_name" class="left">Title:</label>
                <input type="text" name="contact_news_name" id="contact_news_name" class="field" value="" tabindex="4" /></p>

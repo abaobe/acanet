@@ -7,7 +7,7 @@
 ?>
 <!--CREATE EVENT-->
    <div class="contactform">
-      <?php  echo form_open('create_event',array('id'=>'createEventForm')); ?>
+      <?php  echo form_open('make_event',array('id'=>'createEventForm')); ?>
          <fieldset><legend>&nbsp;CREATE EVENT&nbsp;</legend>
             <p><label for="contact_event_name" class="left">Event Name:</label>
                <input type="text" name="contact_event_name" id="contact_event_name" class="field" value="" tabindex="4" /></p>

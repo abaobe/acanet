@@ -95,11 +95,13 @@ $(document).ready(function(){
 
       //var postIds = GetJsonString(allRecentPosts);
       //",
+      var username = $("loggedUsername").val();
+
       $.ajax({
          url : site_url()+"/home/PrintRecentPosts",
          type : "POST",
          data : ({
-                    username : "ibrahim"
+                    username : username
                     //postIds : postIds
                }),         
          success : function(data){

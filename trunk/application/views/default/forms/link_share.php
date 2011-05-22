@@ -7,7 +7,7 @@
 ?>
 <!--LINK SHARE-->
    <div class="contactform">
-       <?php  echo form_open('link_share',array('id'=>'linkShareForm')); ?>
+       <?php  echo form_open('make_link',array('id'=>'linkShareForm')); ?>
          <fieldset><legend>&nbsp;SHARE LINK&nbsp;</legend>
             <p><label for="contact_link" class="left">Link:</label>
                <input type="text" name="contact_link" id="contact_link" class="field" value="" tabindex="4" /></p>
