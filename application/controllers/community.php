@@ -29,6 +29,9 @@ class Community extends CI_Controller {
         $this->page->set(array('community', 'jquery-ui-1.8.12.custom.min'), 'js');
         $this->page->set(array('community', 'jquery-ui-timepicker-addon'), 'js');
 
+         
+         
+
         $this->load->library('util');
         $this->page->nav1 = array(
             "Home" => base_url(),

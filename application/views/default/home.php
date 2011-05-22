@@ -23,7 +23,7 @@
          <?php $this->load->view($this->page->theme.'forms/create_news',array('username'=>$username)); ?>      
       <?php endif ?>
    </div>
-  <input type="hidden" id="loggedUsername" name="loggedUsername" value="<? $username?>" />
+  <input type="hidden" id="loggedUsername" name="loggedUsername" value="<? echo $username; ?>" />
    <h1 class="block">Updates</h1>
 
    <div class="column1-unit">
