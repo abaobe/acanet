@@ -24,12 +24,16 @@ $(document).ready(function(){
    
    var allRecentPosts = new Array();
 
+   
    $("#recent-post-load-div .posts")
-     .live("mouseover",function(){
-         $(this).css("background-color","#F2F2F2");
-   }).live("mouseout",function(){
+     .live("mouseover",function(){       
+            $(this).css("background-color","#F2F2F2");
+   }).live("mouseout",function(){       
          $(this).css("background-color","");
+   }).live("click",function(){
+        
    });
+   
 
    LoadCommunities();
    LoadRecentPosts();
@@ -111,12 +115,26 @@ $(document).ready(function(){
             $("#recent-post-load-div").attr("opacity","1");
             $("#recent-post-load-div").html(data);
             $("#recent-post-load-div").slideDown('slow');
+
+            
             //UpdateRecentPostList(data);
          }
       })
       //$("#recent-post-load-div").load(,{username:""});
    }
-   
+
+   $(".show-post-reply").live("click",function(){
+       var postId = $(this).attr("postId");
+       if($(this).html()=="Reply"){
+        $("#post-reply-wrapper-"+postId).slideDown();
+        $(this).html("Hide replies");
+       }else{
+        $("#post-reply-wrapper-"+postId).slideUp();
+        $(this).html("Reply");
+       }
+
+   });
+
    function GetJsonString(data)
    {
          return  JSON.stringify(data, function (key, value) {
