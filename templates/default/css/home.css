@@ -36,14 +36,14 @@
 }
 
 .posts-reply{
-    padding-left: 50px;
+    padding-left: 10px;
     padding-right: 20px;
     padding-top: 2px;    
     font-size: 8pt;    
 }
 
 .post-post-reply-wrapper{
-    margin: 1em 0 2em 0;
+    margin: 1em 0 1em 0;
 }
 
 .post-reply-wrapper{    
@@ -56,6 +56,9 @@
     box-shadow: 2px 2px 2px rgba(10,32,34,0.6);
    -webkit-box-shadow: 2px 2px 2px rgba(10,32,34,0.6);
    -moz-box-shadow: 2px 2px 2px rgba(10,32,34,0.6);
+    background: rgb(237,239,244);
+    opticity: .2px;
+    display: none;
 }
 
 .posts .post-datetime,.posts-reply .post-datetime{
@@ -88,18 +91,21 @@
     color:olivedrab;
 }
 .posts-reply .post-description{
-    margin : 0.5em 0 0.5em 0;
+    margin : 0.5em 0 0.5em 0;    
 }
 .post-reply-input-div{
     margin: 1em 0 0 0;
-    padding : 2px 2px 0 40px;
+    padding : 2px 2px 0 10px;
 
     border-radius:0ex 0ex 3ex 0ex;
    -webkit-border-radius:0ex 0ex 3ex 0ex;
    -moz-border-radius:0ex 0ex 3ex 0ex;
 }
-.post-reply-input{
-    width: 100%;
+.post-reply-input{    
+    padding-right: 32%;
+    resize :none;
+    margin-bottom:5px;
+    
 }
 
 .odd{

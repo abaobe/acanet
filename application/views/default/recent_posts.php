@@ -1,4 +1,4 @@
-<div class="post-post-reply-wrapper">
+
    <?php
     $len="";
     $i=0;
@@ -6,6 +6,7 @@
     $class = !($i%2)? "odd" : "even";
     $i++;
    ?>
+<div class="post-post-reply-wrapper">
          <div class="posts <?=$class?> rounded" postId="<?=$aPost->post_id ?>">
              <div class="post-title"><?= ucfirst($aPost->title) ?></div>
             <div class="post-datetime"><?=  date_format(date_create($aPost->date_time), 'l, d F Y \a\t H:i'); ?>
@@ -45,13 +46,13 @@
                             </a>                 
                 | Reply's: <a href="#">73
                             </a> 
-                | <a href="#">Reply</a>    
+                | <a class="show-post-reply" href="javascript:void(0);" postId="<?=$aPost->post_id ?>">Reply</a>
                 
                 
             </p>
         </div>
 
-<div class="post-reply-wrapper">
+<div class="post-reply-wrapper" id="post-reply-wrapper-<?=$aPost->post_id ?>">
         <?php  for($i=0;$i<rand()%5;$i++): ?>
    <div class="posts-reply">            
                  <div class="post-description">
@@ -77,9 +78,8 @@
     
     <?php  endfor; ?>        
         <div class="post-reply-input-div" class="contactform">
-            <hr>            
+                
                 <textarea class="field post-reply-input .shadow" type="text" name="post-reply-input"  postId="<?=$aPost->post_id ?>" rows="2" cols="30"></textarea>            
         </div>    </div>
-
-      <?php endforeach; ?>
 </div>
+      <?php endforeach; ?>
