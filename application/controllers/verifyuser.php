@@ -12,9 +12,10 @@ class Verifyuser extends CI_Controller{
     function index($username,$param)
     {
         $this->load->model('model_user','User');
-        if($this->User->CheckParamAndSetValue($username,$param))
+        if($this->User->CheckParamAndSetValue($username,$param) == true)
         {
-            $this->load->view('home');
+            //$this->load->view('home');
+            redirect('home');
         }
         else{
             $this->load->view('error');
