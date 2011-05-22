@@ -1,9 +1,9 @@
 <div class="loginform">
-                            <?php
-                            //print_r($post);
                             
-                                echo $message;
-                                echo form_open('login'); ?>
+                            
+                            
+                                <div class="error"><?php echo ucfirst($message);  ?></div>
+                                <?php  echo form_open('login'); ?>
                                 <p><input type="hidden" name="rememberme" value="0" /></p>
 
                                 <fieldset>

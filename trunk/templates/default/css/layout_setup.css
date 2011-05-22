@@ -151,6 +151,18 @@
 .footer:after, p:after {content:"."; display:block; height:0; clear:both; visibility:hidden;}
 .clear-contentunit {clear:both; width:440px; height:0.1em; border:none; background:rgb(210,210,210); color:rgb(210,210,210);}
 
+
+/********************************/
+/*  Extended */
+/********************************/
+
+.error {
+    color : red;
+    font-size: 10pt;
+    font-family:  Gill, Helvetica, sans-serif;
+}
+
+
 /********************************/
 /*  PRINTING and MISCELLANEOUS  */
 /********************************/
@@ -161,3 +173,5 @@
 @media print {.main-navigation {display:inline /*Fix IE floating margin bug*/; float:left; width:199px; border-right:solid 1px rgb(200,200,200); border-bottom:solid 1px rgb(200,200,200); background-color:rgb(240,240,240); overflow:visible !important /*Firefox*/; overflow:hidden /*IE*/;}}
 @media print {.footer {clear:both; width:900px; height:3.7em; padding:1.1em 0 0; background:rgb(240,240,240); font-size:1.0em; overflow:visible !important /*Firefox*/; overflow:hidden /*IE6*/;}}
 html {filter: expression(document.execCommand("BackgroundImageCache", false, true));} /*IE proprietary flicker hack for background images. Not validating, but OK*/
+
+

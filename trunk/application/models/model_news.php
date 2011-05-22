@@ -50,7 +50,7 @@
        }
        function SetNewsCommunityRelation($newsId,$cId)
        {
-           $this->db->set('news_id',$contentId);
+           $this->db->set('news_id',$newsId);
            $this->db->set('community_id',$cId);
            return $result = $this->db->insert('news_community');
        }

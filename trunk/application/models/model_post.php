@@ -12,7 +12,7 @@
            parent::__construct();
        }
        //@order is given as associative array .ex. array('title'=>'ASC','date'=>'DESC');
-       function Get($id=null,$order="",$start=0,$limit=10,$obj=false)
+       function Get($id=null,$order="",$start=0,$limit=10,$obj=false,$where=array())
        {
          $select = 'post.post_id,post_community.community_id,
                            publisher_name,description,date_time,
@@ -27,7 +27,10 @@
          if($id!=null){            
            $this->db->where("post_id='$id'");           
          }
-         else{                       
+         else{
+             if(!empty($where))
+                 $this->db->where($where);
+             
             if($order!="" && is_array($order))
             {
                foreach($order as $key=>$val)

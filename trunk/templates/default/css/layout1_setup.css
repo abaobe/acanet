@@ -127,6 +127,23 @@
 .footer:after, p:after {content:"."; display:block; height:0; clear:both; visibility:hidden;}
 .clear-contentunit {clear:both; width:840px; height:0.1em; border:none; background:rgb(210,210,210); color:rgb(210,210,210);}
 
+
+/********************************/
+/*  Extended */
+/********************************/
+
+.error {
+
+    margin: 20px 0 10px 0;
+    padding: 2px;
+    width: 200px;
+    color : red;
+    font-size: 9pt;
+    font-family:  Gill, Helvetica, sans-serif;    
+}
+
+
+
 /********************************/
 /*  PRINTING and MISCELLANEOUS  */
 /********************************/
