@@ -15,6 +15,9 @@ class Community extends CI_Controller {
     }
 
     function index($community_name) {
+        if(!isset ($community_name)){
+            redirect("community_list");
+        }
         $this->LoadCommunityView($community_name);
     }
 
@@ -26,7 +29,7 @@ class Community extends CI_Controller {
         $this->page->set(array('community', 'jquery-ui-1.8.12.custom.min'), 'js');
         $this->page->set(array('community', 'jquery-ui-timepicker-addon'), 'js');
 
-        
+        $this->load->library('util');
         $this->page->nav1 = array(
             "Home" => base_url(),
             "Login" => site_url('login'),
@@ -52,7 +55,9 @@ class Community extends CI_Controller {
         
         $data['communityId'] = $this->Model_community->GetByName($community_name);
         $data['communityId'] = $data['communityId'][0]->community_id;
-        $data['userName'] ="ibrahim";
+
+        $data['userName'] =$this->Model_user->GetLoggedInUsername();
+
         $data['communityName'] = $community_name;
 
         $main_content[0] = array("Community: $community_name", "forms/community_form_view",$data);
