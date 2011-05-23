@@ -17,15 +17,13 @@ class Institute extends CI_Controller {
         "Institution" => site_url("institute"));
         // Load User Model
         $this->load->model('model_user','User');
+        $this->load->model('Institution');
     }
 
    // Validation Functions
    function validate_availability(){
-       $this->load->model('Institution');
-       return $this->Institution->IsAvailable(
-               $this->input->post('name'),
-               $this->input->post('sname')
-               );
+      
+       return $this->Institution->IsAvailable();
    }
    // View Creators
    function index() {
@@ -42,9 +40,17 @@ class Institute extends CI_Controller {
            return;
        if(!empty ($mode)){
            if($mode == "process"){
+               
+               
+               
                // Process Submitted request
                $this->form_validation->set_rules('name', 'Name', 'required|max_length[100]|callback_validate_availability');
                $this->form_validation->set_rules('sname', 'Short Name', 'required|max_length[100]');
+               
+               $this->Institution->name = $this->input->post('name');
+               $this->Institution->short_name = $this->input->post('sname');
+               
+               
                $this->form_validation->set_rules('location', 'Location', 'required|max_length[100]');
                $this->form_validation->set_rules('campuses', 'Campuses', 'required|max_length[500]');
                $this->form_validation->set_rules('short_description', 'Short Description', 'required|max_length[500]');
@@ -55,7 +61,7 @@ class Institute extends CI_Controller {
                }
                if($this->form_validation->run()){
                    // Success. insert into db
-                   $this->load->model('Institution');
+//                   $this->load->model('Institution');
                    // Create Object
                    if($option == "modify"){
                        // validate permissions -- TBD
@@ -65,8 +71,7 @@ class Institute extends CI_Controller {
                            return;
                        }
                    }
-                   $this->Institution->name = $this->input->post('name');
-                   $this->Institution->short_name = $this->input->post('sname');
+                   
                    $this->Institution->campuses = $this->input->post('campuses');
                    $this->Institution->short_description = $this->input->post('short_description');
                    $this->Institution->location = $this->input->post('location');
@@ -138,7 +143,7 @@ class Institute extends CI_Controller {
                if($this->form_validation->run()){
                    // success! Check if institute exists
                    $id = $this->input->post('institution_id');
-                   $this->load->model('Institution');
+//                   $this->load->model('Institution');
                    $this->Institution->institution_id = $id;
                    if(!$this->Institution->Load()){
                        $this->page->showMessage("Institution ID " . $this->Institution->institution_id . " was not found!");
@@ -179,7 +184,7 @@ class Institute extends CI_Controller {
        }
 
        // Load  Models
-       $this->load->model('Institution');
+//       $this->load->model('Institution');
        $instList = $this->Institution->GetAllApproved();
 
        $this->page->loadViews(
@@ -209,7 +214,7 @@ class Institute extends CI_Controller {
                }
                // Check permission here. dummy validated...
                // get the institution
-               $this->load->model('Institution');
+//               $this->load->model('Institution');
 
                $this->Institution->institution_id = $id;
 
@@ -238,7 +243,7 @@ class Institute extends CI_Controller {
        }
 
        // Load  Models
-       $this->load->model('Institution');
+//       $this->load->model('Institution');
        $instList = $this->Institution->GetAll();
 
        $this->page->loadViews(
@@ -256,7 +261,7 @@ class Institute extends CI_Controller {
 
        // validations not required since this is general view
        
-      $this->load->model('Institution');
+//      $this->load->model('Institution');
       $this->Institution->institution_id = $institution_id;
       if(!$this->Institution->Load()){
           $this->page->showMessage("The Institution you specified was not found");
