@@ -97,9 +97,9 @@ $(document).ready(function(){
 
     var info_loaded = [];
     info_loaded[1] = true;
-    info_loaded[2] = false;
-    info_loaded[3] = false;
-    info_loaded[4] = false;
+    info_loaded[2] = true;
+    info_loaded[3] = true;
+    info_loaded[4] = true;
     info_loaded[5] = true;
     info_loaded[6] = true;
     info_loaded[7] = true;
@@ -119,10 +119,15 @@ $(document).ready(function(){
     {
         if(new_info_tab_no == info_tab_no) return;
         if(info_loading) return;
+        for(var i = 1 ; i < 8 ; i++)$(info_tab[i]).hide();
+
+         $(info_tab[info_tab_no]).show();
 
         if(info_loaded[new_info_tab_no]){
+            info_loading = true;
             $(info_tab[info_tab_no]).animate({opacity: 0.0},500).hide(1,function(){
-                $(info_tab[new_info_tab_no]).show(1).animate({opacity: 1.0},500);
+                $(info_tab[new_info_tab_no]).show(1).animate({opacity: 1.0},500,function(){info_loading = false;});
+                
             });
         }
         else{
@@ -131,7 +136,7 @@ $(document).ready(function(){
         }
 
 
-        info_tab_no = new_info_tab_no;         //make tab = new tab        
+        info_tab_no = new_info_tab_no;         //make tab = new tab
     }
 
     //1
