@@ -60,6 +60,7 @@ class Community extends CI_Controller {
 
 
         //--------Loading main content--------------------------------------------
+        $data = null;
         $data['communityId'] = $this->Model_community->GetByName($community_name);
         $data['communityId'] = $data['communityId'][0]->community_id;
 
@@ -72,6 +73,9 @@ class Community extends CI_Controller {
         $this->load->model('Model_user');
         $data['members'] = $this->Model_user->GetByCommunityName($community_name,array('user.username','user.name'));
         $data['admins'] = $this->Model_user->GetByCommunityName($community_name,array('user.username','user.name'),true);
+        $data['post'] = $this->Model_post->GetByCommunityName($community_name);
+        $data['news'] = $this->Model_news->GetByCommunityName($community_name);
+        $data['event'] = $this->Model_event->GetByCommunityName($community_name);
         //======================
 
         $main_content[0] = array("Community: $community_name", "forms/community_form_view",$data);
@@ -79,6 +83,7 @@ class Community extends CI_Controller {
 
 
         //-----------Loading right side bar--------------------------------------
+        $data = null;
         $data['post'] = $this->Model_post->GetByCommunityName($community_name);
         $data['news'] = $this->Model_news->GetByCommunityName($community_name);        
         $data['event'] = $this->Model_event->GetByCommunityName($community_name);
