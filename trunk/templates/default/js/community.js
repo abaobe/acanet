@@ -100,12 +100,13 @@ $(document).ready(function(){
     info_loaded[2] = false;
     info_loaded[3] = false;
     info_loaded[4] = false;
-    info_loaded[5] = false;
-    info_loaded[6] = false;
+    info_loaded[5] = true;
+    info_loaded[6] = true;
     info_loaded[7] = true;
 
 
     var info_tab_no = 1;
+    var info_loading = false;
 
     function init(){
         for ( var i = 2 ; i < 8 ; i++){
@@ -117,6 +118,7 @@ $(document).ready(function(){
     function hide_n_show(new_info_tab_no)
     {
         if(new_info_tab_no == info_tab_no) return;
+        if(info_loading) return;
 
         if(info_loaded[new_info_tab_no]){
             $(info_tab[info_tab_no]).animate({opacity: 0.0},500).hide(1,function(){

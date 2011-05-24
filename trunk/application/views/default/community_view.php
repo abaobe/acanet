@@ -16,38 +16,63 @@
         </div>
         <hr class="clear-contentunit" />
     <?php endforeach; ?>
-</div>
+    </div>
 
 
-<div id="news_detail">
-    
-</div>
+    <div id="news_detail">
+
+    </div>
 
 
-<div id="event_detail">
+    <div id="event_detail">
 
-</div>
+    </div>
 
-<div id="content_detail">
+    <div id="content_detail">
 
-</div>
-
-
-<div id="members_detail">
-
-</div>
+    </div>
 
 
-<div id="admins_detail">
+    <div id="members_detail">
+        <h1 class="block">Members</h1>
 
-</div>
-
-
-<div id="about_detail">
-        <h1 class="block">About this community</h1>
         <div class="column1-unit">
-            <br/>
-            <p> <?php echo $communityInfo->short_description; ?> </p>
+            <table>
+                <tr>
+                    <th class="top" scope="col" style="width:200px;">Usename</th><th class="top" scope="col" style="width:200px;">Full name</th>
+                </tr>
+            <?php foreach ($members as $row): ?>
+                <tr><th scope="row"><?php echo $row->username; ?></th><th><?php echo $row->name; ?></th></tr>
+            <?php endforeach; ?>
+            </table>
         </div>
-        
+
+    </div>
+
+
+    <div id="admins_detail">
+
+        <h1 class="block">Administrators</h1>
+
+        <div class="column1-unit">
+            <table>
+                <tr>
+                    <th class="top" scope="col" style="width:200px;">Usename</th><th class="top" scope="col" style="width:200px;">Full name</th>
+                </tr>
+            <?php foreach ($admins as $row): ?>
+                    <tr><th scope="row"><?php echo $row->username; ?></th><th><?php echo $row->name; ?></th></tr>
+            <?php endforeach; ?>
+                </table>
+            </div>  
+
+        </div>
+
+
+        <div id="about_detail">
+            <h1 class="block">About this community</h1>
+            <div class="column1-unit">
+                <br/>
+                <p> <?php echo $communityInfo->short_description; ?> </p>
+    </div>
+
 </div>
