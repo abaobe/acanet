@@ -18,19 +18,23 @@ root {
     margin:10px;
     height:50px;
     
-    border: 1px solid black;
-    padding: 10 px;
     text-align: center;
-
+    padding: 2em 0 2em 0;
+    background-color:#F2F2F2;
+    font-family: "trebuchet ms",arial,sans-serif;
+    font-size:1em;
+    line-height: 1.5em;
 
 }
 .long{
     margin:10px;
-    height:150px;
-    border: 1px solid black;
-    padding: 10 px;
+    height:50px;
+    
     text-align: center;
-
-
+    padding: 2em 0 2em 0;
+    background-color:#F2F2F2;
+    font-family: "trebuchet ms",arial,sans-serif;
+    font-size:1em;
+    line-height: 1.5em;
 }
 

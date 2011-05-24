@@ -28,13 +28,45 @@ class Profile_change extends CI_Controller {
         }
     }
 
-    function ChangeAddress($address) {
-        $address = rawurldecode($address);
+    function ChangeAddress() {
+        $this->form_validation->set_rules('changed_address', 'address', 'required');
         $this->load->model('model_user', 'User');
         $username = $this->User->Authenticate();
-        if ($username) {  // echo $username;
-            $data = array('address' => $address);
+        if($this->form_validation->run() == false)
+                redirect("profile/index/$username/3/Address not valid");
+        if ($username) {  echo "entered";
+            $data = array('address' => $this->input->post('changed_address'));
             $this->User->update($username, $data);
+            redirect("profile/index/$username/0");
+
+        }
+    }
+
+    function ChangeNumber() {
+        $this->form_validation->set_rules('changed_number', 'number', 'required');
+        $this->load->model('model_user', 'User');
+        $username = $this->User->Authenticate();
+        if($this->form_validation->run() == false)
+                redirect("profile/index/$username/4/Contact Number not valid");
+        if ($username) {  // echo $username;
+            $data = array('contact_number' => $this->input->post('changed_number'));
+            $this->User->update($username, $data);
+            redirect("profile/index/$username/0");
+
+        }
+    }
+
+    function ChangeMailAddress() {
+        $this->form_validation->set_rules('changed_mail_address', 'mail_address', 'required');
+        $this->load->model('model_user', 'User');
+        $username = $this->User->Authenticate();
+        if($this->form_validation->run() == false)
+                redirect("profile/index/$username/5/Mail Address not valid");
+        if ($username) {  // echo $username;
+            $data = array('mail_id' => $this->input->post('changed_mail_address'));
+            $this->User->update($username, $data);
+            redirect("profile/index/$username/0");
+
         }
     }
 
