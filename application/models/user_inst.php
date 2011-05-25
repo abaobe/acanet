@@ -24,6 +24,8 @@ class User_inst extends CI_Model {
     }
 
     function Load(){
+        if($this->IsAvailable())
+            return false;
         $this->db->where(array(
             'username' => $this->username,
             'institution_id' => $this->institution_id)
@@ -33,6 +35,7 @@ class User_inst extends CI_Model {
             $this->role = $row->role;
             $this->referer = $row->referer;
         }
+        return true;
     }
 
     function IsAvailable(){
@@ -55,6 +58,31 @@ class User_inst extends CI_Model {
     }
 
     function GetPendingMembers(){
+    }
+    
+    function ValidateMembership(){
+        // validates if given user is member of a given institute,
+        // also returns false if pending/banned etc.
+        if($this->Load()){
+            switch($this->role){
+                case 'pending':
+                    return false;
+                case 'banned' :
+                    return false;
+                default:
+                    return true;
+                        
+            }
+        }
+        return false;    
+    }
+    
+    function GetRole(){
+        // Returns role, else False if failed to load
+        if($this->Load()){
+            return $this->role;
+        }
+        return false;
     }
 
 }

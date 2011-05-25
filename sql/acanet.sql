@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.0.1
+-- version 3.3.10deb1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 22, 2011 at 07:40 AM
--- Server version: 5.1.36
--- PHP Version: 5.3.0
+-- Generation Time: May 26, 2011 at 12:49 AM
+-- Server version: 5.1.54
+-- PHP Version: 5.3.5-1ubuntu7.2
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -25,6 +25,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `community`
 --
 
+DROP TABLE IF EXISTS `community`;
 CREATE TABLE IF NOT EXISTS `community` (
   `community_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -32,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `community` (
   `short_description` text NOT NULL,
   `updated_date` datetime NOT NULL,
   PRIMARY KEY (`community_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
 
 --
 -- Dumping data for table `community`
@@ -73,7 +74,13 @@ INSERT INTO `community` (`community_id`, `name`, `type`, `short_description`, `u
 (31, 'Rajsahi University', 'institution', 'sdfs', '0000-00-00 00:00:00'),
 (32, 'Rajsahi University', 'institution', 'sdfs', '0000-00-00 00:00:00'),
 (33, 'Rajsahi University', 'institution', 'sdfs', '0000-00-00 00:00:00'),
-(34, 'North South', 'institution', 'blah', '0000-00-00 00:00:00');
+(34, 'North South', 'institution', 'blah', '0000-00-00 00:00:00'),
+(35, 'Community for National Fan', 'institution', 'n/a', '0000-00-00 00:00:00'),
+(36, 'Community for Computer Science & Engineering', 'institution', 'Global CSE Field', '0000-00-00 00:00:00'),
+(37, 'Community for Computer Science & Engineering', 'institution', 'Buet''s CSE Field', '0000-00-00 00:00:00'),
+(38, 'Community for Computer Science & Engineering', 'institution', 'Buet''s CSE Field', '0000-00-00 00:00:00'),
+(39, 'Community for Computer Science & Engineering', 'institution', 'Global CSE Field', '0000-00-00 00:00:00'),
+(40, 'Community for Electrical & Electronic Engineering', 'institution', 'Buet''s EEE', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -81,6 +88,7 @@ INSERT INTO `community` (`community_id`, `name`, `type`, `short_description`, `u
 -- Table structure for table `content`
 --
 
+DROP TABLE IF EXISTS `content`;
 CREATE TABLE IF NOT EXISTS `content` (
   `content_id` int(10) NOT NULL AUTO_INCREMENT,
   `type` enum('link','text') NOT NULL,
@@ -112,6 +120,7 @@ INSERT INTO `content` (`content_id`, `type`, `content_link`, `publisher_name`, `
 -- Table structure for table `content_community`
 --
 
+DROP TABLE IF EXISTS `content_community`;
 CREATE TABLE IF NOT EXISTS `content_community` (
   `content_id` int(10) NOT NULL,
   `community_id` int(10) NOT NULL,
@@ -138,6 +147,7 @@ INSERT INTO `content_community` (`content_id`, `community_id`) VALUES
 -- Table structure for table `course`
 --
 
+DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
   `course_id` int(10) NOT NULL AUTO_INCREMENT,
   `field_id` int(10) NOT NULL,
@@ -162,6 +172,7 @@ CREATE TABLE IF NOT EXISTS `course` (
 -- Table structure for table `event`
 --
 
+DROP TABLE IF EXISTS `event`;
 CREATE TABLE IF NOT EXISTS `event` (
   `event_id` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
@@ -195,6 +206,7 @@ INSERT INTO `event` (`event_id`, `title`, `description`, `start_date_time`, `end
 -- Table structure for table `event_community`
 --
 
+DROP TABLE IF EXISTS `event_community`;
 CREATE TABLE IF NOT EXISTS `event_community` (
   `event_id` int(10) NOT NULL,
   `community_id` int(10) NOT NULL,
@@ -220,6 +232,7 @@ INSERT INTO `event_community` (`event_id`, `community_id`) VALUES
 -- Table structure for table `field`
 --
 
+DROP TABLE IF EXISTS `field`;
 CREATE TABLE IF NOT EXISTS `field` (
   `field_id` int(10) NOT NULL AUTO_INCREMENT,
   `institution_id` int(10) NOT NULL,
@@ -228,15 +241,20 @@ CREATE TABLE IF NOT EXISTS `field` (
   `community_id` int(10) NOT NULL,
   `short_description` text NOT NULL,
   `updated_date` datetime NOT NULL,
+  `status` enum('pending','approved') NOT NULL DEFAULT 'pending',
   PRIMARY KEY (`field_id`),
   KEY `community_id` (`community_id`),
   KEY `institution_id` (`institution_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `field`
 --
 
+INSERT INTO `field` (`field_id`, `institution_id`, `name`, `short_name`, `community_id`, `short_description`, `updated_date`, `status`) VALUES
+(3, 2, 'Computer Science & Engineering', 'CSE', 38, 'Buet''s CSE Field', '0000-00-00 00:00:00', 'approved'),
+(4, 0, 'Computer Science & Engineering', 'CSE', 39, 'Global CSE Field', '0000-00-00 00:00:00', 'approved'),
+(5, 2, 'Electrical & Electronic Engineering', 'EEE', 40, 'Buet''s EEE', '0000-00-00 00:00:00', 'approved');
 
 -- --------------------------------------------------------
 
@@ -244,6 +262,7 @@ CREATE TABLE IF NOT EXISTS `field` (
 -- Table structure for table `institution`
 --
 
+DROP TABLE IF EXISTS `institution`;
 CREATE TABLE IF NOT EXISTS `institution` (
   `institution_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -258,18 +277,20 @@ CREATE TABLE IF NOT EXISTS `institution` (
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `short_name` (`short_name`),
   KEY `community_id` (`community_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `institution`
 --
 
 INSERT INTO `institution` (`institution_id`, `name`, `short_name`, `location`, `community_id`, `campuses`, `short_description`, `updated_date`, `status`) VALUES
+(0, 'Global', 'Global', 'Global', 0, 'N/A', 'N/A', '0000-00-00 00:00:00', 'approved'),
 (1, 'Dhaka University', 'DU', 'DU', 28, 'only one campus', 'DU', '0000-00-00 00:00:00', 'pending'),
 (2, 'Bangladesh University Of Engineering & Technology', 'BUET', 'Polashi, Dhaka', 0, 'New Aca Building\nEME building', 'buet is a peculiar university', '0000-00-00 00:00:00', 'approved'),
 (3, 'Chittagong University', 'CU', 'dfd\ndsf', 30, '\ndfsd\ndsf\nfsdfsf\n', 'dfsdf\nsdf\nsdf', '0000-00-00 00:00:00', 'pending'),
 (4, 'Rajsahi University', 'RU', 'Rajsahi', 31, 'dfsd\nsdfs\nsdf', 'sdfs', '0000-00-00 00:00:00', 'pending'),
-(6, 'North South', 'NSU', 'blah', 34, 'blah', 'blah', '0000-00-00 00:00:00', '');
+(6, 'North South', 'NSU', 'blah', 34, 'blah', 'blah', '0000-00-00 00:00:00', ''),
+(7, 'National Fan', 'NF', 'n/a', 35, 'n/a', 'n/a', '0000-00-00 00:00:00', 'pending');
 
 -- --------------------------------------------------------
 
@@ -277,6 +298,7 @@ INSERT INTO `institution` (`institution_id`, `name`, `short_name`, `location`, `
 -- Table structure for table `news`
 --
 
+DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `news_id` int(10) NOT NULL AUTO_INCREMENT,
   `heading` varchar(100) NOT NULL,
@@ -286,7 +308,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `date_time` datetime NOT NULL,
   PRIMARY KEY (`news_id`),
   KEY `publisher_name` (`publisher_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `news`
@@ -299,6 +321,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 -- Table structure for table `news_community`
 --
 
+DROP TABLE IF EXISTS `news_community`;
 CREATE TABLE IF NOT EXISTS `news_community` (
   `news_id` int(10) NOT NULL,
   `community_id` int(10) NOT NULL,
@@ -317,6 +340,7 @@ CREATE TABLE IF NOT EXISTS `news_community` (
 -- Table structure for table `post`
 --
 
+DROP TABLE IF EXISTS `post`;
 CREATE TABLE IF NOT EXISTS `post` (
   `post_id` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) DEFAULT NULL,
@@ -354,6 +378,7 @@ INSERT INTO `post` (`post_id`, `title`, `description`, `publisher_name`, `date_t
 -- Table structure for table `post_community`
 --
 
+DROP TABLE IF EXISTS `post_community`;
 CREATE TABLE IF NOT EXISTS `post_community` (
   `post_id` int(10) NOT NULL,
   `community_id` int(10) NOT NULL,
@@ -390,6 +415,7 @@ INSERT INTO `post_community` (`post_id`, `community_id`) VALUES
 -- Table structure for table `post_reply`
 --
 
+DROP TABLE IF EXISTS `post_reply`;
 CREATE TABLE IF NOT EXISTS `post_reply` (
   `post_id` int(10) NOT NULL,
   `community_id` int(10) NOT NULL,
@@ -410,6 +436,7 @@ CREATE TABLE IF NOT EXISTS `post_reply` (
 -- Table structure for table `request`
 --
 
+DROP TABLE IF EXISTS `request`;
 CREATE TABLE IF NOT EXISTS `request` (
   `request_id` int(10) NOT NULL AUTO_INCREMENT,
   `description` text NOT NULL,
@@ -436,6 +463,7 @@ CREATE TABLE IF NOT EXISTS `request` (
 -- Table structure for table `subject`
 --
 
+DROP TABLE IF EXISTS `subject`;
 CREATE TABLE IF NOT EXISTS `subject` (
   `subejct_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -460,6 +488,7 @@ INSERT INTO `subject` (`subejct_id`, `name`, `community_id`, `short_description`
 -- Table structure for table `subject_course`
 --
 
+DROP TABLE IF EXISTS `subject_course`;
 CREATE TABLE IF NOT EXISTS `subject_course` (
   `subject_id` int(10) NOT NULL,
   `course_id` int(10) NOT NULL,
@@ -478,6 +507,7 @@ CREATE TABLE IF NOT EXISTS `subject_course` (
 -- Table structure for table `subject_field`
 --
 
+DROP TABLE IF EXISTS `subject_field`;
 CREATE TABLE IF NOT EXISTS `subject_field` (
   `subject_id` int(10) NOT NULL,
   `field_id` int(10) NOT NULL COMMENT 'Only Global Fields',
@@ -496,6 +526,7 @@ CREATE TABLE IF NOT EXISTS `subject_field` (
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `username` char(20) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -514,8 +545,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `name`, `address`, `contact_number`, `mail_address`, `type`, `status`, `verification_data`) VALUES
+('azam', '5cc32e366c87c4cb49e4309b75f57d64', 'okd doke', 'dsfdsfsdfdfd', 'n/a', 'n/a', 'subscriber', 'activated', 'abcdef'),
 ('giga', '00d8c86d80f51dc38b694de6172f96b4ffbc571b', '', '', '', '', 'admin', 'pending', ''),
 ('ibrahim', 'f1c083e61b32d3a9be76bc21266b0648', 'Ibrahim ibrahim', 'dsafadsfasdf', 'asdfasdf', 'adsfasdf', 'subscriber', 'pending', 'abcdef'),
+('shafiul', 'a6926ad918ad3ab499e8d7d7f1de0316', 'Shafiul Azam', 'n/a n/a n/a', 'n/a', 'ishafiul@gmail.com', 'subscriber', 'activated', 'abcdef'),
 ('sifat', 'e10adc3949ba59abbe56e057f20f883e', 'sdf asdfas', 'sifatasdfasdfasfd', 'sifat', 'sifat@gamil.com', 'subscriber', 'pending', 'abcdef');
 
 -- --------------------------------------------------------
@@ -524,6 +557,7 @@ INSERT INTO `user` (`username`, `password`, `name`, `address`, `contact_number`,
 -- Table structure for table `user_community`
 --
 
+DROP TABLE IF EXISTS `user_community`;
 CREATE TABLE IF NOT EXISTS `user_community` (
   `username` char(20) NOT NULL,
   `community_id` int(10) NOT NULL,
@@ -544,9 +578,12 @@ CREATE TABLE IF NOT EXISTS `user_community` (
 -- Table structure for table `user_field`
 --
 
+DROP TABLE IF EXISTS `user_field`;
 CREATE TABLE IF NOT EXISTS `user_field` (
   `username` char(20) NOT NULL,
   `field_id` int(10) NOT NULL,
+  `role` enum('owner','member','moderator','pending','banned') NOT NULL DEFAULT 'member',
+  `referer` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`username`,`field_id`),
   KEY `field_id` (`field_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -555,6 +592,13 @@ CREATE TABLE IF NOT EXISTS `user_field` (
 -- Dumping data for table `user_field`
 --
 
+INSERT INTO `user_field` (`username`, `field_id`, `role`, `referer`) VALUES
+('azam', 3, 'pending', 'shafiul'),
+('azam', 4, 'pending', 'ibrahim'),
+('azam', 5, 'owner', NULL),
+('shafiul', 3, 'owner', NULL),
+('shafiul', 4, 'owner', NULL),
+('shafiul', 5, 'pending', 'azam');
 
 -- --------------------------------------------------------
 
@@ -562,6 +606,7 @@ CREATE TABLE IF NOT EXISTS `user_field` (
 -- Table structure for table `user_institution`
 --
 
+DROP TABLE IF EXISTS `user_institution`;
 CREATE TABLE IF NOT EXISTS `user_institution` (
   `username` char(20) NOT NULL,
   `institution_id` int(10) NOT NULL,
@@ -576,13 +621,16 @@ CREATE TABLE IF NOT EXISTS `user_institution` (
 --
 
 INSERT INTO `user_institution` (`username`, `institution_id`, `role`, `referer`) VALUES
+('azam', 2, 'member', 'shafiul'),
 ('giga', 2, 'pending', 'ibrahim'),
 ('giga', 6, 'pending', 'ibrahim'),
 ('ibrahim', 1, 'owner', NULL),
 ('ibrahim', 2, 'owner', NULL),
 ('ibrahim', 3, 'owner', NULL),
 ('ibrahim', 4, 'owner', NULL),
-('ibrahim', 6, 'owner', NULL);
+('ibrahim', 6, 'owner', NULL),
+('shafiul', 2, 'member', 'azam'),
+('shafiul', 7, 'owner', NULL);
 
 --
 -- Constraints for dumped tables
