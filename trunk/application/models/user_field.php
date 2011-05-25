@@ -5,11 +5,12 @@
  * and open the template in the editor.
  */
 
-class User_inst extends CI_Model {
+class User_field extends CI_Model {
 
     var $username;
     var $field_id;
     var $role;
+    var $referer;
 
     function __construct() {
         parent::__construct();
@@ -30,6 +31,7 @@ class User_inst extends CI_Model {
         $query = $this->db->get('user_field');
         foreach($query->result() as $row){
             $this->role = $row->role;
+            $this->referer = $row->referer;
         }
     }
 

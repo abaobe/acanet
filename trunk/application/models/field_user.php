@@ -1,6 +1,8 @@
 <?php
 
 /*
+ * WARNING - THIS IS A DUPLICATE FILE SOMEONE CREATED, AND POSSIBLY USING.
+ * INSTEAD, USE "USER_FILED" MODEL. i'LL DELETE IT SOON - SHAFIUL
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */

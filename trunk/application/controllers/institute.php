@@ -82,6 +82,22 @@ class Institute extends CI_Controller {
                        return;
                    }
                    $this->Institution->status = "pending";
+                   
+                   // Get a community
+                   $this->load->model("model_community", "Community");
+                   // Create Instance
+                   $this->Community->name = "Community for " . $this->Institution->name;
+                   $this->Community->type = "institution";
+                   $this->Community->short_description = $this->Institution->short_description;
+                   $this->Community->Insert();  //  Created
+
+                   if(!$this->Community->community_id){
+                       $this->page->showMesssage("Failed to create community!");
+                       return;
+                   }
+
+                   $this->Institution->community_id = $this->Community->community_id;
+                   // Done. Now INSERT
                    $this->Institution->Insert();    //  Insert Into DB
                    if($this->Institution->institution_id){
                        // Insert it into user_inst
@@ -91,7 +107,8 @@ class Institute extends CI_Controller {
                        $this->User_inst->institution_id = $this->Institution->institution_id;
                        $this->User_inst->role = "owner";
                        $this->User_inst->Insert();  // Create
-                       $this->page->showMessage("Successfully created community! ID is: " . $this->Institution->institution_id);
+                       
+                       $this->page->showMessage("Successfully created Institution! ID is: " . $this->Institution->institution_id);
                    }else{
                        $this->page->showMessage("Error! Instituion name/short name alredy taken.");
                    }
@@ -138,7 +155,7 @@ class Institute extends CI_Controller {
                
            }else if($mode == "ref_chosen"){
                $this->form_validation->set_rules('institution_id', 'Institute ID', 'required');
-               $this->form_validation->set_rules('referer', 'Referer Username', 'required|max_length[100]');
+               $this->form_validation->set_rules('referer', 'Referer Username', 'required|max_length[20]');
 
                if($this->form_validation->run()){
                    // success! Check if institute exists

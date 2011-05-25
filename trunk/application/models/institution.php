@@ -25,14 +25,6 @@
        }
 
        function Insert(){
-           // Get a community
-           $this->load->model("Community");
-           // Create Instance
-           $this->Community->name = $this->name;
-           $this->Community->type = "institution";
-           $this->Community->short_description = $this->short_description;
-           $this->Community->Insert();  //  Created
-           $this->community_id = $this->Community->community_id;
            $this->db->insert('institution',$this);
            $this->institution_id = $this->db->insert_id();
        }
@@ -68,12 +60,16 @@
        }
 
        function GetAll(){
+           $this->db->where(array(
+               "institution_id >" => 0
+           ));
            $query = $this->db->get('institution');
            return $query->result();
        }
        function GetAllApproved(){
            $query = $this->db->get_where('institution', array(
-               'status' => 'approved'
+               'status =' => 'approved',
+               "institution_id >" => 0
            ));
            return $query->result();
        }
