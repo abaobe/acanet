@@ -25,6 +25,8 @@
             "Fields" => site_url("fields"));
             // Load User Model
             $this->load->model('model_user','User');
+            $this->load->model('Field');
+            $this->load->model('User_field');
         }
         
         
@@ -32,7 +34,14 @@
         function validate_availability(){
            // In case of global, name must be unique
            // in case of those under Institutions, only one name under an institute. 
-           return true;
+           return $this->Field->IsAvailable();
+        }
+        
+        function validate_referer(){
+            if(!empty($this->input->post('referer'))){
+                return $this->User->IsUsernameValid('referer');
+            }
+            return false;
         }
         
         
@@ -55,16 +64,20 @@
                    $this->form_validation->set_rules('name', 'Name', 'required|max_length[100]|callback_validate_availability');
                    $this->form_validation->set_rules('short_name', 'Short Name', 'required|max_length[100]');
                    $this->form_validation->set_rules('institution_id', 'Institution ID', 'required|integer');
+                   
+                   // Prepare the model
+                   $this->Field->name = $this->input->post('name');
+                   $this->Field->short_name = $this->input->post('short_name');
+                   $this->Field->institution_id = (int) ($this->input->post('institution_id') );
+                   
                    $this->form_validation->set_rules('short_description', 'Short Description', 'required|max_length[500]');
-                   $this->form_validation->set_message('validate_availability', 'This Name or Short Name is Unavailable!');
+                   $this->form_validation->set_message('validate_availability', 'This Name is Unavailable!');
 //                   if($option == "modify"){
 //                       $this->form_validation->set_rules('institution_id','Institution Id', 'required');
 //                       $this->form_validation->set_rules('status','Status ', 'required');
 //                   }
                    if($this->form_validation->run()){
                        // Success. insert into db
-                       $this->load->model('Field');
-                       // Create Object
 //                       if($option == "modify"){
 //                           // validate permissions -- TBD
 //                           $this->Institution->institution_id = $this->input->post('institution_id');
@@ -73,43 +86,54 @@
 //                               return;
 //                           }
 //                       }
-                       $this->Institution->name = $this->input->post('name');
-                       $this->Institution->short_name = $this->input->post('sname');
-                       $this->Institution->institution_id = $this->input->post('instituion_id');
-                       $this->Institution->short_description = $this->input->post('short_description');
-                       $this->Institution->location = $this->input->post('location');
+                       $this->Field->short_description = $this->input->post('short_description');
+                       
 //                       if($option == "modify"){
 //                           $this->Institution->status = $this->input->post('status');
 //                           $this->Institution->Update();
 //                           $this->page->showMessage("Institution Updated!");
 //                           return;
 //                       }
-//                       $this->Institution->status = "pending";
-//                       $this->Institution->Insert();    //  Insert Into DB
-//                       if($this->Institution->institution_id){
-//                           // Insert it into user_inst
-//                           $this->load->model('User_inst');
-//                           // Prepare Object
-//                           $this->User_inst->username = $uname;
-//                           $this->User_inst->institution_id = $this->Institution->institution_id;
-//                           $this->User_inst->role = "owner";
-//                           $this->User_inst->Insert();  // Create
-//                           $this->page->showMessage("Successfully created community! ID is: " . $this->Institution->institution_id);
-//                       }else{
-//                           $this->page->showMessage("Error! Instituion name/short name alredy taken.");
-//                       }
+                       $this->Field->status = "pending";
+                       // Get a community
+                       $this->load->model("model_community","Community");
+                       // Create Instance
+                       $this->Community->name = "Community for " . $this->Field->name;
+                       $this->Community->type = "institution";
+                       $this->Community->short_description = $this->Field->short_description;
+                       $this->Community->Insert();  //  Created
+                       
+                       if(!$this->Community->community_id){
+                           $this->page->showMesssage("Failed to create community!");
+                           return;
+                       }
+                       
+                       $this->Field->community_id = $this->Community->community_id;
+                       
+                       $this->Field->Insert();    //  Insert Into DB
+                       if($this->Field->field_id){
+                           // Insert it into user_field
+                           // Prepare Object
+                           $this->User_field->username = $uname;
+                           $this->User_field->field_id = $this->Field->field_id;
+                           $this->User_field->role = "owner";
+                           $this->User_field->Insert();  // Create
+                           $this->page->showMessage("Successfully created Field! ID is: " . $this->Field->field_id);
+                       }else{
+                           $this->page->showMessage("Error! Instituion name/short name alredy taken.");
+                       }
                        return;
                    }else{
                        // Not validated
-                       if($option == "modify"){
-                           redirect('institute/modify/id_chosen/' . $this->input->post('institution_id'));
-                           return;
-                       }
+//                       if($option == "modify"){
+//                           redirect('institute/modify/id_chosen/' . $this->input->post('institution_id'));
+//                           return;
+//                       }
                    }
                }
            }
            
-           // Get all institution list
+           // Get all institution list to send to sidebars
            
            $this->load->model('Institution');
            $institutes = $this->Institution->GetAll();
@@ -129,6 +153,84 @@
                        array("Create New Field", "forms/createField", array("institutes" => $data))
                    ),
                    null);
+       }
+       
+       
+       function join($mode = "", $id = ""){
+           // Join an Institution
+           $this->page->title = "Join A Field";
+           $this->defaultBreadcrumb['Join A Field'] = "";
+           $this->page->breadcrumbs = $this->defaultBreadcrumb;
+           $uname = $this->User->Authenticate();
+           if(!$uname)
+               return;
+
+           if(!empty($mode)){
+               if($mode == "id_chosen"){
+                   if(!isset($id)){
+                       $this->page->showMessage("Error: Must Choose A Field First!");
+                       return;
+                   }
+
+               }else if($mode == "ref_chosen"){
+                   $this->form_validation->set_rules('field_id', 'Field ID', 'required');
+                   $this->form_validation->set_rules('referer', 'Referer Username', 'required|max_length[20]');
+
+                   if($this->form_validation->run()){
+                       // success! Check if Field exists
+                       $id = $this->input->post('field_id');
+    //                   $this->load->model('Institution');
+                       $this->Field->field_id = $id;
+                       if(!$this->Field->Load()){
+                           $this->page->showMessage("Field ID " . $this->Field->field_id . " was not found!");
+                           return;
+                       }
+                       if($this->Field->status != "approved"){
+                           $this->page->showMessage("This Field is not approved yet.");
+                           return;
+                       }
+                       // Future implementation: check if the referer valid
+                       $this->load->model('User_field');
+                       $this->User_field->username = $uname;
+                       $this->User_field->field_id = $id;
+                       $this->User_field->referer = $this->input->post('referer');
+                       $this->User_field->role = "pending";
+                       if($this->User_field->IsAvailable()){
+                           $this->User_field->Insert();
+                           $this->page->showMessage("You are successfully applied for the Field.");
+                       }else{
+                           $this->page->showMessage("You have already applied for the field!");
+                       }
+                       return;
+                   }
+               }
+               $this->defaultBreadcrumb['Join A Field'] = site_url('fields/join');
+               $this->defaultBreadcrumb['Choose Referer'] = "";
+               $this->page->breadcrumbs = $this->defaultBreadcrumb;
+               $this->page->loadViews(
+                    array(
+                       array("Fields", "sidebars/field_common"),
+                       array("Administration", "sidebars/field_admin")
+                    ),
+                    array(
+                       array("Choose A Referer", "forms/choose_referer", array("id" => $id)),
+                    ),
+                    null);
+               return;
+           }
+
+           // Load  Models
+           $fieldList = $this->Field->GetAllApproved();
+
+           $this->page->loadViews(
+                array(
+                   array("Fields", "sidebars/field_common"),
+                   array("Administration", "sidebars/field_admin")
+                ),
+                array(
+                   array("Join A Field", "field/listAll", array("list" => $fieldList)),
+                ),
+                null);
        }
         
     }

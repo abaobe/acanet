@@ -3,6 +3,8 @@
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
+ * 
+ * What does this file do? not written by me... - shafiul
  */
 
 class Inst_field extends CI_Controller {
