@@ -23,7 +23,7 @@
           $data[] = array("Status", form_dropdown('status', array(
               'approved' => 'Approved',
               'pending' => 'Pending'
-          )) . " (" . $instData->status . ") ");
+          ), $instData->status) . " (" . $instData->status . ") ");
           echo $this->table->generate($data);
 
 //          echo form_label("Name: ","name");

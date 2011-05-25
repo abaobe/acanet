@@ -118,7 +118,7 @@ class register extends CI_Controller {
 
     function CheckUsername($username) {
         $this->load->model('model_user','User');
-        if (!$this->User->IsUsernameValid($username)) {
+        if ($this->User->IsUsernameValid($username)) {
             $this->form_validation->set_message('CheckUsername', 'The %s is used already please try another username');
             return false;
         }

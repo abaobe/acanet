@@ -38,15 +38,44 @@
         }
         
         function validate_referer(){
-            if(!empty($this->input->post('referer'))){
-                return $this->User->IsUsernameValid('referer');
+            $ref = $this->input->post('referer');
+            if(!empty($ref)){
+                if( $this->User->IsUsernameValid($ref) ){
+                    // Now validate whether this user has permission to this Field.
+                    $this->User_field->username = $ref;
+                    $this->User_field->field_id = $this->input->post('id');
+                    if (!$this->User_field->ValidateMembership() ){
+                        $this->form_validation->set_message('validate_referer', 'This Username you chose is not a member of this field!');
+                        return false;
+                    }else{
+                        return true;
+                    }
+                }
+                $this->form_validation->set_message('validate_referer', 'This Referer username is invalid!');
+                return false;
             }
-            return false;
+            return true;    //  no referer choosen.
+        }
+        
+        function validate_institute_membership(){
+            // checks if the user has access to that institute
+            $username = $this->User->Authenticate();
+            $fieldId = $this->input->post('id');
+            // get institution id of this field
+            $this->Field->field_id = $fieldId;
+            $instId = $this->Field->GetInstitute_id();
+            if($instId == 0)
+                return true;
+            $this->load->model('User_inst');
+            $this->User_inst->username = $username;
+            $this->User_inst->institution_id = $instId;
+            return $this->User_inst->ValidateMembership();
         }
         
         
         function index(){
             // view public fields here.
+            redirect('fields/join');
         }
         
         
@@ -61,7 +90,11 @@
            if(!empty ($mode)){
                if($mode == "process"){
                    // Process Submitted request
-                   $this->form_validation->set_rules('name', 'Name', 'required|max_length[100]|callback_validate_availability');
+                   if($option == "modify")
+                       $this->form_validation->set_rules('name', 'Name', 'required|max_length[100]');
+                   else
+                       $this->form_validation->set_rules('name', 'Name', 'required|max_length[100]|callback_validate_availability');
+                  
                    $this->form_validation->set_rules('short_name', 'Short Name', 'required|max_length[100]');
                    $this->form_validation->set_rules('institution_id', 'Institution ID', 'required|integer');
                    
@@ -72,28 +105,28 @@
                    
                    $this->form_validation->set_rules('short_description', 'Short Description', 'required|max_length[500]');
                    $this->form_validation->set_message('validate_availability', 'This Name is Unavailable!');
-//                   if($option == "modify"){
-//                       $this->form_validation->set_rules('institution_id','Institution Id', 'required');
-//                       $this->form_validation->set_rules('status','Status ', 'required');
-//                   }
+                   if($option == "modify"){
+                       $this->form_validation->set_rules('field_id','Field Id', 'required|integer');
+                       $this->form_validation->set_rules('status','Status ', 'required');
+                   }
                    if($this->form_validation->run()){
                        // Success. insert into db
-//                       if($option == "modify"){
-//                           // validate permissions -- TBD
-//                           $this->Institution->institution_id = $this->input->post('institution_id');
-//                           if(!$this->Institution->Load()){
-//                               $this->page->showMessage("The institution was not found for modifying");
-//                               return;
-//                           }
-//                       }
+                       if($option == "modify"){
+                           // validate permissions -- TBD
+                           $this->Field->field_id = $this->input->post('field_id');
+                           if(!$this->Field->Load()){
+                               $this->page->showMessage("The Field was not found for modifying");
+                               return;
+                           }
+                       }
                        $this->Field->short_description = $this->input->post('short_description');
                        
-//                       if($option == "modify"){
-//                           $this->Institution->status = $this->input->post('status');
-//                           $this->Institution->Update();
-//                           $this->page->showMessage("Institution Updated!");
-//                           return;
-//                       }
+                       if($option == "modify"){
+                           $this->Field->status = $this->input->post('status');
+                           $this->Field->Update();
+                           $this->page->showMessage("Field Updated!");
+                           return;
+                       }
                        $this->Field->status = "pending";
                        // Get a community
                        $this->load->model("model_community","Community");
@@ -125,10 +158,12 @@
                        return;
                    }else{
                        // Not validated
-//                       if($option == "modify"){
-//                           redirect('institute/modify/id_chosen/' . $this->input->post('institution_id'));
-//                           return;
-//                       }
+                       if($option == "modify"){
+//                           echo validation_errors();
+//                           die();
+                           redirect('fields/modify/id_chosen/' . $this->input->post('field_id'));
+                           return;
+                       }
                    }
                }
            }
@@ -173,12 +208,14 @@
                    }
 
                }else if($mode == "ref_chosen"){
-                   $this->form_validation->set_rules('field_id', 'Field ID', 'required');
-                   $this->form_validation->set_rules('referer', 'Referer Username', 'required|max_length[20]');
+                   $this->form_validation->set_rules('id', 'Field ID', 'required|callback_validate_institute_membership');
+                   $this->form_validation->set_rules('referer', 'Referer Username', 'max_length[20]|callback_validate_referer');
 
+                   $this->form_validation->set_message('validate_institute_membership', 'You do not have access to this the institution of this Field!');
+             
                    if($this->form_validation->run()){
                        // success! Check if Field exists
-                       $id = $this->input->post('field_id');
+                       $id = $this->input->post('id');
     //                   $this->load->model('Institution');
                        $this->Field->field_id = $id;
                        if(!$this->Field->Load()){
@@ -213,7 +250,7 @@
                        array("Administration", "sidebars/field_admin")
                     ),
                     array(
-                       array("Choose A Referer", "forms/choose_referer", array("id" => $id)),
+                       array("Choose A Referer", "forms/choose_referer", array("id" => $id, "controller" => "fields")),
                     ),
                     null);
                return;
@@ -232,6 +269,106 @@
                 ),
                 null);
        }
+       
+       function modify($mode = "", $id = "") {
+            // Modify an Institution
+            $this->page->title = "Modify A Field";
+            $this->defaultBreadcrumb['Modify A Field'] = "";
+            $this->page->breadcrumbs = $this->defaultBreadcrumb;
+            $uname = $this->User->Authenticate();
+            if (!$uname)
+                return;
+            if (!empty($mode)) {
+                if ($mode == "id_chosen") {
+                    if (empty($id)) {
+                        $this->page->showMessage("Error: Must Choose An ID");
+                        return;
+                    }
+                    // Check permission here. dummy validated...
+                    // get the institution
+    //               $this->load->model('Institution');
+
+                    $this->Field->field_id = $id;
+
+
+                    if (!$this->Field->Load()) {
+                        $this->page->showMessage("Could not load Field " . $this->Field->field_id);
+                        return;
+                    }
+                    
+                    
+                    // Get all institution list to send to sidebars
+           
+                    $this->load->model('Institution');
+                    $institutes = $this->Institution->GetAll();
+                    // Prepare data to send
+                    $data = array();
+                    $data['0'] = "Under No Institution (Global)";
+                    foreach($institutes as $i){
+                       $data[$i->institution_id] = $i->name;
+                    }
+                    
+
+                    // All Validated. do something here.
+                    $this->defaultBreadcrumb['Modify A Field'] = site_url('fields/modify');
+                    $this->defaultBreadcrumb['Edit'] = "";
+                    $this->page->breadcrumbs = $this->defaultBreadcrumb;
+                    $this->page->loadViews(
+                            array(
+                        array("Fields", "sidebars/field_common"),
+                        array("Administration", "sidebars/field_admin")
+                            ), array(
+                        array("Edit Field", "forms/modifyField", array("fieldData" => $this->Field, "instList" => $data)),
+                            ), null);
+                    return;
+                }
+            }
+
+            // Load  Models
+    //       $this->load->model('Institution');
+            $fieldList = $this->Field->GetAll();
+
+            $this->page->loadViews(
+                    array(
+                array("Fields", "sidebars/field_common"),
+                array("Administration", "sidebars/field_admin")
+                    ), array(
+                array("Modify A Field", "field/listAll", array("list" => $fieldList, "action" => "modify")),
+                    ), null);
+        }
+        
+        
+        function view($field_id, $option="") {
+
+            // validations not required since this is general view
+            $this->Field->field_id = $field_id;
+            if (!$this->Field->Load()) {
+                $this->page->showMessage("The Field you specified was not found");
+                return;
+            }
+
+
+
+            if ($option == "community") {
+                // Load this page's community. Here we may need validation if the user joined this community
+//                $this->defaultBreadcrumb[$this->Institution->short_name] = site_url('institute/view/' . $this->Institution->institution_id);
+//                $this->defaultBreadcrumb["Community"] = "";
+//                $this->page->breadcrumbs = $this->defaultBreadcrumb;
+//                $this->page->title = "Official Community Page For " . $this->Institution->name . " ";
+                // I think a redirection will do :)
+                $this->page->showMessage("Load community: " . $this->Field->community_id);
+                return;
+            }
+
+            $this->defaultBreadcrumb[$this->Field->short_name] = "";
+            $this->page->breadcrumbs = $this->defaultBreadcrumb;
+            $this->page->title = $this->Field->name . " | Field";
+
+            $this->page->loadViews(
+                    null, array(
+                array($this->Field->name, "institution/view", array("instData" => $this->Field))
+                    ), null);
+        }
         
     }
 
