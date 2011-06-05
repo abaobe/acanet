@@ -5,6 +5,8 @@ $i = 0;
 foreach ($allPosts as $aPost):
     $class = !($i % 2) ? "odd" : "even";
     $i++;
+    $replyCount = count($aPost->replyies);
+    $classHidden = ($replyCount==0)?"hidden":"";
     ?>
     <div class="post-post-reply-wrapper">
         <div class="posts <?= $class ?> rounded" postId="<?= $aPost->post_id ?>">
@@ -47,15 +49,18 @@ foreach ($allPosts as $aPost):
                 <br/>
                 | Posted by <a href="<?= site_url("profile") . "/index/$aPost->publisher_name" ?>"><?= $aPost->publisher_name ?> 
                 </a>                 
-                | Reply's: <a href="#">73
-                </a> 
-                | <a class="show-post-reply" href="javascript:void(0);" postId="<?= $aPost->post_id ?>">Reply</a>
+                <? if($replyCount): ?>
+                | Reply's: <a href="#"><?= $replyCount ?>
+                <? endif ?>
+                </a>                 
+                | <a class="show-post-reply" href="javascript:void(0);" postId="<?= $aPost->post_id ?>">
+                            <? echo ($replyCount)? "Hide replies":"Reply" ?></a>
 
 
             </p>
         </div>
 
-        <div class="post-reply-wrapper" id="post-reply-wrapper-<?= $aPost->post_id ?>">
+        <div class="post-reply-wrapper <?= $classHidden; ?>" id="post-reply-wrapper-<?= $aPost->post_id ?>">
             <?php foreach($aPost->replyies as $aReply): ?>
                 <div class="posts-reply">            
                     <div class="post-description">
@@ -80,13 +85,13 @@ foreach ($allPosts as $aPost):
 
                 </div>
 
-            <?php endforeach; ?>        
+            <?php endforeach; ?>                    
             <div class="post-reply-input-div" class="contactform">
                <textarea class="field post-reply-input shadow" type="text" name="post-reply-input"  cId ="<?= $aPost->community_id ?>" postId="<?= $aPost->post_id ?>" rows="2" cols="30"></textarea>                            
                <div class="replySubmitButtonDiv rounded">
                    <span>Reply</span>
                </div>
-            </div>    
+            </div>            
         </div>
     </div>
 <?php endforeach; ?>
