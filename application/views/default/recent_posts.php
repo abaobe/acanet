@@ -53,8 +53,7 @@ foreach ($allPosts as $aPost):
                 | Reply's: <a href="#"><?= $replyCount ?>
                 <? endif ?>
                 </a>                 
-                | <a class="show-post-reply" href="javascript:void(0);" postId="<?= $aPost->post_id ?>">
-                            <? echo ($replyCount)? "Hide replies":"Reply" ?></a>
+                | <a class="show-post-reply" href="javascript:void(0);" postId="<?= $aPost->post_id ?>"><? echo ($replyCount)? "Hide replies":"Reply" ?></a>
 
 
             </p>
