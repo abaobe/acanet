@@ -48,13 +48,14 @@
         
        }
        
-       function Add($title,$description,$publisherName)
-       {
+       function Add($description,$publisherName,$title="")
+       {           
            $this->db->set('title',$title);
            $this->db->set('description',$description);
            $this->db->set('publisher_name',$publisherName);
-           $this->db->set('date_time',"now()",false);
+           $this->db->set('date_time',"now()",false);                      
            $result = $this->db->insert('post');
+           if(!$result)echo "Unable to insert posts";
            return $this->db->insert_id();
        }
        function SetPostCommunityRelation($postId,$cId)
@@ -62,6 +63,13 @@
            $this->db->set('post_id',$postId);
            $this->db->set('community_id',$cId);
            return $result = $this->db->insert('post_community');
+       }
+       function SetPostReplyRelation($postId,$cId,$replyId)
+       {
+           $this->db->set('post_id',$postId);
+           $this->db->set('community_id',$cId);
+           $this->db->set('reply_id',$replyId);
+           return $result = $this->db->insert('post_reply');
        }
        function GetByUser($username){           
            $this->db->select('*');
@@ -78,6 +86,8 @@
            $query = $this->db->query($query_str);
            return $query->result();
        }
+       
+       
    }
 
 ?>

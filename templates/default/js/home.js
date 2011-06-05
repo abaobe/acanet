@@ -41,6 +41,36 @@ $(document).ready(function(){
    $("#make-post-community-type").change(function(){         
         LoadCommunities();         
    });
+   
+   $(".replySubmitButtonDiv").live("click",function(){
+       
+       var div = $(this).parent().find(".post-reply-input");
+       var desc = $(div).val();
+       var postId = $(div).attr("postId");
+       var cId = $(div).attr("cId");
+       SaveReply(desc,cId,postId);
+   });
+   
+   function SaveReply(description,cId,postId)  //postId parentId
+   {
+        url = $("#makePostForm").attr("action");
+        var username = $("#loggedUsername").val();
+        $.ajax({
+         url: url,
+         type: "POST",
+         data: ({
+                  description : description,
+                  cId: cId,
+                  publisherName : username,                  
+                  type : 'reply',
+                  postId : postId
+               }),
+         success: function(msg){
+            LoadRecentPosts();
+         }
+      })
+        
+    }
 
    $("#makePostForm").submit(function(){
       var actionUrl = $(this).attr("action");
@@ -60,12 +90,13 @@ $(document).ready(function(){
                   description : postBody,
                   cId: communityId,
                   publisherName : publisherName,
-                  title : title
+                  title : title,
+                  type : 'post'
                }),
          success: function(msg){
             $("#make-post-form-container p,input,select,textarea").removeAttr('disabled');
             $("#make-post-form-container").animate({opacity: 1});
-            $("#make-post-form-container :input").val("");
+            $("#make-post-form-container :input :not(#makePostButton) ").val("");
             LoadRecentPosts();
          }
       })
@@ -134,6 +165,57 @@ $(document).ready(function(){
        }
 
    });
+   
+   $("textarea").autoResize({
+        // On resize:
+        onResize : function() {
+            $(this).css({opacity:0.8});
+        },
+        // After resize:
+        animateCallback : function() {
+            $(this).css({opacity:1});
+        },
+        limit : 1000,
+        // Quite slow animation:
+        animateDuration : 300,
+        // More extra space:
+        extraSpace : 30
+    });
+    
+    
+   var alreadyInit =  false;
+   $(".post-reply-input-div textarea").live("keypress",function(event){       
+        if(!alreadyInit){
+            $(".post-reply-input-div textarea").autoResize({
+                // On resize:
+                onResize : function() {
+                    $(this).css({opacity:0.8});
+                },
+                // After resize:
+                animateCallback : function() {
+                    $(this).css({opacity:1});
+                },
+                limit : 1000,
+                // Quite slow animation:
+                animateDuration : 300,
+                // More extra space:
+                extraSpace : 30
+            });
+            alreadyInit = true;
+        }
+//        if(!event.ctrlKey && event.which === 13 ){            
+//            e.preventDefault();
+//            return false;
+//        }
+//        else if( event.ctrlKey && event.which === 13) {
+//            event.initEvent(13,false,false);
+//            return true;
+//        } 
+//        return true;        
+   });
+    
+    
+   
 
    function GetJsonString(data)
    {

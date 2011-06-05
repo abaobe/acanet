@@ -1,85 +1,92 @@
 
-   <?php
-    $len="";
-    $i=0;
-    foreach ($allPosts as $aPost):
-    $class = !($i%2)? "odd" : "even";
+<?php
+$len = "";
+$i = 0;
+foreach ($allPosts as $aPost):
+    $class = !($i % 2) ? "odd" : "even";
     $i++;
-   ?>
-<div class="post-post-reply-wrapper">
-         <div class="posts <?=$class?> rounded" postId="<?=$aPost->post_id ?>">
-             <div class="post-title"><?= ucfirst($aPost->title) ?></div>
-            <div class="post-datetime"><?=  date_format(date_create($aPost->date_time), 'l, d F Y \a\t H:i'); ?>
-                        </div>
-            
-                <div class="post-description">
-                    <?php
-                        $len = strlen($aPost->description);
-                        if($len >80)
-                            echo substr($aPost->description,0,80);
-                        else
-                            echo $aPost->description;
-                    ?>                                    
-                </div>
-                <a class="readMore" href="javascript:void(0)">
+    ?>
+    <div class="post-post-reply-wrapper">
+        <div class="posts <?= $class ?> rounded" postId="<?= $aPost->post_id ?>">
+            <div class="post-title"><?= ucfirst($aPost->title) ?></div>
+            <div class="post-datetime"><?= date_format(date_create($aPost->date_time), 'l, d F Y \a\t H:i'); ?>
+            </div>
+            <div class="hidden" id="complete-post-desc-<?= $aPost->post_id ?>"><?= $aPost->description ?></div>
+            <div class="post-description">
                 <?php
-                    if($len>80)
-                        echo "Read more &raquo;";
+                $len = strlen($aPost->description);
+                if ($len > 80)
+                    echo substr($aPost->description, 0, 80);
+                else
+                    echo $aPost->description;
                 ?>
-                </a>                
-            
-            
+                <a class="read-more" href="#complete-post-desc-<?= $aPost->post_id ?>">
+                    <?php
+                    if ($len > 80)
+                        echo "Read more &raquo;";
+                    ?>
+                </a>    
+
+            </div>
+
+
+
+
             <p class="details">
-                
-                
-                | Community:<a title="<?=  $aPost->name ?>" href="<?= site_url("community")."/index/$aPost->name" ?>">
-                                <?php
-                                    if(strlen($aPost->name)>50)
-                                        echo substr($aPost->name,0,50)."...";
-                                    else
-                                        echo $aPost->name; 
-                                 ?>
-                            </a> 
+
+
+                | Community:<a title="<?= $aPost->name ?>" href="<?= site_url("community") . "/index/$aPost->name" ?>">
+                    <?php
+                    if (strlen($aPost->name) > 50)
+                        echo substr($aPost->name, 0, 50) . "...";
+                    else
+                        echo $aPost->name;
+                    ?>
+                </a> 
                 <br/>
                 <br/>
-                | Posted by <a href="<?= site_url("profile")."/index/$aPost->publisher_name" ?>"><?=$aPost->publisher_name ?> 
-                            </a>                 
+                | Posted by <a href="<?= site_url("profile") . "/index/$aPost->publisher_name" ?>"><?= $aPost->publisher_name ?> 
+                </a>                 
                 | Reply's: <a href="#">73
-                            </a> 
-                | <a class="show-post-reply" href="javascript:void(0);" postId="<?=$aPost->post_id ?>">Reply</a>
-                
-                
+                </a> 
+                | <a class="show-post-reply" href="javascript:void(0);" postId="<?= $aPost->post_id ?>">Reply</a>
+
+
             </p>
         </div>
 
-<div class="post-reply-wrapper" id="post-reply-wrapper-<?=$aPost->post_id ?>">
-        <?php  for($i=0;$i<rand()%5;$i++): ?>
-   <div class="posts-reply">            
-                 <div class="post-description">
-                    <?php
-                        $len = strlen($aPost->description);
-                        if($len >80)
-                            echo substr($aPost->description,0,80);
+        <div class="post-reply-wrapper" id="post-reply-wrapper-<?= $aPost->post_id ?>">
+            <?php foreach($aPost->replyies as $aReply): ?>
+                <div class="posts-reply">            
+                    <div class="post-description">
+                        <?php
+                        $len = strlen($aReply->description);
+                        if ($len > 80)
+                            echo substr($aReply->description, 0, 80);
                         else
-                            echo $aPost->description;
-                    ?>
+                            echo $aReply->description;
+                        ?>
+                        <a class="read-more" href="javascript:void(0)">
+                            <?php
+                            if ($len > 80)
+                                echo "Read more &raquo;";
+                            ?>
+                        </a>
+                    </div>
+
+                    <div class="post-datetime"><?= date_format(date_create($aReply->date_time), 'l, d F Y \a\t H:i'); ?>,
+                        by <a href="#"><?= $aReply->publisher_name ?></a></div>
+
+
                 </div>
 
-                <div class="post-datetime"><?=  date_format(date_create($aPost->date_time), 'l, d F Y \a\t H:i'); ?>,
-                        by <a href="#"><?=$aPost->publisher_name ?></a></div>
-
-                <a class="readMore" href="javascript:void(0)">
-                <?php
-                    if($len>80)
-                        echo "Read more &raquo;";
-                ?>
-                </a>
+            <?php endforeach; ?>        
+            <div class="post-reply-input-div" class="contactform">
+               <textarea class="field post-reply-input shadow" type="text" name="post-reply-input"  cId ="<?= $aPost->community_id ?>" postId="<?= $aPost->post_id ?>" rows="2" cols="30"></textarea>                            
+               <div class="replySubmitButtonDiv rounded">
+                   <span>Reply</span>
+               </div>
+            </div>    
         </div>
-    
-    <?php  endfor; ?>        
-        <div class="post-reply-input-div" class="contactform">
-                
-                <textarea class="field post-reply-input .shadow" type="text" name="post-reply-input"  postId="<?=$aPost->post_id ?>" rows="2" cols="30"></textarea>            
-        </div>    </div>
-</div>
-      <?php endforeach; ?>
+    </div>
+<?php endforeach; ?>
