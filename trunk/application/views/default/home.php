@@ -29,7 +29,7 @@
    <div class="column1-unit">
    </div>
    <div id="recent-post-load-div">
-
+       <a class="readMore" style="display:none;"></a>
    </div>
    
 
