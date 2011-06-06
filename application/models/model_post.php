@@ -76,12 +76,12 @@
            $query = $this->db->get_where('post',array('publisher_name'=>$username));
            return  $query->result_array();           
        }
-       function GetByCommunityName($community_name)
+       function GetByCommunityId($community_id)
        {
            $query_str = "SELECT post_id,title,description,publisher_name,date_time
                         FROM post NATURAL JOIN post_community
                                 NATURAL JOIN community
-                        WHERE community.name = '$community_name'
+                        WHERE community.community_id = '$community_id'
                         ORDER BY date_time desc";
            $query = $this->db->query($query_str);
            return $query->result();
