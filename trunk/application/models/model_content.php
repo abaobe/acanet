@@ -29,12 +29,12 @@
            return $result = $this->db->insert('content_community');
        }
 
-       function GetByCommunityName($communityName)
+       function GetByCommunityId($community_id)
        {
            $query_str = "SELECT content.content_id, content.type, content.content_link, content.publisher_name, content.date_time, content.description
                         FROM (content JOIN content_community ON content.content_id = content_community.content_id)
                             JOIN community ON content_community.community_id = community.community_id
-                        WHERE community.name = '$communityName'";
+                        WHERE community.community_id = '$community_id'";
            $query = $this->db->query($query_str);
            //print_r($query->result_array());
            return $query->result();

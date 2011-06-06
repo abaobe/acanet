@@ -9,15 +9,15 @@ class Community extends CI_Controller {
         parent::__construct();
     }
 
-    function index($community_name) {
-        if(!isset ($community_name)){
+    function index($community_id) {
+        if(!isset ($community_id)){
             redirect("community_list");
         }
-        $this->LoadCommunityView($community_name);
+        $this->LoadCommunityView($community_id);
     }
 
     
-    function LoadCommunityView($community_name) {
+    function LoadCommunityView($community_id) {
 
         // Loading models-----------------------
         $this->load->model('Model_community');
@@ -25,15 +25,28 @@ class Community extends CI_Controller {
         $this->load->model('Model_post');
         $this->load->model('Model_event');
         $this->load->model('Model_user');
+        $this->load->model('Model_content');
         //--------------------------------------
 
 
+        //===============Get community basic info from ID===========
+
+        $community = $this->Model_community->GetById($community_id);
+        if($community == null){
+            redirect(site_url("/community_list"));            
+        }
+        $community = $community[0];
+
         //-js and css--------------------------
-        $this->page->title = $community_name;
-        $this->page->set(array('jquery-ui-1.8.12.custom'), 'css');
-        $this->page->set(array('timepicker-addon'), 'css');
-        $this->page->set(array('community', 'jquery-ui-1.8.12.custom.min'), 'js');
-        $this->page->set(array('community', 'jquery-ui-timepicker-addon'), 'js');
+        $this->page->title = $community->name;
+        $this->page->set(array('jquery-ui-1.8.12.custom',
+                                'timepicker-addon',
+                                'fullcalendar/fullcalendar',
+                                'fullcalendar/fullcalendar.print'), 'css');
+        $this->page->set(array('community',
+                                'jquery-ui-1.8.12.custom.min',
+                                'jquery-ui-timepicker-addon',
+                                'fullcalendar/fullcalendar.min'), 'js');
         //------------------------------------
          
          
@@ -61,33 +74,32 @@ class Community extends CI_Controller {
 
         //--------Loading main content--------------------------------------------
         $data = null;
-        $data['communityId'] = $this->Model_community->GetByName($community_name);
-        $data['communityId'] = $data['communityId'][0]->community_id;
+        $data['communityId'] = $community_id;
 
         $data['userName'] =$this->Model_user->GetLoggedInUsername();
 
-        $data['communityName'] = $community_name;        
+        $data['communityName'] = $community->name;
         
 
         //========testing=======
         $this->load->model('Model_user');
-        $data['members'] = $this->Model_user->GetByCommunityName($community_name,array('user.username','user.name'));
-        $data['admins'] = $this->Model_user->GetByCommunityName($community_name,array('user.username','user.name'),true);
-        $data['post'] = $this->Model_post->GetByCommunityName($community_name);
-        $data['news'] = $this->Model_news->GetByCommunityName($community_name);
-        $data['event'] = $this->Model_event->GetByCommunityName($community_name);
-        //======================
-
-        $main_content[0] = array("Community: $community_name", "forms/community_form_view",$data);
+        $data['members'] = $this->Model_user->GetByCommunityId($community_id,array('user.username','user.name'));
+        $data['admins'] = $this->Model_user->GetByCommunityId($community_id,array('user.username','user.name'),true);
+        $data['post'] = $this->Model_post->GetByCommunityId($community_id);
+        $data['news'] = $this->Model_news->GetByCommunityId($community_id);
+        $data['event'] = $this->Model_event->GetByCommunityId($community_id);
+        //======================        
+        $main_content[0] = array("Community: $community->name", "forms/community_form_view",$data);
         //-------------------------------------------------------------------------------
 
 
         //-----------Loading right side bar--------------------------------------
         $data = null;
-        $data['post'] = $this->Model_post->GetByCommunityName($community_name);
-        $data['news'] = $this->Model_news->GetByCommunityName($community_name);        
-        $data['event'] = $this->Model_event->GetByCommunityName($community_name);
-        $data['communityInfo'] = $this->Model_community->GetByName($community_name);
+        $data['post'] = $this->Model_post->GetByCommunityId($community_id);
+        $data['news'] = $this->Model_news->GetByCommunityId($community_id);
+        $data['event'] = $this->Model_event->GetByCommunityId($community_id);
+        $data['content'] = $this->Model_content->GetByCommunityId($community_id);
+        $data['communityInfo'] = $this->Model_community->GetById($community_id);
         $data['communityInfo'] = $data['communityInfo'][0];
         $main_content[1] = array(null, "community_view",$data);
 

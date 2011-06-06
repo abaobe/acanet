@@ -7,7 +7,13 @@
             <th class="top" scope="col">Short Description</th>
         </tr>
         <?php foreach($query_result as $row): ?>
-        <tr><th scope="row"><?php echo $row->name;?></th><td><?php echo $row->short_description;?></td></tr>
+        <tr><th scope="row">
+                <a href="<?=  site_url("/community/index/$row->community_id")?>">
+                    <?php echo $row->name;?>
+                </a>
+            </th>
+            <td><?php echo $row->short_description;?></td>
+        </tr>
         <?php        endforeach; ?>
     </table>
 </div>

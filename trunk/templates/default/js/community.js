@@ -110,7 +110,9 @@ $(document).ready(function(){
 
     function init(){
         for ( var i = 2 ; i < 8 ; i++){
-            $(info_tab[i]).css({opacity: 0.0}).hide();
+            $(info_tab[i]).css({
+                opacity: 0.0
+            }).hide();
         }         
     }
     init();
@@ -121,18 +123,26 @@ $(document).ready(function(){
         if(info_loading) return;
         for(var i = 1 ; i < 8 ; i++)$(info_tab[i]).hide();
 
-         $(info_tab[info_tab_no]).show();
+        $(info_tab[info_tab_no]).show();
 
         if(info_loaded[new_info_tab_no]){
             info_loading = true;
-            $(info_tab[info_tab_no]).animate({opacity: 0.0},500).hide(1,function(){
-                $(info_tab[new_info_tab_no]).show(1).animate({opacity: 1.0},500,function(){info_loading = false;});
+            $(info_tab[info_tab_no]).animate({
+                opacity: 0.0
+            },500).hide(1,function(){
+                $(info_tab[new_info_tab_no]).show(1).animate({
+                    opacity: 1.0
+                },500,function(){
+                    info_loading = false;
+                });
                 
             });
         }
         else{
-            $(info_tab[info_tab_no]).animate({opacity: 0.4},500);
-            //$.load(url, data, callback)
+            $(info_tab[info_tab_no]).animate({
+                opacity: 0.4
+            },500);
+        //$.load(url, data, callback)
         }
 
 
@@ -173,5 +183,63 @@ $(document).ready(function(){
     $("#jq_tab_show_about").click(function(){
         hide_n_show(7);
     });
+    
+    
+    //=====================FULL Calendar======================================
+
+//    var date = new Date();
+//    var d = date.getDate();
+//    var m = date.getMonth();
+//    var y = date.getFullYear();
+//
+//    $('#calendar').fullCalendar({
+//        editable: true,
+//        events: [
+//        {
+//            title: 'All Day Event',
+//            start: new Date(y, m, 1)
+//        },
+//        {
+//            title: 'Long Event',
+//            start: new Date(y, m, d-5),
+//            end: new Date(y, m, d-2)
+//        },
+//        {
+//            id: 999,
+//            title: 'Repeating Event',
+//            start: new Date(y, m, d-3, 16, 0),
+//            allDay: false
+//        },
+//        {
+//            id: 999,
+//            title: 'Repeating Event',
+//            start: new Date(y, m, d+4, 16, 0),
+//            allDay: false
+//        },
+//        {
+//            title: 'Meeting',
+//            start: new Date(y, m, d, 10, 30),
+//            allDay: false
+//        },
+//        {
+//            title: 'Lunch',
+//            start: new Date(y, m, d, 12, 0),
+//            end: new Date(y, m, d, 14, 0),
+//            allDay: false
+//        },
+//        {
+//            title: 'Birthday Party',
+//            start: new Date(y, m, d+1, 19, 0),
+//            end: new Date(y, m, d+1, 22, 30),
+//            allDay: false
+//        },
+//        {
+//            title: 'Click for Google',
+//            start: new Date(y, m, 28),
+//            end: new Date(y, m, 29),
+//            url: 'http://google.com/'
+//        }
+//        ]
+//    });
     
 });
