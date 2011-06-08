@@ -85,7 +85,11 @@ class Institute extends CI_Controller {
 //                   $this->load->model('Institution');
                     // Create Object
                     if ($option == "modify") {
-                        // validate permissions -- TBD
+                        // validate permissions
+                        
+                        if(! $this->User->AuthenticateAsAdmin(false))
+                            return;
+                        
                         $this->Institution->institution_id = $this->input->post('institution_id');
                         if (!$this->Institution->Load()) {
                             $this->page->showMessage("The institution was not found for modifying");
@@ -238,6 +242,10 @@ class Institute extends CI_Controller {
         $uname = $this->User->Authenticate();
         if (!$uname)
             return;
+        
+        if(! $this->User->AuthenticateAsAdmin(false))
+            return;
+        
         if (!empty($mode)) {
             if ($mode == "id_chosen") {
                 if (empty($id)) {
@@ -298,12 +306,7 @@ class Institute extends CI_Controller {
 
         if ($option == "community") {
             // Load this page's community. Here we may need validation if the user joined this community
-            $this->defaultBreadcrumb[$this->Institution->short_name] = site_url('institute/view/' . $this->Institution->institution_id);
-            $this->defaultBreadcrumb["Community"] = "";
-            $this->page->breadcrumbs = $this->defaultBreadcrumb;
-            $this->page->title = "Official Community Page For " . $this->Institution->name . " ";
-
-            $this->page->showMessage("Load community: " . $this->Institution->community_id);
+            redirect('community/index/' . $this->Institution->community_id);
             return;
         }
         
@@ -335,7 +338,7 @@ class Institute extends CI_Controller {
                 ), null);
     }
     
-    function pendingMembers($mode, $id, $chosenUsername = "") {
+    function pendingMembers($mode, $id, $chosenUsername = "", $status="member") {
         // Approve pending Members
         $this->page->title = "Pending Membership";
         $this->defaultBreadcrumb['Pending Membership'] = "";
@@ -393,7 +396,7 @@ class Institute extends CI_Controller {
                 }
                 
                 $this->User_inst->referer = $uname;
-                $this->User_inst->role = "member";
+                $this->User_inst->role = $status;
                 $this->User_inst->Update();
                 
                 $this->page->showMessage("Updated Successfully!");
