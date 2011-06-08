@@ -8,9 +8,16 @@
           $this->table->clear();
           $data = array();
 
-          $data[0] = array("Name", form_input("name", set_value("name")));
-          $data[1] = array("Type", form_input("stype", set_value("stype")));
-          $data[2] = array("Short Description", form_textarea(array(
+          $data[] = array("Name", form_input("name", set_value("name")));
+          $options = array(
+                  'institution'  => 'institution',
+                  'subject'    => 'subject',
+                  'field'   => 'field',
+                  'course' => 'course',
+                  'group' => 'group'
+                );
+          $data[] = array("Type", form_dropdown('stype', $options, 'group'));
+          $data[] = array("Short Description", form_textarea(array(
               "name" => "short_description", "value" => set_value("short_description"), "cols" => "22", "rows" => "4"
           )));
           echo $this->table->generate($data);
