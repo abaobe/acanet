@@ -87,8 +87,7 @@
                     array_push($result, $element['institution_id']);
            }
            return $result;
-
-
+           
        }
 
        function Load(){

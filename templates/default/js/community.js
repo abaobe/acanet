@@ -196,6 +196,18 @@ $(document).ready(function(){
    }).live("click",function(){
 
    });
+
+   $(".show-post-reply").live("click",function(){
+       var postId = $(this).attr("postId");
+       if($(this).html()=="Reply"){
+        $("#post-reply-wrapper-"+postId).slideDown();
+        $(this).html("Hide replies");
+       }else{
+        $("#post-reply-wrapper-"+postId).slideUp();
+        $(this).html("Reply");
+       }
+
+   });
     
     
     //=====================FULL Calendar======================================
