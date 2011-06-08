@@ -1,7 +1,12 @@
-                    <dl class="nav3-grid">
-                        <dt><a href="#">CSE</a></dt>
-                        <dt><a href="#">EEE</a></dt>
-                        
-                        <dt><a href="#">Medical</a></dt>
-                        <dt><a href="#">DU</a></dt>
-                    </dl>
+<dl class="nav3-grid">
+    <?php
+        foreach($allCommunities as $aCommnity)
+        {
+            echo "<dt>
+                    <a href='".site_url('community')."/index/$aCommnity->community_id'>
+                        $aCommnity->name
+                    </a>
+                </dt>";
+        }
+    ?>
+</dl>

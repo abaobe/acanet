@@ -84,6 +84,11 @@ class User_field extends CI_Model {
         }
         return false;
     }
+    function GetByUsername($username){
+        $this->db->where("username",$username);
+        $query = $this->db->get('user_field');
+        return $query->result;
+    }
 
 }
 
