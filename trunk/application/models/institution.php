@@ -69,6 +69,12 @@
            $query = $this->db->get('institution');
            return $query->result();
        }
+       function GetByUsername($username){
+            $query = $this->db->query(
+                    "select * from institution where institution_id in
+                (select institution_id from user_institution where username='$username')");
+           return $query->result();
+       }
        function GetAllApproved(){
            $query = $this->db->get_where('institution', array(
                'status =' => 'approved',
