@@ -28,7 +28,7 @@ class Login extends CI_Controller {
             //$this->FormValidation();
             if ($this->FormValidation() == false) {
                 $this->autofill_username = $this->input->post('username_2');
-                $this->message = "invalid username/password";
+                $this->message = "invalid username/password or account is not activated";
                 $this->LoadLoginView();
             } else {
                 $this->login_data = $this->input->post('username_2');
@@ -92,13 +92,14 @@ class Login extends CI_Controller {
      * if valid user allow him to log in and set a session 
      */
     function FormValidation() {
-
+        
         $username = $this->input->post('username_2');
         $password = $this->input->post('password_2');
         if ($username === null || $password === null) {
             return false;
         } else {
             $this->load->model('model_user', 'User');
+
             if ($this->User->CheckUsernamePassword($username, $password)) {
                 $data = array('username' => $username);
                 $this->session->set_userdata($data);

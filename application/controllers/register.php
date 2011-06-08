@@ -97,14 +97,14 @@ class register extends CI_Controller {
     function FormValidation() {
 
         //rules for register form validation
-        $this->form_validation->set_rules('contact_firstname', 'Firstname', 'required|min_length[3]|max_length[25]');
-        $this->form_validation->set_rules('contact_lastname', 'Lastname', 'required|min_length[3]|max_length[25]');
+        $this->form_validation->set_rules('contact_firstname', 'Firstname', 'required|max_length[25]');
+        $this->form_validation->set_rules('contact_lastname', 'Lastname', 'required|max_length[25]');
         $this->form_validation->set_rules('contact_username', 'Username', 'callback_CheckUsername');
         $this->form_validation->set_rules('contact_password', 'Password', 'required|min_length[6]|max_length[15]|matches[contact_repassword]');
         $this->form_validation->set_rules('contact_repassword', 'Re Enter Password', 'required|min_length[6]|max_length[15]');
         //$this->form_validation->set_rules('contact_institution', 'Institution', 'callback_CheckInstitution');
         //$this->form_validation->set_rules('contact_field', 'Field', 'callback_CheckField');
-        $this->form_validation->set_rules('contact_address', 'Address', 'required|min_length[6]|max_length[100]');
+        $this->form_validation->set_rules('contact_address', 'Address', 'max_length[100]');
         $this->form_validation->set_rules('contact_phone', 'Phone', 'callback_CheckPhone');
         $this->form_validation->set_rules('contact_email', 'Email', 'callback_CheckMail');
     }
@@ -190,7 +190,7 @@ class register extends CI_Controller {
      */
 
     function CheckPhone($phone) {
-        $this->form_validation->set_message('CheckPhone', 'The %s field should be a number from 6 to 15 digit');
+        //$this->form_validation->set_message('CheckPhone', 'The %s field should be a number from 6 to 15 digit');
         //Phone checking will be added here
         return true;
     }
