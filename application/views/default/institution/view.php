@@ -2,6 +2,7 @@
     <a href="<?php echo site_url('institute/view/' . $instData->institution_id . '/community'); ?>">Go to community of this institute</a>
     <br />
     <?php echo anchor('institute/pendingMembers/list/' . $instData->institution_id, "Approve Pending Members"); ?>
+    
 </p>
 
                     <!-- Content unit - One column -->

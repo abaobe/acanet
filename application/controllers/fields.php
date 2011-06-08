@@ -382,6 +382,86 @@
                     ), null);
         }
         
+        function pendingMembers($mode, $id, $chosenUsername = "") {
+            // Approve pending Members
+            $this->page->title = "Pending Membership Approval";
+            $this->defaultBreadcrumb['Pending Membership'] = "";
+            $this->page->breadcrumbs = $this->defaultBreadcrumb;
+            $uname = $this->User->Authenticate();
+
+            if(!$uname)
+                return;
+
+            // validate if the user is really member of this community
+
+            $this->load->model('User_field');
+
+            if(! $this->User->AuthenticateAsAdmin()){
+                $this->User_field->field_id = $id;
+                $this->User_field->username = $uname;
+                if(!$this->User_field->ValidateMembership()){
+                    $this->page->showMessage("You are not a member of this Field!");
+                    return;
+                }
+            }else{
+    //            die("Admin!!");
+            }
+
+            // validate Institution
+
+            $this->Field->field_id = $id;
+            if(! $this->Field->Load()){
+                $this->page->showMessage("Invalid Field ID");
+                return;
+            }
+
+            switch ($mode){
+                case 'list':
+
+                    $data = $this->User_field->GetPendingMembers($id);
+
+                    break;
+
+                case 'approve':
+
+                    if(empty($chosenUsername)){
+                        $this->page->showMessage("No Username Chosen");
+                        return;
+                    }
+
+                    // Try to update
+
+                    $this->User_field->field_id = $id;
+                    $this->User_field->username = $chosenUsername;
+
+                    if(!$this->User_field->Load()){
+                        $this->page->showMessage("Invalid username/field ID");
+                        return;
+                    }
+
+                    $this->User_field->referer = $uname;
+                    $this->User_field->role = "member";
+                    $this->User_field->Update();
+
+                    $this->page->showMessage("Updated Successfully!");
+                    return;
+
+                    break;
+                default:
+                    //nothings
+            }
+
+            $this->page->loadViews(
+                            array(
+                        array("Fields", "sidebars/field_common"),
+                        array("Administration", "sidebars/field_admin")
+                            ), array(
+                        array("Approve Pending Membership", "field/listPendingMembers", array(
+                            "data" => $data, "fieldId" => $id
+                            )),
+                            ), null);
+        }
+        
     }
 
 ?>

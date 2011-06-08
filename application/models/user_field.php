@@ -57,7 +57,13 @@ class User_field extends CI_Model {
         $this->db->update('user_field', $this);
     }
 
-    function GetPendingMembers(){
+    function GetPendingMembers($fieldId){
+        $this->db->where(array(
+            'role' => 'pending',
+            'field_id' => $fieldId
+        ));
+        $query = $this->db->get('user_field');
+        return $query->result();
     }
     
     function ValidateMembership(){
