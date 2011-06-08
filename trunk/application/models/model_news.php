@@ -41,12 +41,13 @@
        {
            $this->db->set('publisher_name',$publisherName);
            $this->db->set('heading',$heading);
-           $this->db->set('content',$content);
+           $this->db->set('content',$content);		   
            $this->db->set('type',$type);
-           
+            
            $this->db->set('date_time',"now()",false);
            $result = $this->db->insert('news');
            return $this->db->insert_id();
+		   
        }
        function SetNewsCommunityRelation($newsId,$cId)
        {
