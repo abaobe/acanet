@@ -112,7 +112,11 @@
                    if($this->form_validation->run()){
                        // Success. insert into db
                        if($option == "modify"){
-                           // validate permissions -- TBD
+                           // validate permissions
+                           
+                           if(! $this->User->AuthenticateAsAdmin(false))
+                            return;
+                           
                            $this->Field->field_id = $this->input->post('field_id');
                            if(!$this->Field->Load()){
                                $this->page->showMessage("The Field was not found for modifying");
@@ -278,6 +282,10 @@
             $uname = $this->User->Authenticate();
             if (!$uname)
                 return;
+            
+            if(! $this->User->AuthenticateAsAdmin(false))
+                return;
+            
             if (!empty($mode)) {
                 if ($mode == "id_chosen") {
                     if (empty($id)) {
@@ -351,12 +359,7 @@
 
             if ($option == "community") {
                 // Load this page's community. Here we may need validation if the user joined this community
-//                $this->defaultBreadcrumb[$this->Institution->short_name] = site_url('institute/view/' . $this->Institution->institution_id);
-//                $this->defaultBreadcrumb["Community"] = "";
-//                $this->page->breadcrumbs = $this->defaultBreadcrumb;
-//                $this->page->title = "Official Community Page For " . $this->Institution->name . " ";
-                // I think a redirection will do :)
-                $this->page->showMessage("Load community: " . $this->Field->community_id);
+                redirect('community/index/' . $this->Field->community_id);
                 return;
             }
             
@@ -382,7 +385,7 @@
                     ), null);
         }
         
-        function pendingMembers($mode, $id, $chosenUsername = "") {
+        function pendingMembers($mode, $id, $chosenUsername = "", $status = "member") {
             // Approve pending Members
             $this->page->title = "Pending Membership Approval";
             $this->defaultBreadcrumb['Pending Membership'] = "";
@@ -440,7 +443,7 @@
                     }
 
                     $this->User_field->referer = $uname;
-                    $this->User_field->role = "member";
+                    $this->User_field->role = $status;
                     $this->User_field->Update();
 
                     $this->page->showMessage("Updated Successfully!");
