@@ -8,7 +8,7 @@ class Community_list extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('Model_community');
+        
     }
 
     function index($community_type=null) {
@@ -21,12 +21,20 @@ class Community_list extends CI_Controller {
     }
 
     function LoadCommunityListViewAll() {
+        $this->load->model('Model_community');
+        $this->load->model('Model_user');
+        $this->load->model('User_community');
+        $username = $this->Model_user->GetLoggedInUsername();
+        $communities = $this->User_community->GetByUserName($username);
+        
         $this->page->title = "List of Communities By Type";
         
         $data['query1_result'] = $this->Model_community->GetByType('institution',5);
         $data['query2_result'] = $this->Model_community->GetByType('field',5);
         $data['query3_result'] = $this->Model_community->GetByType('subject',5);
         $data['query4_result'] = $this->Model_community->GetByType('course',5);
+        $data['query5_result'] = $this->Model_community->GetByType('group',5);
+        $data['communities'] = $communities;
 
         $main_content[0] = array("Community List", "community_list_view_all",$data);
 
@@ -35,11 +43,17 @@ class Community_list extends CI_Controller {
     }
 
     function LoadCommunityListView($community_type) {
+        $this->load->model('Model_community');
+        $this->load->model('Model_user');
+        $this->load->model('User_community');
+        $username = $this->Model_user->GetLoggedInUsername();
+        $communities = $this->User_community->GetByUserName($username);
 
-        switch($community_type){case 'institution': case 'field': case 'subject': case 'course': break; default: echo '<h1>bad community type<h1>';return;break;}
+        switch($community_type){case 'institution': case 'field': case 'subject': case 'course': case 'group': break; default: echo '<h1>bad community type<h1>';return;break;}
         $this->page->title = "List of Communities of type : $community_type";
 
         $data['query_result'] = $this->Model_community->GetByType($community_type);
+        $data['communities'] = $communities;
         $data['type'] = $community_type;
 
         $main_content[0] = array("Community List", "community_list_view",$data);

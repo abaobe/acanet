@@ -25,7 +25,7 @@
       ?>
       <br />
       <div align ="center">
-          <input type="submit" value="Create New Institution!" />
+          <input type="submit" value="Create New Community" />
       </div>
 </div>
 <hr class="clear-contentunit" />
