@@ -33,15 +33,6 @@ foreach ($allPosts as $aPost):
 
             <p class="details">
 
-
-                | Community:<a title="<?= $aPost->name ?>" href="<?= site_url("community") . "/index/$aPost->name" ?>">
-                    <?php
-                    if (strlen($aPost->name) > 50)
-                        echo substr($aPost->name, 0, 50) . "...";
-                    else
-                        echo $aPost->name;
-                    ?>
-                </a> 
                 <br/>
                 <br/>
                 | Posted by <a href="<?= site_url("profile") . "/index/$aPost->publisher_name" ?>"><?= $aPost->publisher_name ?> 

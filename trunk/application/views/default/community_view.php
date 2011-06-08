@@ -6,7 +6,7 @@
 
 <div id="post_detail">
     <h1 class="block">Posts</h1>
-
+<?php $this->load->view($this->page->theme.'community_posts.php',array('allPosts'=>$post));?>
     <?php foreach ($post as $row): ?>
         <div class="column1-unit">
             <h1><?= $row->title ?></h1>

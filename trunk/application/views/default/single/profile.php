@@ -133,10 +133,10 @@
     <h1 class="block">Privacy Settings</h1>
     <div class="column1-unit">
         <table>
-            <tr><td>Receive Email Notifiction</td><td style="width:30px;"><input type="checkbox"/></td></tr>
-            <tr><td>Computer Science</td><td><input type="checkbox"/></td></tr>
-            <tr><td>BUET</td><td><input type="checkbox"/></td></tr>
-            <tr><td>Sher-e-bangla Hall,Polashi,Dhaka-1000</td><td><input type="checkbox"/></td></tr>
+            <tr><td>Receive Email Notification</td><td style="width:30px;"><input type="checkbox"/></td></tr>
+            <tr><td>Hide Phone Number</td><td><input type="checkbox"/></td></tr>
+            <tr><td>Hide Email</td><td><input type="checkbox"/></td></tr>
+            <tr><td>Receive Notification Update</td><td><input type="checkbox"/></td></tr>
         </table>
     </div>
     <hr class="clear-contentunit" />

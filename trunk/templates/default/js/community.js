@@ -183,6 +183,19 @@ $(document).ready(function(){
     $("#jq_tab_show_about").click(function(){
         hide_n_show(7);
     });
+
+
+
+//===========================FROM IBRAHIM=====================================
+
+ $("#recent-post-load-div .posts")
+     .live("mouseover",function(){
+            $(this).css("background-color","#F2F2F2");
+   }).live("mouseout",function(){
+         $(this).css("background-color","");
+   }).live("click",function(){
+
+   });
     
     
     //=====================FULL Calendar======================================
