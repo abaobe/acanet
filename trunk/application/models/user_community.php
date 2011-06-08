@@ -11,11 +11,12 @@ class User_community extends CI_Model {
     function __construct() {
         parent::__construct();
     }
-   function GetByUserName($name)
+   function GetByUserName($name,$start=0,$limit=10)
    {
        $query_str = "SELECT DISTINCT * FROM `user_community`
        JOIN community ON user_community.community_id = community.community_id
-       WHERE `username` = '$name'";
+       WHERE `username` = '$name'
+       LIMIT $start, $limit";
        $query = $this->db->query($query_str);
        return $query->result();
    }
