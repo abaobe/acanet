@@ -141,10 +141,5 @@ class Page {
         $this->CI->load->view($this->theme . "general/content",array('html' => $content));
         $this->CI->load->view($this->theme . "general/footer");
     }
-
-    
-
-
-
 }
 ?>

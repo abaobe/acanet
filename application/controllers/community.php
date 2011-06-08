@@ -4,19 +4,18 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Community extends CI_Controller {
-
+    
     function __construct() {
         parent::__construct();
     }
 
     function index($community_id) {
-        if(!isset ($community_id)){
+        if (!isset($community_id)) {
             redirect("community_list");
         }
         $this->LoadCommunityView($community_id);
     }
 
-    
     function LoadCommunityView($community_id) {
 
         // Loading models-----------------------
@@ -27,31 +26,26 @@ class Community extends CI_Controller {
         $this->load->model('Model_user');
         $this->load->model('Model_content');
         //--------------------------------------
-
-
         //===============Get community basic info from ID===========
 
         $community = $this->Model_community->GetById($community_id);
-        if($community == null){
-            redirect(site_url("/community_list"));            
+        if ($community == null) {
+            redirect(site_url("/community_list"));
         }
         $community = $community[0];
 
         //-js and css--------------------------
         $this->page->title = $community->name;
-        $this->page->set(array('jquery-ui-1.8.12.custom',
-                                'timepicker-addon',
-                                'fullcalendar/fullcalendar',
-                                'fullcalendar/fullcalendar.print'), 'css');
         $this->page->set(array('community',
-                                'jquery-ui-1.8.12.custom.min',
-                                'jquery-ui-timepicker-addon',
-                                'fullcalendar/fullcalendar.min'), 'js');
+            'jquery-ui-1.8.12.custom',
+            'timepicker-addon',
+            'fullcalendar/fullcalendar',
+            'fullcalendar/fullcalendar.print'), 'css');
+        $this->page->set(array('community',
+            'jquery-ui-1.8.12.custom.min',
+            'jquery-ui-timepicker-addon',
+            'fullcalendar/fullcalendar.min'), 'js');
         //------------------------------------
-         
-         
-
-
         //-----init variables needed for the page----------------------
         $this->load->library('util');
         $this->page->nav1 = array(
@@ -76,52 +70,59 @@ class Community extends CI_Controller {
         $data = null;
         $data['communityId'] = $community_id;
 
-        $data['userName'] =$this->Model_user->GetLoggedInUsername();
+        $data['userName'] = $this->Model_user->GetLoggedInUsername();
 
         $data['communityName'] = $community->name;
-        
+
 
         //========testing=======
         $this->load->model('Model_user');
-        $data['members'] = $this->Model_user->GetByCommunityId($community_id,array('user.username','user.name'));
-        $data['admins'] = $this->Model_user->GetByCommunityId($community_id,array('user.username','user.name'),true);
-        $data['post'] = $this->Model_post->GetByCommunityId($community_id);
+        $data['members'] = $this->Model_user->GetByCommunityId($community_id, array('user.username', 'user.name'));
+        $data['admins'] = $this->Model_user->GetByCommunityId($community_id, array('user.username', 'user.name'), true);
+        //$data['post'] = $this->Model_post->GetByCommunityId($community_id);
+        $data['post'] = $this->GetRecentPosts($community_id);
         $data['news'] = $this->Model_news->GetByCommunityId($community_id);
         $data['event'] = $this->Model_event->GetByCommunityId($community_id);
         //======================        
-        $main_content[0] = array("Community: $community->name", "forms/community_form_view",$data);
+        $main_content[0] = array("Community: $community->name", "forms/community_form_view", $data);
         //-------------------------------------------------------------------------------
-
-
         //-----------Loading right side bar--------------------------------------
         $data = null;
-        $data['post'] = $this->Model_post->GetByCommunityId($community_id);
+        //$data['post'] = $this->Model_post->GetByCommunityId($community_id);        
         $data['news'] = $this->Model_news->GetByCommunityId($community_id);
         $data['event'] = $this->Model_event->GetByCommunityId($community_id);
         $data['content'] = $this->Model_content->GetByCommunityId($community_id);
         $data['communityInfo'] = $this->Model_community->GetById($community_id);
         $data['communityInfo'] = $data['communityInfo'][0];
-        $main_content[1] = array(null, "community_view",$data);
-
-        
+        $main_content[1] = array(null, "community_view", $data);
 
 
-        
-        $right_sidebar[0] = array("Events", "sidebars/events",$data);
-        $right_sidebar[1] = array("News", "sidebars/news",$data);
+
+        $right_sidebar[0] = array("Events", "sidebars/events", $data);
+        $right_sidebar[1] = array("News", "sidebars/news", $data);
         //--------------------------------------------------------------------
-
-
-        
-
-
         //-----Load the views-----------------------------------------------
         $this->page->loadViews($left_sidebar, $main_content, $right_sidebar);
         //------------------------------------------------------------------
     }
 
+    function GetRecentPosts($community_id) {
+        $this->load->model('Model_post');
+        //$allPosts = $this->model_post->Get(null, $order, $start, $limit, true, $where);
+        $allPosts = $this->Model_post->GetByCommunityId($community_id);
+        $count = count($allPosts);        
+        $order = array('date_time' => 'inc');
+        for ($i = 0; $i < $count; $i++) {
+            $where = "post.post_id in (select reply_id from post_reply where community_id = ".$community_id." AND post_reply.post_id =".$allPosts[$i]->post_id.")";
+            
+            $allPosts[$i]->replyies = $this->Model_post->Get(null, $order, 0, 50, true, $where);
+        }
+        //print_r($allPosts);
+        return $allPosts;
+        //$this->load->view($this->page->theme.'recent_posts.php',array('allPosts'=>$allPosts));
+    }
 
-    function GetMembers(){
+    function GetMembers() {
         $community_name = $this->input->post('community_name');
 
         $this->load->model('Model_user');
