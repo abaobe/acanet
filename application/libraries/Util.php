@@ -81,6 +81,31 @@ class Util {
         else
             return date_format(date_create($datetime), $format);
     }
+    function Value2BitArray($val,$len="")
+    {
+        $bitArray = array();
+        $i=0;
+        while($val){
+            $bitArray[$i] = ($val & 1)?1:0;
+            $val = $val >> 1;
+            $i++;
+        }
+        if($len!=""){
+            while($i<$len)
+                $bitArray[$i++]=0;
+        }
+        return $bitArray;
+    }
+   function BitArray2Value($bitArray,$len="")
+    {
+        $size = ($len!="")?$len:count($bitArray);
+        $val = pow(2,$size)-1;
+        for($i=0;$i<$size;$i++){
+            if(!isset($bitArray[$i]) || $bitArray[$i]!=1)
+                $val &= ~(1<<$i);
+        }
+        return $val;
+    }
 
 }
 ?>

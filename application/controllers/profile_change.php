@@ -63,11 +63,20 @@ class Profile_change extends CI_Controller {
         if($this->form_validation->run() == false)
                 redirect("profile/index/$username/5/Mail Address not valid");
         if ($username) {  // echo $username;
-            $data = array('mail_id' => $this->input->post('changed_mail_address'));
+            $data = array('mail_address' => $this->input->post('changed_mail_address'));
             $this->User->update($username, $data);
             redirect("profile/index/$username/0");
 
         }
+    }
+    function updatePrivacy(){
+        $this->load->library('util');                
+        $this->load->Model('Model_user');
+        $privacy = $this->input->post('privacy');        
+        $val = $this->util->BitArray2Value($privacy,4);
+        $username = $this->Model_user->Authenticate();        
+        $this->Model_user->Update($username,array("privacy"=>$val));
+        redirect("profile/index/$username/");
     }
 
 }

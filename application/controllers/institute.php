@@ -313,11 +313,11 @@ class Institute extends CI_Controller {
         
         // Get Events
         $this->load->model('model_event','Event');
-        $eventsArr = $this->Event->GetByCommunity_id($this->Institution->community_id);
+        $eventsArr = $this->Event->GetByCommunityId($this->Institution->community_id);
         
         // Get News
         $this->load->model('model_news','News');
-        $newsArr = $this->News->GetByCommunity_id($this->Institution->community_id);
+        $newsArr = $this->News->GetByCommunityId($this->Institution->community_id);
         
         
         $this->defaultBreadcrumb[$this->Institution->short_name] = "";

@@ -362,11 +362,11 @@
             
             // Get Events
             $this->load->model('model_event','Event');
-            $eventsArr = $this->Event->GetByCommunity_id($this->Field->community_id);
+            $eventsArr = $this->Event->GetByCommunityId($this->Field->community_id);
 
             // Get News
             $this->load->model('model_news','News');
-            $newsArr = $this->News->GetByCommunity_id($this->Field->community_id);
+            $newsArr = $this->News->GetByCommunityId($this->Field->community_id);
 
             $this->defaultBreadcrumb[$this->Field->short_name] = "";
             $this->page->breadcrumbs = $this->defaultBreadcrumb;
