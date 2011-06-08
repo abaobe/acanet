@@ -1,4 +1,4 @@
-
+<h1 class="block">Updates</h1>
 <?php
 $len = "";
 $i = 0;
@@ -8,6 +8,7 @@ foreach ($allPosts as $aPost):
     $replyCount = count($aPost->replyies);
     $classHidden = ($replyCount==0)?"hidden":"";
     ?>
+    
     <div class="post-post-reply-wrapper">
         <div class="posts <?= $class ?> rounded" postId="<?= $aPost->post_id ?>">
             <div class="post-title"><?= ucfirst($aPost->title) ?></div>
@@ -50,8 +51,7 @@ foreach ($allPosts as $aPost):
                 | Reply's: <?= $replyCount; ?>
                 <? endif ?>                 
                 | <a class="show-post-reply" href="javascript:void(0);" postId="<?= $aPost->post_id ?>">
-                    <?php
-                        if($replyCount)
+                    <?php                        
                             echo ($replyCount)? "Hide replies":"Reply"
                     ?>
                 </a>

@@ -72,7 +72,7 @@
               
               //print_r($allPosts);
               $order = array('date_time'=>'desc');
-
+//---------------------Load Ins Filed Comm ---------------------------//
             $allCommunities = array();
             $allFields = array();
             $allInstitution = array();
@@ -86,18 +86,76 @@
                 $allCommunities = $this->Model_community->GetByType('groups',$limit);
                 $allFields = $this->Field->GetAllPublic();
             }
+            $comLinks = array();
+            foreach($allCommunities as $aCommunity){
+                $comLinks[$aCommunity->name] = site_url('community').'/'.$aCommunity->community_id;
+            }
+            $insLinks = array();
+            foreach($allInstitution as $aIns){
+                $insLinks[$aIns->short_name] = site_url('institute').'/view/'.$aIns->institution_id;
+            }
+            $fieldsLinks =array();
+            foreach($allFields as $aField){
+                $fieldsLinks[$aField->short_name] = site_url('field').'/view/'.$aField->field_id;
+            }
+            $nav2 = array();
+            $nav2EntryHeader1 = array("Home", base_url());
+            $nav2EntryHeader2 = array( "Communities", "community/index/");
+            $nav2EntryHeader3 = array("Institutions", "institute/index");
+            $nav2EntryHeader4 = array( "Fields", "fields/index");
 
+            $nav2EntryDropDown1 = array();
+            $nav2EntryDropDown2 = $comLinks;
+            $nav2EntryDropDown3 = $insLinks;
+            $nav2EntryDropDown4 = $fieldsLinks;
+
+            $nav2[0] = array($nav2EntryHeader1,$nav2EntryDropDown1);
+            $nav2[1] = array($nav2EntryHeader2,$nav2EntryDropDown2);
+            $nav2[2] = array($nav2EntryHeader3,$nav2EntryDropDown3);
+            $nav2[3] = array($nav2EntryHeader4,$nav2EntryDropDown4);
+
+            $this->page->nav2 = $nav2;
+
+//            $this->page->nav2 = array(
+//                        array(
+//                              array(
+//                                    "Home", base_url()
+//                                   )
+//                              ),
+//                        array(
+//                            array(
+//                                  "Communities", "community/index/"
+//                                ),
+//                                $comLinks
+//                            ),
+//                        array(
+//                            array(
+//                                   "Institutions", "institute/index"
+//                                ),
+//                                $insLinks
+//                            ),
+//                       array(
+//                            array(
+//                                   "Fields", "fields/index"
+//                                ),
+//                                $fieldsLinks
+//                            )
+//                    );
+
+
+//---------------------Load Ins Filed Comm ---------------------------//
               /***********************************LEFT SIDEBAR START*******************************/
               /*Sifat community copy */
               
               $left_sidebar = array();
               
               if(!$this->isPublicView)
-                $left_sidebar[] = array('Actions', 'sidebars/community_tab_action');              
+                $left_sidebar[] = array('Actions', 'sidebars/homeTabActions');
               if(count($allCommunities)>0)
               $left_sidebar[] = array('Communities', "sidebars/communities",
                   array('allCommunities'=>$allCommunities));
-              $left_sidebar[] =array('Fields', "sidebars/fields",array('allFields'=>$allFields));
+              if(count($allFields)>0)
+                $left_sidebar[] =array('Fields', "sidebars/fields",array('allFields'=>$allFields));
               if(count($allInstitution)>0)
                 $left_sidebar[] =array('Institution', "sidebars/institution",array('allInstitution'=>$allInstitution));
             
@@ -121,7 +179,7 @@
               /***********************************RIGHT SIDEBAR START*******************************/
               //$data =array();
               $news  = $this->Model_news->Get(null,$order,0,5,true);
-              $event = $this->Model_event->Get(null,array('start_date_time'=>'desc'),0,5,true);
+              $event = $this->Model_event->Get(null,array('start_date_time'=>'desc'),0,2,true);
               
               //$this->util->FreshPrint($event);
               
@@ -151,13 +209,29 @@
             return $allPosts;
             //echo json_encode($allPosts,JSON_FORCE_OBJECT);               
           }
-          
+          function PrintRecentContents(){
+              $this->load->model('Model_user');
+              $this->load->model('Model_content');
+              $this->load->library('util');
+              $allContent = array();
+                           
+             $this->currentUsername = $this->Model_user->GetLoggedInUsername();
+             if($this->currentUsername!==false)
+                 $this->isPublicView=false;
+             
+             $allContent = array();
+             if(!$this->isPublicView)
+                $allContent = $this->Model_content->GetByUser($this->currentUsername,0,10,'date_time desc');
+
+             $this->load->view($this->page->theme.'recent_contents.php',array('allContent'=>$allContent));
+          }
           function PrintRecentPosts()
           {
 
 
             $this->load->model('model_post');
             $this->load->model('Model_user');
+            
             
             
             $username = $this->input->post('username');
@@ -186,6 +260,7 @@
             $limit = 10;
 
             $allPosts = $this->model_post->Get(null,$order,$start,$limit,true,$where);
+            
             $count  = count($allPosts);
             $order = array('date_time'=>'inc');
             for($i=0;$i<$count;$i++){                
@@ -200,4 +275,3 @@
    }
 
 ?>
- 

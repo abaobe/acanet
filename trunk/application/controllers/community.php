@@ -185,10 +185,15 @@ class Community extends CI_Controller {
     // Needed by ibrahims module
     //============================================
     function GetByType() {
+        $this->load->model('Model_community');
         $type = $this->input->post('type');
-        $allCommunity = $this->Model_community->GetByType($type);
-        $this->load->view($this->page->theme . 'ajax_request/community_load_list.php',
+        $allCommunity = array();
+        $username = $this->Model_user->GetLoggedInUsername();
+        if($username!==False){
+            $allCommunity = $this->Model_community->GetByUsername($username,$type);        
+            $this->load->view($this->page->theme . 'ajax_request/community_load_list.php',
                 array("allCommunity" => $allCommunity));
+        }
     }
 
 }

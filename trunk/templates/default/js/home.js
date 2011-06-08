@@ -38,7 +38,7 @@ $(document).ready(function(){
    LoadCommunities();
    LoadRecentPosts();
 
-   $("#make-post-community-type").change(function(){         
+   $(".select-community-type").change(function(){
         LoadCommunities();         
    });
    
@@ -74,9 +74,9 @@ $(document).ready(function(){
 
    $("#makePostForm").submit(function(){
       var actionUrl = $(this).attr("action");
-      var publisherName = $("#make-post-publisher-name").val();
+      var publisherName = $(".make-post-publisher-name").val();
       var postBody = $("#post-body").val();
-      var communityId = $("#make-post-community-id").val();
+      var communityId = $(this).find(".select-community-id").val();
       var title = $("#make-post-title").val();
       //alert(title);
 
@@ -94,10 +94,15 @@ $(document).ready(function(){
                   type : 'post'
                }),
          success: function(msg){
-            $("#make-post-form-container p,input,select,textarea").removeAttr('disabled');
-            $("#make-post-form-container").animate({opacity: 1});
+            
+            if(msg == -1){
+                $("#make-post-form-container").find(".post-status").html("Unable to Post");                
+            }else{
+                LoadRecentPosts();
+            }
             $("#make-post-form-container :input :not(#makePostButton) ").val("");
-            LoadRecentPosts();
+            $("#make-post-form-container").animate({opacity: 1});
+            $("#make-post-form-container p,input,select,textarea").removeAttr('disabled');            
          }
       })
 
@@ -107,11 +112,11 @@ $(document).ready(function(){
 
    function LoadCommunities()
    {
-        var type = $("#make-post-community-type").val();
-         $("#make-post-community-id").attr("disabled","disabled");
-         $("#make-post-community-id").html("<option>Loading...</option>");
-         $("#make-post-community-id").load(site_url()+"/community/GetByType",{"type":type});
-         $("#make-post-community-id").attr("disabled","");
+        var type = $(".select-community-type").val();
+         $(".select-community-id").attr("disabled","disabled");
+         $(".select-community-id").html("<option>Loading...</option>");
+         $(".select-community-id").load(site_url()+"/community/GetByType",{"type":type});
+         $(".select-community-id").attr("disabled","");
    }
    function UpdateRecentPostsView(){
       
@@ -121,6 +126,33 @@ $(document).ready(function(){
          allRecentPosts.push($(this).attr("postId"));
       });
       //console.log(allRecentPosts);
+   }
+   function LoadRecentContents(){
+
+
+      $("#recent-post-load-div").attr("opacity","0.4");
+      $("#recent-post-load-div").attr("disabled","disabled");
+
+      //var postIds = GetJsonString(allRecentPosts);
+      //",      
+
+      $.ajax({
+         url : site_url()+"/home/PrintRecentContents",
+         type : "POST",         
+         success : function(data){
+            //alert(eval(data));
+            //allRecentPosts
+                $("#recent-post-load-div").attr("disabled","");
+                $("#recent-post-load-div").attr("opacity","1");
+                $("#recent-post-load-div").html(data);
+                $("#recent-post-load-div").slideDown('slow');
+            
+
+
+            //UpdateRecentPostList(data);
+         }
+      })
+      //$("#recent-post-load-div").load(,{username:""});
    }
    function LoadRecentPosts(){
 
@@ -142,10 +174,12 @@ $(document).ready(function(){
          success : function(data){
             //alert(eval(data));
             //allRecentPosts
-            $("#recent-post-load-div").attr("disabled","");
-            $("#recent-post-load-div").attr("opacity","1");
-            $("#recent-post-load-div").html(data);
-            $("#recent-post-load-div").slideDown('slow');
+            
+                $("#recent-post-load-div").attr("disabled","");
+                $("#recent-post-load-div").attr("opacity","1");
+                $("#recent-post-load-div").html(data);
+                $("#recent-post-load-div").slideDown('slow');
+            
 
             
             //UpdateRecentPostList(data);
@@ -214,7 +248,43 @@ $(document).ready(function(){
 //        return true;        
    });
     
-    
+     $("#linkShareButton").click(function(){
+      
+      var actionUrl = $(this).parent().parent().parent().attr("action");
+      var publisherName = $(".link-share-publisher-name").val();
+      var contentLinkDesc = $("#contact_link_desc").val();
+      var communityId = $(this).find(".select-community-id").val();
+      var contactlink = $("#contact_link").val();
+           
+      $("#jq_linkShare p,input,select,textarea").attr("disabled","disabled");
+      $("#jq_linkShare").animate({opacity: 0.4});
+
+      $.ajax({
+         url: actionUrl,
+         type: "POST",
+         data: ({
+                  content_link_desc : contentLinkDesc,
+                  cId: communityId,
+                  publisherName : publisherName,
+                  content_link : contactlink
+               }),
+         success: function(msg){
+
+            if(msg == -1){
+                $("#jq_linkShare").find(".post-status").html("Unable to Share Link");
+            }
+            else{
+                LoadRecentContents();
+                //$("#jq_linkShare").find(".post-status").html("Link Shared");
+            }
+            $("#jq_linkShare :input :not(#linkShareButton) ").val("");
+            $("#jq_linkShare").animate({opacity: 1});
+            $("#jq_linkShare p,input,select,textarea").removeAttr('disabled');
+         }
+      })
+
+      return false;
+   });
    
 
    function GetJsonString(data)
@@ -285,6 +355,7 @@ $(document).ready(function(){
 
     $("#jq_tab_link").click(function(){
         hideAll(2);
+        LoadRecentContents();
         $("#jq_linkShare").slideDown("fast");
         $("#jq_action_form_hide").show();
         tab_no = 2;
