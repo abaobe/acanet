@@ -13,6 +13,7 @@
        var $location  = "";
        var $community_id = "";
        var $status = "";
+      // var $updated_date="";
 
        function getInstitution_id(){
            return $this->institution_id;
@@ -30,8 +31,10 @@
        }
 
        function Update(){
+          // $this->updated_date = "now()";
            $this->db->where(array('institution_id' => $this->institution_id));
            $this->db->update('institution', $this);
+           
        }
 
        function IsAvailable(){
