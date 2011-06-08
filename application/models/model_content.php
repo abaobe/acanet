@@ -39,6 +39,16 @@
            //print_r($query->result_array());
            return $query->result();
        }
+       function GetByUser($username,$start=0,$limit=10,$order="")
+       {
+           $query_str = "SELECT content.content_id, content.type, content.content_link, content.publisher_name, content.date_time, content.description
+                        FROM (content JOIN content_community ON content.content_id = content_community.content_id)
+                        WHERE (select user_community.community_id from  user_community where username='$username')
+                        order by $order
+                        limit $start,$limit";
+           $query = $this->db->query($query_str);           
+           return $query->result();
+       }
  }
 
 

@@ -4,7 +4,7 @@
         {
             echo "<dt>
                     <a href='".site_url('institute')."/view/$anInstitution->institution_id'>
-                        $anInstitution->name
+                        $anInstitution->short_name
                     </a>
                 </dt>";
         }

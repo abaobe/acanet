@@ -145,14 +145,14 @@
 
                     <!-- Search form -->
 
-                    <div class="searchform">
+<!--                    <div class="searchform">
                         <form action="index.html" method="get">
                             <fieldset>
                                 <input name="field" class="field"  value=" Search..." />
                                 <input type="submit" name="button" class="button" value="GO!" />
                             </fieldset>
                         </form>
-                    </div>
+                    </div>-->
                 </div>
 
             </div>
