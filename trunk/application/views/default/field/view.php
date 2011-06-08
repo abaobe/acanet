@@ -1,4 +1,9 @@
-<p class="right"><a href="<?php echo site_url('fields/view/' . $fieldData->field_id . '/community'); ?>">Go to community of this field</a></p>
+<p class="right">
+    <a href="<?php echo site_url('fields/view/' . $fieldData->field_id . '/community'); ?>">Go to community of this field</a>
+    <br />
+    <?php echo anchor('fields/pendingMembers/list/' . $fieldData->field_id, "Approve Pending Members"); ?>
+    
+</p>
 
                     <!-- Content unit - One column -->
                     <h1 class="block">Information</h1>

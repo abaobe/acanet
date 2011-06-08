@@ -347,9 +347,18 @@ class Institute extends CI_Controller {
         
         // validate if the user is really member of this community
         
-        
-        
         $this->load->model('User_inst');
+        
+        if(! $this->User->AuthenticateAsAdmin()){
+            $this->User_inst->institution_id = $id;
+            $this->User_inst->username = $uname;
+            if(!$this->User_inst->ValidateMembership()){
+                $this->page->showMessage("You are not a member of this Institution!");
+                return;
+            }
+        }else{
+//            die("Admin!!");
+        }
         
         // validate Institution
         
