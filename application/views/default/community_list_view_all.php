@@ -6,6 +6,7 @@
         <tr>
             <th class="top" scope="col" style="width:200px;">Name</th>
             <th class="top" scope="col">Short Description</th>
+            <th class="top" scope="col" style="width:130px;">Action</th>
         </tr>
         <?php foreach($query1_result as $row): ?>
         <tr><th scope="row">
@@ -14,9 +15,11 @@
                 </a>
             </th>
             <td><?php echo $row->short_description;?></td>
+            <td><a href="<?=  site_url("/institute/join/id_chosen/$row->community_id")?>">Join</a></td>
         </tr>
         <?php        endforeach; ?>
     </table>
+    <a  href="<?=  site_url("/community_list/index/institution")?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  More ...</a>
 </div>
 <hr class="clear-contentunit" />
 
@@ -29,6 +32,7 @@
         <tr>
             <th class="top" scope="col" style="width:200px;">Name</th>
             <th class="top" scope="col">Short Description</th>
+            <th class="top" scope="col" style="width:130px;">Action</th>
         </tr>
         <?php foreach($query2_result as $row): ?>
         <tr><th scope="row">
@@ -37,9 +41,11 @@
                 </a>
             </th>
             <td><?php echo $row->short_description;?></td>
+            <td><a href="<?=  site_url("/fields/join/id_chosen/$row->community_id")?>">Join</a></td>
         </tr>
         <?php        endforeach; ?>
     </table>
+    <a  href="<?=  site_url("/community_list/index/field")?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  More ...</a>
 </div>
 <hr class="clear-contentunit" />
 
@@ -51,6 +57,7 @@
         <tr>
             <th class="top" scope="col" style="width:200px;">Name</th>
             <th class="top" scope="col">Short Description</th>
+            <th class="top" scope="col" style="width:130px;">Action</th>
         </tr>
         <?php foreach($query3_result as $row): ?>
         <tr><th scope="row">
@@ -59,9 +66,11 @@
                 </a>
             </th>
             <td><?php echo $row->short_description;?></td>
+            <td><a href="javascript:void(0);">Join</a></td>
         </tr>
         <?php        endforeach; ?>
     </table>
+    <a  href="<?=  site_url("/community_list/index/subject")?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  More ...</a>
 </div>
 <hr class="clear-contentunit" />
 
@@ -73,6 +82,7 @@
         <tr>
             <th class="top" scope="col" style="width:200px;">Name</th>
             <th class="top" scope="col">Short Description</th>
+            <th class="top" scope="col" style="width:130px;">Action</th>
         </tr>
         <?php foreach($query4_result as $row): ?>
         <tr><th scope="row">
@@ -81,8 +91,10 @@
                 </a>
             </th>
             <td><?php echo $row->short_description;?></td>
+            <td><a href="javascript:void(0);">Join</a></td>
         </tr>
         <?php        endforeach; ?>
     </table>
+    <a  href="<?=  site_url("/community_list/index/course")?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  More ...</a>
 </div>
 <hr class="clear-contentunit" />

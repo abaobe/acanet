@@ -23,8 +23,7 @@ class User_community extends CI_Model {
 
     function Insert($username, $community_id,$role="subscriber") {
         $data = array('username' => $username, 'community_id' => $community_id,'role'=>$role);
-        $this->db->insert('user_community', $data);
-        return $this->db->insert_id();
+        $this->db->insert('user_community', $data);        
     }
 
 }
