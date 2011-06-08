@@ -13,6 +13,56 @@ class Community extends CI_Controller {
         if (!isset($community_id)) {
             redirect("community_list");
         }
+        $this->load->model('Model_user');
+	$username = $this->Model_user->Authenticate();
+        if($username==false){
+            return;
+        }
+	$this->load->model('Field');
+        $this->load->model('Institution');
+	$this->load->model('User_field');
+        $this->load->model('User_inst');
+        $this->load->model('Model_community');
+        
+        $community = $this->Model_community->GetById($community_id);
+        if ($community == null) {
+            redirect(site_url("/community_list"));
+        }
+        $community = $community[0];
+
+        if($community->type == "institution"){
+            $this->User_inst->username = $username;
+            $this->User_inst->institution_id = $this->Institution->GetField_idByCommunity_id($community_id);
+            $role = $this->User_inst->GetRole();
+        }else if($community->type == "field"){
+            $this->User_field->username = $username;
+            $this->User_field->field_id = $this->Field->GetField_idByCommunity_id($community_id);
+            $role = $this->User_field->GetRole();
+        }
+        else{
+            $this->LoadCommunityView($community_id);
+            return;
+            
+        }
+
+        if($role){
+            switch($role){
+                case 'owner': case 'member': break;
+                case 'pending':
+                    $this->page->showMessage("Your Request to join this community is pending.");
+                    break;
+                case 'banned':
+                    $this->page->showMessage("Sorry! You have been banned form this community.");
+                    break;
+            }
+        }else{
+            $url = site_url('/institute/join/id_chosen/' . $community_id);
+            $this->page->showMessage("You need permission to get access to this community.<br/>
+                Get <a href='$url'>refferal</a> for access to this community.");
+            return;
+        }
+
+
         $this->LoadCommunityView($community_id);
     }
 
@@ -27,6 +77,7 @@ class Community extends CI_Controller {
         $this->load->model('Model_content');
         //--------------------------------------
         //===============Get community basic info from ID===========
+
 
         $community = $this->Model_community->GetById($community_id);
         if ($community == null) {
