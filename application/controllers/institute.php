@@ -62,7 +62,7 @@ class Institute extends CI_Controller {
 
 
                 // Process Submitted request
-                $this->form_validation->set_rules('name', 'Name', 'required|max_length[100]|callback_validate_availability');
+                
                 $this->form_validation->set_rules('sname', 'Short Name', 'required|max_length[100]');
 
                 $this->Institution->name = $this->input->post('name');
@@ -74,8 +74,11 @@ class Institute extends CI_Controller {
                 $this->form_validation->set_rules('short_description', 'Short Description', 'required|max_length[500]');
                 $this->form_validation->set_message('validate_availability', 'This Name or Short Name is Unavailable!');
                 if ($option == "modify") {
+                    $this->form_validation->set_rules('name', 'Name', 'required|max_length[100]');
                     $this->form_validation->set_rules('institution_id', 'Institution Id', 'required');
                     $this->form_validation->set_rules('status', 'Status ', 'required');
+                }else{
+                    $this->form_validation->set_rules('name', 'Name', 'required|max_length[100]|callback_validate_availability');
                 }
                 if ($this->form_validation->run()) {
                     // Success. insert into db
@@ -94,6 +97,7 @@ class Institute extends CI_Controller {
                     $this->Institution->short_description = $this->input->post('short_description');
                     $this->Institution->location = $this->input->post('location');
                     if ($option == "modify") {
+//                        die("Im hre");
                         $this->Institution->status = $this->input->post('status');
                         $this->Institution->Update();
                         $this->page->showMessage("Institution Updated!");
@@ -133,6 +137,8 @@ class Institute extends CI_Controller {
                     return;
                 } else {
                     // Not validated
+                    echo validation_errors();
+                    die("not validated");
                     if ($option == "modify") {
                         redirect('institute/modify/id_chosen/' . $this->input->post('institution_id'));
                         return;
@@ -300,14 +306,32 @@ class Institute extends CI_Controller {
             $this->page->showMessage("Load community: " . $this->Institution->community_id);
             return;
         }
-
+        
+        // Get fields for this institute
+        $this->load->model('Field');
+        $fieldsArr = $this->Field->GetFieldByInst($institution_id);
+        
+        // Get Events
+        $this->load->model('model_event','Event');
+        $eventsArr = $this->Event->GetByCommunity_id($this->Institution->community_id);
+        
+        // Get News
+        $this->load->model('model_news','News');
+        $newsArr = $this->News->GetByCommunity_id($this->Institution->community_id);
+        
+        
         $this->defaultBreadcrumb[$this->Institution->short_name] = "";
         $this->page->breadcrumbs = $this->defaultBreadcrumb;
         $this->page->title = $this->Institution->name . " | Institution";
 
         $this->page->loadViews(
                 null, array(
-            array($this->Institution->name, "institution/view", array("instData" => $this->Institution))
+            array($this->Institution->name, "institution/view", array(
+                "instData" => $this->Institution,
+                "fieldsData" => $fieldsArr,
+                "eventsData" => $eventsArr,
+                "newsData" => $newsArr
+                    ))
                 ), null);
     }
 

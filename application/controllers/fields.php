@@ -359,6 +359,14 @@
                 $this->page->showMessage("Load community: " . $this->Field->community_id);
                 return;
             }
+            
+            // Get Events
+            $this->load->model('model_event','Event');
+            $eventsArr = $this->Event->GetByCommunity_id($this->Field->community_id);
+
+            // Get News
+            $this->load->model('model_news','News');
+            $newsArr = $this->News->GetByCommunity_id($this->Field->community_id);
 
             $this->defaultBreadcrumb[$this->Field->short_name] = "";
             $this->page->breadcrumbs = $this->defaultBreadcrumb;
@@ -366,7 +374,11 @@
 
             $this->page->loadViews(
                     null, array(
-                array($this->Field->name, "institution/view", array("instData" => $this->Field))
+                array($this->Field->name, "field/view", array(
+                    "fieldData" => $this->Field,
+                    "eventsData" => $eventsArr,
+                    "newsData" => $newsArr)
+                    )
                     ), null);
         }
         
