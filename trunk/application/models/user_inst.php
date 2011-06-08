@@ -57,8 +57,15 @@ class User_inst extends CI_Model {
         $this->db->update('user_institution', $this);
     }
 
-    function GetPendingMembers(){
+    function GetPendingMembers($institutionId){
+        $this->db->where(array(
+            'role' => 'pending',
+            'institution_id' => $institutionId
+        ));
+        $query = $this->db->get('user_institution');
+        return $query->result();
     }
+    
     
     function ValidateMembership(){
         // validates if given user is member of a given institute,
