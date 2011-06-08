@@ -334,6 +334,77 @@ class Institute extends CI_Controller {
                     ))
                 ), null);
     }
+    
+    function pendingMembers($mode, $id, $chosenUsername = "") {
+        // Approve pending Members
+        $this->page->title = "Pending Membership";
+        $this->defaultBreadcrumb['Pending Membership'] = "";
+        $this->page->breadcrumbs = $this->defaultBreadcrumb;
+        $uname = $this->User->Authenticate();
+        
+        if(!$uname)
+            return;
+        
+        // validate if the user is really member of this community
+        
+        
+        
+        $this->load->model('User_inst');
+        
+        // validate Institution
+        
+        $this->Institution->institution_id = $id;
+        if(! $this->Institution->Load()){
+            $this->page->showMessage("Invalid Institute ID");
+            return;
+        }
+        
+        switch ($mode){
+            case 'list':
+                
+                $data = $this->User_inst->GetPendingMembers($id);
+                
+                break;
+                
+            case 'approve':
+                
+                if(empty($chosenUsername)){
+                    $this->page->showMessage("No Username Chosen");
+                    return;
+                }
+                
+                // Try to update
+                
+                $this->User_inst->institution_id = $id;
+                $this->User_inst->username = $chosenUsername;
+                
+                if(!$this->User_inst->Load()){
+                    $this->page->showMessage("Invalid username/institute ID");
+                    return;
+                }
+                
+                $this->User_inst->referer = $uname;
+                $this->User_inst->role = "member";
+                $this->User_inst->Update();
+                
+                $this->page->showMessage("Updated Successfully!");
+                return;
+                
+                break;
+            default:
+                //nothings
+        }
+        
+        $this->page->loadViews(
+                        array(
+                    array("Institutions", "sidebars/inst_common"),
+                    array("Administration", "sidebars/inst_admin")
+                        ), array(
+                    array("Approve Pending Membership", "institution/listPendingMembers", array(
+                        "data" => $data, "instituteId" => $id
+                        )),
+                        ), null);
+    }
 
 }
 
