@@ -74,7 +74,7 @@ foreach ($allPosts as $aPost):
 
             <?php endforeach; ?>                    
             <div class="post-reply-input-div" class="contactform">
-               <textarea class="field post-reply-input shadow" type="text" name="post-reply-input"  cId ="<?= $aPost->community_id ?>" postId="<?= $aPost->post_id ?>" rows="2" cols="30"></textarea>                            
+               <textarea class="field post-reply-input shadow" type="text" name="post-reply-input"  cId ="<?= $community_id ?>" postId="<?= $aPost->post_id ?>" rows="2" cols="30"></textarea>
                <div class="replySubmitButtonDiv rounded">
                    <span>Reply</span>
                </div>

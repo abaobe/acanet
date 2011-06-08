@@ -83,6 +83,7 @@ class Community extends CI_Controller {
         $data['post'] = $this->GetRecentPosts($community_id);
         $data['news'] = $this->Model_news->GetByCommunityId($community_id);
         $data['event'] = $this->Model_event->GetByCommunityId($community_id);
+        $data['community_id'] = $community_id;
         //======================        
         $main_content[0] = array("Community: $community->name", "forms/community_form_view", $data);
         //-------------------------------------------------------------------------------
