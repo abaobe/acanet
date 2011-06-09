@@ -46,14 +46,17 @@ class Page {
         
         if($uname = $this->CI->session->userdata('username')){
             $this->nav1 = array(
-                $uname => site_url('profile'),
+                $uname => site_url('profile')."/index/$uname",
+
                 "Logout" => site_url('logout')
             );
         }else{
             // Not Logged In
+            
             $this->nav1 = array(
                 "Home" => base_url(),
-                "Registration" => site_url('registration')
+                "Login" => site_url('login'),
+                "Registration" => site_url('register')
             );
         }
         

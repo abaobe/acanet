@@ -115,7 +115,7 @@ class Institute extends CI_Controller {
                     $this->Community->name = "Community for " . $this->Institution->name;
                     $this->Community->type = "institution";
                     $this->Community->short_description = $this->Institution->short_description;
-                    $this->Community->Insert();  //  Created
+                    $this->Community->DirectInsert();  //  Created
 
                     if (!$this->Community->community_id) {
                         $this->page->showMesssage("Failed to create community!");

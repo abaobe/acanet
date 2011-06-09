@@ -56,15 +56,15 @@ class Login extends CI_Controller {
 
         $this->page->title = "Welcome to AcaNet";
 
-        $this->page->nav1 = array(
-            "Home" => base_url(),
-            "Registration" => site_url('register')
-        );
-
-        $this->page->nav2[] = array(
-            array("Field", site_url('field')),
-            array('Computer Science' => site_url('field/cse'))
-        );
+//        $this->page->nav1 = array(
+//            "Home" => base_url(),
+//            "Registration" => site_url('register')
+//        );
+//
+//        $this->page->nav2[] = array(
+//            array("Field", site_url('field')),
+//            array('Computer Science' => site_url('field/cse'))
+//        );
 
 
 
