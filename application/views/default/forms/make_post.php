@@ -11,11 +11,11 @@
                   <textarea name="contact_message" id="post-body" cols="45" rows="10"></textarea></p>
                <p><label for="Type" class="left">Type:</label>
                   <select name="make-post-community-type" class="combo select-community-type">
-                     <option>Institution</option>
-                     <option>Field</option>
-                     <option>Course</option>
-                     <option>Subject</option>
-                     <option>Groups</option>
+                     <option value="institution">Institution</option>
+                     <option value="field">Field</option>
+                     <option value="course">Course</option>
+                     <option value="subject">Subject</option>
+                     <option value="group">Group</option>
                   </select>
                </p>
                <p><label for="Communities" class="left">Community: </label>
