@@ -20,8 +20,8 @@ foreach($data as $row){
     $tableData[] = array(
         $row->username,
         $row->referer,
-        anchor("institute/pendingMembers/approve/$instituteId/member" . $row->username,"Approve") . " " .
-        anchor("institute/pendingMembers/approve/$instituteId/banned" . $row->username,"Approve")
+        anchor("institute/pendingMembers/approve/$instituteId/" . $row->username . "/member","Approve") . " " .
+        anchor("institute/pendingMembers/approve/$instituteId/" . $row->username . "/banned","Approve")
     );
 }
 

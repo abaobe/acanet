@@ -225,7 +225,7 @@ class Page {
                         function takeMeBack(){
                             window.location = '" . $_SERVER['HTTP_REFERER'] ."';
                         }
-                        setTimeout('takeMeBack();',5000);
+                        setTimeout('takeMeBack();',3000);
 
                         //design
 
