@@ -66,7 +66,7 @@ class home extends CI_Controller {
 
 
         $js = array(
-            'community', 'jquery-ui-1.8.12.custom.min', 'jquery-ui-timepicker-addon',
+            'jquery-ui-1.8.12.custom.min', 'jquery-ui-timepicker-addon',
             'home', 'curvycorners', 'fancybox/jquery.fancybox-1.3.4.pack',
             'fancybox/jquery.mousewheel-3.0.4.pack', 'autoresize'
         );

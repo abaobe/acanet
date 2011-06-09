@@ -1,4 +1,4 @@
-
+<div id="recent-post-load-div">
 <?php
 $len = "";
 $i = 0;
@@ -8,6 +8,7 @@ foreach ($allPosts as $aPost):
     $replyCount = count($aPost->replyies);
     $classHidden = ($replyCount==0)?"hidden":"";
     ?>
+
     <div class="post-post-reply-wrapper">
         <div class="posts <?= $class ?> rounded" postId="<?= $aPost->post_id ?>">
             <div class="post-title"><?= ucfirst($aPost->title) ?></div>
@@ -27,7 +28,7 @@ foreach ($allPosts as $aPost):
                     if ($len > 80)
                         echo "Read more &raquo;";
                     ?>
-                </a>    
+                </a>
 
             </div>
 
@@ -35,13 +36,16 @@ foreach ($allPosts as $aPost):
 
                 <br/>
                 <br/>
-                | Posted by <a href="<?= site_url("profile") . "/index/$aPost->publisher_name" ?>"><?= $aPost->publisher_name ?> 
-                </a>                 
+                | Posted by <a href="<?= site_url("profile") . "/index/$aPost->publisher_name" ?>"><?= $aPost->publisher_name ?>
+                </a>
                 <? if($replyCount): ?>
-                | Reply's: <a href="#"><?= $replyCount ?>
+                | Reply's: <?= $replyCount; ?>
                 <? endif ?>
-                </a>                 
-                | <a class="show-post-reply" href="javascript:void(0);" postId="<?= $aPost->post_id ?>"><? echo ($replyCount)? "Hide replies":"Reply" ?></a>
+                | <a class="show-post-reply" href="javascript:void(0);" postId="<?= $aPost->post_id ?>">
+                    <?php
+                            echo ($replyCount)? "Hide replies":"Reply"
+                    ?>
+                </a>
 
 
             </p>
@@ -49,7 +53,7 @@ foreach ($allPosts as $aPost):
 
         <div class="post-reply-wrapper <?= $classHidden; ?>" id="post-reply-wrapper-<?= $aPost->post_id ?>">
             <?php foreach($aPost->replyies as $aReply): ?>
-                <div class="posts-reply">            
+                <div class="posts-reply">
                     <div class="post-description">
                         <?php
                         $len = strlen($aReply->description);
@@ -67,18 +71,22 @@ foreach ($allPosts as $aPost):
                     </div>
 
                     <div class="post-datetime"><?= date_format(date_create($aReply->date_time), 'l, d F Y \a\t H:i'); ?>,
-                        by <a href="#"><?= $aReply->publisher_name ?></a></div>
+                        by <a href="<?= site_url("profile") . "/index/$aPost->publisher_name" ?>"><?= $aReply->publisher_name ?></a></div>
 
 
                 </div>
+            <?php endforeach; ?>
 
-            <?php endforeach; ?>                    
+            <?php if(!$this->isPublicView):?>
             <div class="post-reply-input-div" class="contactform">
                <textarea class="field post-reply-input shadow" type="text" name="post-reply-input"  cId ="<?= $community_id ?>" postId="<?= $aPost->post_id ?>" rows="2" cols="30"></textarea>
                <div class="replySubmitButtonDiv rounded">
                    <span>Reply</span>
                </div>
-            </div>            
+            </div>
+            <?php endif; ?>
         </div>
+
     </div>
 <?php endforeach; ?>
+</div>

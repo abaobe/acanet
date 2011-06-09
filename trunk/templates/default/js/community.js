@@ -187,6 +187,39 @@ $(document).ready(function(){
 
 
 //===========================FROM IBRAHIM=====================================
+  function LoadRecentPosts(){
+
+
+      $("#recent-post-load-div").attr("opacity","0.4");
+      $("#recent-post-load-div").attr("disabled","disabled");
+
+      //var postIds = GetJsonString(allRecentPosts);
+      //",
+      var username = $("#loggedUsername").val();
+
+      $.ajax({
+         url : site_url()+"/home/PrintRecentPosts",
+         type : "POST",
+         data : ({
+                    username : username
+                    //postIds : postIds
+               }),
+         success : function(data){
+            //alert(eval(data));
+            //allRecentPosts
+
+                $("#recent-post-load-div").attr("disabled","");
+                $("#recent-post-load-div").attr("opacity","1");
+                $("#recent-post-load-div").html(data);
+                $("#recent-post-load-div").slideDown('slow');
+
+
+
+            //UpdateRecentPostList(data);
+         }
+      })
+      //$("#recent-post-load-div").load(,{username:""});
+   }
 
  $("#recent-post-load-div .posts")
      .live("mouseover",function(){
@@ -208,6 +241,38 @@ $(document).ready(function(){
        }
 
    });
+
+
+    $(".replySubmitButtonDiv").live("click",function(){
+
+       var div = $(this).parent().find(".post-reply-input");
+       var desc = $(div).val();
+       var postId = $(div).attr("postId");
+       var cId = $(div).attr("cId");
+       SaveReply(desc,cId,postId);
+   });
+
+   function SaveReply(description,cId,postId)  //postId parentId
+   {
+        url = site_url()+ "/make_post/";
+        var username = $("#loggedUsername").val();
+        $.ajax({
+         url: url,
+         type: "POST",
+         data: ({
+                  description : description,
+                  cId: cId,
+                  publisherName : username,
+                  type : 'reply',
+                  postId : postId
+               }),
+         success: function(msg){
+            LoadRecentPosts();
+         }
+      })
+   }
+
+
     
     
     //=====================FULL Calendar======================================

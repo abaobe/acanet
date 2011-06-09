@@ -154,6 +154,7 @@ class Community extends CI_Controller {
         $data['news'] = $this->Model_news->GetByCommunityId($community_id);
         $data['event'] = $this->Model_event->GetByCommunityId($community_id);
         $data['community_id'] = $community_id;
+        $data['publisher_id'] = $username;
         //======================        
         $main_content[0] = array("Community: $community->name", "forms/community_form_view", $data);
         //-------------------------------------------------------------------------------
