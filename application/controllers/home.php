@@ -78,7 +78,7 @@
             $allInstitution = array();
             $limit = 10;
             if(!$this->isPublicView){
-                $allCommunities = $this->User_community->GetByUserName($username,$limit);
+                $allCommunities = $this->User_community->GetByUserName($username,"",0,$limit);
                 $allFields = $this->Field->GetByUserName($username);
                 $allInstitution = $this->Institution->GetByUserName($username);
             }
