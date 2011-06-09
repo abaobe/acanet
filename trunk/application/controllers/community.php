@@ -4,9 +4,11 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Community extends CI_Controller {
-    
+
+    var $currentUsername = '';
+    var $isPublicView = true;
     function __construct() {
-        parent::__construct();
+        parent::__construct();        
     }
 
     function index($community_id) {
@@ -75,15 +77,45 @@ class Community extends CI_Controller {
         $this->load->model('Model_event');
         $this->load->model('Model_user');
         $this->load->model('Model_content');
+        $this->load->library('util');
         //--------------------------------------
-        //===============Get community basic info from ID===========
 
-
-        $community = $this->Model_community->GetById($community_id);
+       $community = $this->Model_community->GetById($community_id);
         if ($community == null) {
             redirect(site_url("/community_list"));
         }
         $community = $community[0];
+        //===============Get community basic info from ID===========
+
+        //===============Public or private view=====================
+            $this->currentUsername = $this->Model_user->GetLoggedInUsername();
+              if($this->currentUsername!==false)
+                 $this->isPublicView=false;
+
+
+              $this->page->title = "Home";
+
+              $this->page->breadcrumbs = array(
+                  "Home" => base_url()
+              );
+
+              $nav1 = array();
+
+              if($this->isPublicView){
+                $nav1["Login"]=site_url('login');
+                $nav1["Registration"] = site_url('register');
+              }
+              else{
+                $nav1[$this->currentUsername]=site_url('profile');
+                $nav1["Logout"]=site_url('logout');
+              }
+              $username = $this->currentUsername;
+
+              $this->page->nav1 = $nav1;
+
+        //===============end public or private view=================
+
+             
 
         //-js and css--------------------------
         $this->page->title = $community->name;
@@ -98,18 +130,13 @@ class Community extends CI_Controller {
             'fullcalendar/fullcalendar.min'), 'js');
         //------------------------------------
         //-----init variables needed for the page----------------------
-        $this->load->library('util');
-        $this->page->nav1 = array(
-            "Home" => base_url(),
-            "Login" => site_url('login'),
-            "Registration" => site_url('register')
-        );
-
+        
 
 
         $this->page->breadcrumbs = array(
             "Home" => base_url(),
-            "Community" => site_url("community")
+            "Community" => site_url("community"),
+            "$community->name" => site_url("community/index/$community->community_id")
         );
 
         $left_sidebar[0] = array('Actions', 'sidebars/community_tab_action');
