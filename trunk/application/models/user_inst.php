@@ -66,6 +66,17 @@ class User_inst extends CI_Model {
         return $query->result();
     }
     
+    function GetRefererRequests($username){
+        $this->db->from("user_institution");
+        $this->db->join("institution", "institution.institution_id = user_institution.institution_id");
+        $this->db->where(array(
+            'role' => 'pending',
+            'referer' => $username
+        ));
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
     
     function ValidateMembership(){
         // validates if given user is member of a given institute,

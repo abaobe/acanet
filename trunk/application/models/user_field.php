@@ -66,6 +66,17 @@ class User_field extends CI_Model {
         return $query->result();
     }
     
+    function GetRefererRequests($username){
+        $this->db->from("user_field");
+        $this->db->join("field", "field.field_id = user_field.field_id");
+        $this->db->where(array(
+            'role' => 'pending',
+            'referer' => $username
+        ));
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
     function ValidateMembership(){
         // validates if given user is member of a given field,
         // also returns false if pending/banned etc.

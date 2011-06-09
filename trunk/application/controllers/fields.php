@@ -197,6 +197,10 @@
        
        function join($mode = "", $id = ""){
            // Join an Institution
+           
+           
+           $this->load->model('User_field');
+           
            $this->page->title = "Join A Field";
            $this->defaultBreadcrumb['Join A Field'] = "";
            $this->page->breadcrumbs = $this->defaultBreadcrumb;
@@ -231,7 +235,6 @@
                            return;
                        }
                        // Future implementation: check if the referer valid
-                       $this->load->model('User_field');
                        $this->User_field->username = $uname;
                        $this->User_field->field_id = $id;
                        $this->User_field->referer = $this->input->post('referer');
@@ -262,6 +265,9 @@
 
            // Load  Models
            $fieldList = $this->Field->GetAllApproved();
+           
+           // Get referer requests
+           $refData = $this->User_field->GetRefererRequests($uname);
 
            $this->page->loadViews(
                 array(
@@ -271,7 +277,9 @@
                 array(
                    array("Join A Field", "field/listAll", array("list" => $fieldList)),
                 ),
-                null);
+                array(
+                    array("Requests", "sidebars/referer_requests", array("fieldData" => $refData))
+                ));
        }
        
        function modify($mode = "", $id = "") {
