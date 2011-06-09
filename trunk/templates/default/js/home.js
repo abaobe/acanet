@@ -39,7 +39,7 @@ $(document).ready(function(){
    LoadRecentPosts();
 
    $(".select-community-type").change(function(){
-        LoadCommunities();         
+        LoadCommunities();
    });
    
    $(".replySubmitButtonDiv").live("click",function(){
@@ -78,7 +78,7 @@ $(document).ready(function(){
       var actionUrl = $(this).attr("action");
       var publisherName = $(".make-post-publisher-name").val();
       var postBody = $("#post-body").val();
-      var communityId = $(this).find(".select-community-id").val();
+      var communityId = $(this).find(".make-post-community-id").val();
       var title = $("#make-post-title").val();
       //alert(title);
 
@@ -255,8 +255,9 @@ $(document).ready(function(){
       var actionUrl = $(this).parent().parent().parent().attr("action");
       var publisherName = $(".link-share-publisher-name").val();
       var contentLinkDesc = $("#contact_link_desc").val();
-      var communityId = $(this).parent().parent().parent().find(".select-community-id").val();
-      var contactlink = $("#contact_link").val();      
+      var communityId = $(this).find(".content-link-community-id").val();
+      var contactlink = $("#contact_link").val();
+      
       $("#jq_linkShare p,input,select,textarea").attr("disabled","disabled");
       $("#jq_linkShare").animate({opacity: 0.4});
 
