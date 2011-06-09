@@ -38,8 +38,16 @@ $(document).ready(function(){
    LoadCommunities();
    LoadRecentPosts();
 
-   $(".select-community-type").change(function(){
+   $(".select-community-type").change(function(){      
         LoadCommunities();
+   });
+
+   $("#select-community-type-1").change(function(){
+     var type = $("#select-community-type-1").val();
+     $("#select-community-id-1").attr("disabled","disabled");
+     $("#select-community-id-1").html("<option>Loading...</option>");
+     $("#select-community-id-1").load(site_url()+"/community/GetByType",{"type":type});
+     $("#select-community-id-1").attr("disabled","");
    });
    
    $(".replySubmitButtonDiv").live("click",function(){
@@ -255,7 +263,7 @@ $(document).ready(function(){
       var actionUrl = $(this).parent().parent().parent().attr("action");
       var publisherName = $(".link-share-publisher-name").val();
       var contentLinkDesc = $("#contact_link_desc").val();
-      var communityId = $(this).find(".content-link-community-id").val();
+      var communityId = $(this).parent().parent().parent().find(".content-link-community-id").val();
       var contactlink = $("#contact_link").val();
       
       $("#jq_linkShare p,input,select,textarea").attr("disabled","disabled");
@@ -348,11 +356,12 @@ $(document).ready(function(){
         $(this).hide();
     });
 
-    $("#jq_tab_post").click(function(){
+    $("#jq_tab_post").click(function(){        
         hideAll(1);
         $("#jq_makePost").slideDown("fast");
         $("#jq_action_form_hide").show();
         tab_no = 1;
+        return false;
     });
 
     $("#jq_tab_link").click(function(){
@@ -361,6 +370,7 @@ $(document).ready(function(){
         $("#jq_linkShare").slideDown("fast");
         $("#jq_action_form_hide").show();
         tab_no = 2;
+        return false;
     });
 
     $("#jq_tab_event").click(function(){

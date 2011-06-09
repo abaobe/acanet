@@ -10,7 +10,7 @@
                   <label for="Message" class="left">Message:</label>
                   <textarea name="contact_message" id="post-body" cols="45" rows="10"></textarea></p>
                <p><label for="Type" class="left">Type:</label>
-                  <select name="make-post-community-type" class="combo select-community-type">
+                  <select name="make-post-community-type" class="combo select-community-type" >
                      <option value="institution">Institution</option>
                      <option value="field">Field</option>
                      <option value="course">Course</option>
