@@ -73,48 +73,52 @@
               //print_r($allPosts);
               $order = array('date_time'=>'desc');
 //---------------------Load Ins Filed Comm ---------------------------//
-            $allCommunities = array();
-            $allFields = array();
-            $allInstitution = array();
-            $limit = 10;
-            if(!$this->isPublicView){
-                $allCommunities = $this->User_community->GetByUserName($username,"",0,$limit);
-                $allFields = $this->Field->GetByUserName($username);
-                $allInstitution = $this->Institution->GetByUserName($username);
-            }
-            else{
-                $allCommunities = $this->Model_community->GetByType('groups',$limit);
-                $allFields = $this->Field->GetAllPublic();
-            }
-            $comLinks = array();
-            foreach($allCommunities as $aCommunity){
-                $comLinks[$aCommunity->name] = site_url('community').'/'.$aCommunity->community_id;
-            }
-            $insLinks = array();
-            foreach($allInstitution as $aIns){
-                $insLinks[$aIns->short_name] = site_url('institute').'/view/'.$aIns->institution_id;
-            }
-            $fieldsLinks =array();
-            foreach($allFields as $aField){
-                $fieldsLinks[$aField->short_name] = site_url('field').'/view/'.$aField->field_id;
-            }
-            $nav2 = array();
-            $nav2EntryHeader1 = array("Home", base_url());
-            $nav2EntryHeader2 = array( "Communities", "community/index/");
-            $nav2EntryHeader3 = array("Institutions", "institute/index");
-            $nav2EntryHeader4 = array( "Fields", "fields/index");
-
-            $nav2EntryDropDown1 = array();
-            $nav2EntryDropDown2 = $comLinks;
-            $nav2EntryDropDown3 = $insLinks;
-            $nav2EntryDropDown4 = $fieldsLinks;
-
-            $nav2[0] = array($nav2EntryHeader1,$nav2EntryDropDown1);
-            $nav2[1] = array($nav2EntryHeader2,$nav2EntryDropDown2);
-            $nav2[2] = array($nav2EntryHeader3,$nav2EntryDropDown3);
-            $nav2[3] = array($nav2EntryHeader4,$nav2EntryDropDown4);
-
-            $this->page->nav2 = $nav2;
+            $allCommunities = $this->page->allCommunities;
+            $allFields = $this->page->allFields;
+            $allInstitution = $this->page->allInstitution;
+            
+//            $allCommunities = array();
+//            $allFields = array();
+//            $allInstitution = array();
+//            $limit = 10;
+//            if(!$this->isPublicView){
+//                $allCommunities = $this->User_community->GetByUserName($username,"",0,$limit);
+//                $allFields = $this->Field->GetByUserName($username);
+//                $allInstitution = $this->Institution->GetByUserName($username);
+//            }
+//            else{
+//                $allCommunities = $this->Model_community->GetByType('groups',$limit);
+//                $allFields = $this->Field->GetAllPublic();
+//            }
+//            $comLinks = array();
+//            foreach($allCommunities as $aCommunity){
+//                $comLinks[$aCommunity->name] = site_url('community').'/'.$aCommunity->community_id;
+//            }
+//            $insLinks = array();
+//            foreach($allInstitution as $aIns){
+//                $insLinks[$aIns->short_name] = site_url('institute').'/view/'.$aIns->institution_id;
+//            }
+//            $fieldsLinks =array();
+//            foreach($allFields as $aField){
+//                $fieldsLinks[$aField->short_name] = site_url('field').'/view/'.$aField->field_id;
+//            }
+//            $nav2 = array();
+//            $nav2EntryHeader1 = array("Home", base_url());
+//            $nav2EntryHeader2 = array( "Communities", "community/index/");
+//            $nav2EntryHeader3 = array("Institutions", "institute/index");
+//            $nav2EntryHeader4 = array( "Fields", "fields/index");
+//
+//            $nav2EntryDropDown1 = array();
+//            $nav2EntryDropDown2 = $comLinks;
+//            $nav2EntryDropDown3 = $insLinks;
+//            $nav2EntryDropDown4 = $fieldsLinks;
+//
+//            $nav2[0] = array($nav2EntryHeader1,$nav2EntryDropDown1);
+//            $nav2[1] = array($nav2EntryHeader2,$nav2EntryDropDown2);
+//            $nav2[2] = array($nav2EntryHeader3,$nav2EntryDropDown3);
+//            $nav2[3] = array($nav2EntryHeader4,$nav2EntryDropDown4);
+//
+//            $this->page->nav2 = $nav2;
 
 //            $this->page->nav2 = array(
 //                        array(
