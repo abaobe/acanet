@@ -20,13 +20,13 @@
 
         $this->table->clear();
         $data = array();
-        $data[] = array("Name", "Short Name", "Institution Name", "Description", "Status", "Action");
+        $data[] = array("Name", "Institution Name", "Description", "Status", "Action");
         foreach($list as $i){
             $actionText = anchor('fields/join/id_chosen/' . $i->field_id, "Join!");
             if($action == "modify")
                 $actionText = anchor('fields/modify/id_chosen/' . $i->field_id, "Modify");
             
-            $data[] = array(anchor('fields/view/' . $i->field_id, $i->name), $i->short_name, $i->institution_id, $i->short_description,
+            $data[] = array(anchor('fields/view/' . $i->field_id, $i->name), $i->institution_id, $i->short_description,
                 $i->status, $actionText);
         }
         echo $this->table->generate($data);

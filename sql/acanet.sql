@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 08, 2011 at 08:23 AM
+-- Generation Time: Jun 09, 2011 at 12:49 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -32,52 +32,7 @@ CREATE TABLE IF NOT EXISTS `community` (
   `short_description` text NOT NULL,
   `updated_date` datetime NOT NULL,
   PRIMARY KEY (`community_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
-
---
--- Dumping data for table `community`
---
-
-INSERT INTO `community` (`community_id`, `name`, `type`, `short_description`, `updated_date`) VALUES
-(0, 'no name', 'institution', 'It is a dummy community for the global Institution and field', '2011-04-20 17:52:29'),
-(1, 'BUET', 'institution', 'It is a community of BUET students', '2011-04-20 17:34:51'),
-(2, 'DU', 'institution', 'It is a community of DU students', '2011-04-20 17:36:06'),
-(3, 'CSE', 'field', 'It is a community of CSE Students of Bangladesh', '2011-04-20 17:37:07'),
-(4, 'EEE Community', 'field', 'It is a community of EEE Students of Bangladesh', '2011-04-20 17:37:54'),
-(5, 'BUET CSE Community', 'field', 'It is a community of BUET CSE students', '2011-04-20 17:39:08'),
-(6, 'BUET EEE Community', 'field', 'It is a community of BUET EEE students', '2011-04-20 17:40:03'),
-(7, 'DU CSE Community', 'field', 'It is a community of CSE students of DU', '2011-04-20 18:07:39'),
-(8, 'DU EEE Community', 'field', 'It is a community of EEE students of DU', '2011-04-20 18:08:18'),
-(9, 'Structered Programming language Community', 'subject', 'It is a community of structured programming language subject', '2011-04-20 17:41:39'),
-(10, 'CSE 101 Community', 'course', 'It is a community of CSE 101 students ', '2011-04-20 17:42:58'),
-(12, 'Jahanginagar University', 'institution', '', '0000-00-00 00:00:00'),
-(14, 'American Int''l University', 'institution', '', '0000-00-00 00:00:00'),
-(15, 'Jagannath', 'institution', '', '0000-00-00 00:00:00'),
-(16, 'Naval Inst', 'institution', '', '0000-00-00 00:00:00'),
-(17, 'Naval Instd', 'institution', '', '0000-00-00 00:00:00'),
-(18, 'Naval Instds', 'institution', '', '0000-00-00 00:00:00'),
-(19, 'Naval Instdss', 'institution', '', '0000-00-00 00:00:00'),
-(20, 'Navald Instdss', 'institution', '', '0000-00-00 00:00:00'),
-(21, 'Navsdald Instdss', 'institution', '', '0000-00-00 00:00:00'),
-(22, 'Navsdald Instdsss', 'institution', '', '0000-00-00 00:00:00'),
-(23, 'Navsdald sInstdsss', 'institution', '', '0000-00-00 00:00:00'),
-(24, 'Navsdald sInstdssss', 'institution', '', '0000-00-00 00:00:00'),
-(25, 'sNavsdald sInstdssss', 'institution', '', '0000-00-00 00:00:00'),
-(26, 'sNssavsdald sInstdssss', 'institution', '', '0000-00-00 00:00:00'),
-(27, 'Metalorgy', 'institution', '', '0000-00-00 00:00:00'),
-(28, 'Dhaka University', 'institution', '', '0000-00-00 00:00:00'),
-(29, 'Bangladesh University Of Engineering & Technology', 'institution', '', '0000-00-00 00:00:00'),
-(30, 'Chittagong University', 'institution', '', '0000-00-00 00:00:00'),
-(31, 'Rajsahi University', 'institution', 'sdfs', '0000-00-00 00:00:00'),
-(32, 'Rajsahi University', 'institution', 'sdfs', '0000-00-00 00:00:00'),
-(33, 'Rajsahi University', 'institution', 'sdfs', '0000-00-00 00:00:00'),
-(34, 'North South', 'institution', 'blah', '0000-00-00 00:00:00'),
-(35, 'Community for National Fan', 'institution', 'n/a', '0000-00-00 00:00:00'),
-(36, 'Community for Computer Science & Engineering', 'institution', 'Global CSE Field', '0000-00-00 00:00:00'),
-(37, 'Community for Computer Science & Engineering', 'institution', 'Buet''s CSE Field', '0000-00-00 00:00:00'),
-(38, 'Community for Computer Science & Engineering', 'institution', 'Buet''s CSE Field', '0000-00-00 00:00:00'),
-(39, 'Community for Computer Science & Engineering', 'institution', 'Global CSE Field', '0000-00-00 00:00:00'),
-(40, 'Community for Electrical & Electronic Engineering', 'institution', 'Buet''s EEE', '0000-00-00 00:00:00');
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
 
 -- --------------------------------------------------------
 
@@ -94,21 +49,7 @@ CREATE TABLE IF NOT EXISTS `content` (
   `description` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`content_id`),
   KEY `publisher_id` (`publisher_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
-
---
--- Dumping data for table `content`
---
-
-INSERT INTO `content` (`content_id`, `type`, `content_link`, `publisher_name`, `date_time`, `description`) VALUES
-(1, 'link', 'test_link', 'ibrahim', '2011-05-01 19:16:56', NULL),
-(2, 'link', 'test_link2', 'giga', '2011-05-01 19:17:12', NULL),
-(3, 'link', 'test_link3', 'ibrahim', '2011-05-01 19:19:41', NULL),
-(4, 'link', 'test_link4', 'giga', '2011-05-01 19:19:43', NULL),
-(5, 'link', 'link test 1', 'ibrahim', '2011-05-17 14:56:44', '0'),
-(7, 'link', 'link test 1', 'ibrahim', '2011-05-17 14:59:06', '0'),
-(8, 'link', 'link test 1', 'ibrahim', '2011-05-17 14:59:28', '0'),
-(9, 'link', 'link test 1', 'ibrahim', '2011-05-17 15:00:37', 'desc 1');
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
 
 -- --------------------------------------------------------
 
@@ -122,19 +63,6 @@ CREATE TABLE IF NOT EXISTS `content_community` (
   PRIMARY KEY (`content_id`,`community_id`),
   KEY `community_id` (`community_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `content_community`
---
-
-INSERT INTO `content_community` (`content_id`, `community_id`) VALUES
-(1, 0),
-(1, 1),
-(2, 3),
-(7, 3),
-(8, 3),
-(9, 3),
-(2, 4);
 
 -- --------------------------------------------------------
 
@@ -155,11 +83,6 @@ CREATE TABLE IF NOT EXISTS `course` (
   KEY `course_id` (`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `course`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -176,22 +99,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `date_time` date DEFAULT NULL,
   PRIMARY KEY (`event_id`),
   KEY `publisher_id` (`publisher_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
-
---
--- Dumping data for table `event`
---
-
-INSERT INTO `event` (`event_id`, `title`, `description`, `start_date_time`, `end_date_time`, `publisher_name`, `date_time`) VALUES
-(1, 'Event 1', 'this is decs for event 1', '2011-05-03 19:25:22', '2011-05-05 19:25:32', 'ibrahim', NULL),
-(2, 'Event 2', 'this is decs for event 2', '2011-05-04 19:25:42', '2011-05-06 19:25:45', 'giga', NULL),
-(3, 'Event 3', 'this is decs for event 3', '2011-05-07 19:25:51', '2011-05-09 19:25:55', 'ibrahim', NULL),
-(4, 'Event 4', 'this is decs for event 4', '2011-05-09 19:26:01', '2011-05-11 19:26:04', 'ibrahim', NULL),
-(5, 'Event 5', 'this is decs for event 5', '2011-05-02 19:26:11', '2011-05-04 19:26:17', 'ibrahim', NULL),
-(8, 'Event 6', 'this is event 6', '2011-04-07 19:29:12', '2011-04-09 19:29:18', 'ibrahim', NULL),
-(9, 'Event 7', 'this is event 7', '2011-04-13 19:29:24', '2011-04-14 19:29:30', 'giga', NULL),
-(10, 'test event 1', 'desc test 1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'ibrahim', NULL),
-(11, 'test event 1', 'desc test 1', '2004-05-12 00:00:00', '2018-05-11 00:00:00', 'ibrahim', NULL);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -205,18 +113,6 @@ CREATE TABLE IF NOT EXISTS `event_community` (
   PRIMARY KEY (`event_id`,`community_id`),
   KEY `community_id` (`community_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `event_community`
---
-
-INSERT INTO `event_community` (`event_id`, `community_id`) VALUES
-(1, 1),
-(2, 1),
-(2, 3),
-(5, 3),
-(10, 3),
-(11, 3);
 
 -- --------------------------------------------------------
 
@@ -237,15 +133,6 @@ CREATE TABLE IF NOT EXISTS `field` (
   KEY `community_id` (`community_id`),
   KEY `institution_id` (`institution_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `field`
---
-
-INSERT INTO `field` (`field_id`, `institution_id`, `name`, `short_name`, `community_id`, `short_description`, `updated_date`, `status`) VALUES
-(3, 2, 'Computer Science & Engineering', 'CSE', 38, 'Buet''s CSE Field', '0000-00-00 00:00:00', 'approved'),
-(4, 0, 'Computer Science & Engineering', 'CSE', 39, 'Global CSE Field', '0000-00-00 00:00:00', 'approved'),
-(5, 2, 'Electrical & Electronic Engineering', 'EEE', 40, 'Buet''s EEE', '0000-00-00 00:00:00', 'approved');
 
 -- --------------------------------------------------------
 
@@ -269,19 +156,6 @@ CREATE TABLE IF NOT EXISTS `institution` (
   KEY `community_id` (`community_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
---
--- Dumping data for table `institution`
---
-
-INSERT INTO `institution` (`institution_id`, `name`, `short_name`, `location`, `community_id`, `campuses`, `short_description`, `updated_date`, `status`) VALUES
-(0, 'Global', 'Global', 'Global', 0, 'N/A', 'N/A', '0000-00-00 00:00:00', 'approved'),
-(1, 'Dhaka University', 'DU', 'DU', 28, 'only one campus', 'DU', '0000-00-00 00:00:00', 'pending'),
-(2, 'Bangladesh University Of Engineering & Technology', 'BUET', 'Polashi, Dhaka', 0, 'New Aca Building\nEME building', 'buet is a peculiar university', '0000-00-00 00:00:00', 'approved'),
-(3, 'Chittagong University', 'CU', 'dfd\ndsf', 30, '\ndfsd\ndsf\nfsdfsf\n', 'dfsdf\nsdf\nsdf', '0000-00-00 00:00:00', 'pending'),
-(4, 'Rajsahi University', 'RU', 'Rajsahi', 31, 'dfsd\nsdfs\nsdf', 'sdfs', '0000-00-00 00:00:00', 'pending'),
-(6, 'North South', 'NSU', 'blah', 34, 'blah', 'blah', '0000-00-00 00:00:00', ''),
-(7, 'National Fan', 'NF', 'n/a', 35, 'n/a', 'n/a', '0000-00-00 00:00:00', 'pending');
-
 -- --------------------------------------------------------
 
 --
@@ -297,12 +171,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `date_time` datetime NOT NULL,
   PRIMARY KEY (`news_id`),
   KEY `publisher_name` (`publisher_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `news`
---
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -316,11 +185,6 @@ CREATE TABLE IF NOT EXISTS `news_community` (
   PRIMARY KEY (`news_id`,`community_id`),
   KEY `community_id` (`community_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `news_community`
---
-
 
 -- --------------------------------------------------------
 
@@ -336,28 +200,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `date_time` datetime NOT NULL,
   PRIMARY KEY (`post_id`),
   KEY `publisher_id` (`publisher_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
-
---
--- Dumping data for table `post`
---
-
-INSERT INTO `post` (`post_id`, `title`, `description`, `publisher_name`, `date_time`) VALUES
-(1, 'fsadfsf', 'gffffff\n', 'ibrahim', '2011-05-01 08:56:50'),
-(2, 'sdfsdf', 'dfsdasdfasdf', 'ibrahim', '2011-05-02 13:07:56'),
-(3, 'sdfsdfsd', 'Helldslf;ajdl', 'ibrahim', '2011-05-02 13:08:04'),
-(4, 'i am Histu', 'I am Hisu', 'ibrahim', '2011-05-02 13:20:24'),
-(5, 'This is a Post with title', 'Hello', 'ibrahim', '2011-05-02 13:25:08'),
-(6, '', '', 'ibrahim', '2011-05-02 15:31:47'),
-(7, 'sdf', 'asdf', 'ibrahim', '2011-05-08 21:35:59'),
-(8, 'sdf', 'asdfdddd', 'ibrahim', '2011-05-08 21:36:12'),
-(15, 'title', 'dilam', 'giga', '2011-05-14 23:32:52'),
-(31, '', '', 'ibrahim', '2011-05-15 12:09:43'),
-(32, '', '', 'ibrahim', '2011-05-15 13:24:43'),
-(33, 'sd', 'dasf', 'ibrahim', '2011-05-17 22:28:00'),
-(34, 'asdfasd', 'asdfasdf', 'ibrahim', '2011-05-17 22:28:11'),
-(35, 'this', 'all we do is done', 'ibrahim', '2011-05-18 02:50:51'),
-(36, 'try another one', 'polish', 'ibrahim', '2011-05-18 02:53:51');
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
 
 -- --------------------------------------------------------
 
@@ -371,29 +214,6 @@ CREATE TABLE IF NOT EXISTS `post_community` (
   PRIMARY KEY (`post_id`,`community_id`),
   KEY `community_id` (`community_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `post_community`
---
-
-INSERT INTO `post_community` (`post_id`, `community_id`) VALUES
-(15, 0),
-(2, 1),
-(4, 1),
-(5, 1),
-(6, 1),
-(7, 1),
-(8, 1),
-(1, 3),
-(2, 3),
-(31, 3),
-(32, 3),
-(33, 3),
-(34, 3),
-(35, 3),
-(36, 3),
-(1, 7),
-(3, 16);
 
 -- --------------------------------------------------------
 
@@ -409,11 +229,6 @@ CREATE TABLE IF NOT EXISTS `post_reply` (
   KEY `community_id` (`community_id`),
   KEY `reply_id` (`reply_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `post_reply`
---
-
 
 -- --------------------------------------------------------
 
@@ -436,11 +251,6 @@ CREATE TABLE IF NOT EXISTS `request` (
   KEY `referer_id` (`referer_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `request`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -458,13 +268,6 @@ CREATE TABLE IF NOT EXISTS `subject` (
   KEY `community_id` (`community_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
---
--- Dumping data for table `subject`
---
-
-INSERT INTO `subject` (`subejct_id`, `name`, `community_id`, `short_description`, `updated_date`) VALUES
-(1, 'Structered Programming language', 9, 'It is one of the core subject of Computer programming', '2011-04-20');
-
 -- --------------------------------------------------------
 
 --
@@ -478,11 +281,6 @@ CREATE TABLE IF NOT EXISTS `subject_course` (
   KEY `course_id` (`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `subject_course`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -495,11 +293,6 @@ CREATE TABLE IF NOT EXISTS `subject_field` (
   PRIMARY KEY (`subject_id`,`field_id`),
   KEY `field_id` (`field_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `subject_field`
---
-
 
 -- --------------------------------------------------------
 
@@ -521,17 +314,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`username`, `password`, `name`, `address`, `contact_number`, `mail_address`, `type`, `status`, `verification_data`, `privacy`) VALUES
-('azam', '5cc32e366c87c4cb49e4309b75f57d64', 'okd doke', 'dsfdsfsdfdfd', 'n/a', 'n/a', 'subscriber', 'activated', 'abcdef', ''),
-('giga', '00d8c86d80f51dc38b694de6172f96b4ffbc571b', '', '', '', '', 'admin', 'pending', '', ''),
-('ibrahim', 'f1c083e61b32d3a9be76bc21266b0648', 'Ibrahim ibrahim', 'dsafadsfasdf', 'asdfasdf', 'adsfasdf', 'subscriber', 'pending', 'abcdef', ''),
-('shafiul', 'a6926ad918ad3ab499e8d7d7f1de0316', 'Shafiul Azam', 'n/a n/a n/a', 'n/a', 'ishafiul@gmail.com', 'subscriber', 'activated', 'abcdef', ''),
-('sifat', 'e10adc3949ba59abbe56e057f20f883e', 'sdf asdfas', 'sifatasdfasdfasfd', 'sifat', 'sifat@gamil.com', 'subscriber', 'pending', 'abcdef', '');
-
 -- --------------------------------------------------------
 
 --
@@ -546,11 +328,6 @@ CREATE TABLE IF NOT EXISTS `user_community` (
   KEY `user_id` (`username`),
   KEY `community_id` (`community_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `user_community`
---
-
 
 -- --------------------------------------------------------
 
@@ -567,18 +344,6 @@ CREATE TABLE IF NOT EXISTS `user_field` (
   KEY `field_id` (`field_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `user_field`
---
-
-INSERT INTO `user_field` (`username`, `field_id`, `role`, `referer`) VALUES
-('azam', 3, 'pending', 'shafiul'),
-('azam', 4, 'pending', 'ibrahim'),
-('azam', 5, 'owner', NULL),
-('shafiul', 3, 'owner', NULL),
-('shafiul', 4, 'owner', NULL),
-('shafiul', 5, 'pending', 'azam');
-
 -- --------------------------------------------------------
 
 --
@@ -593,22 +358,6 @@ CREATE TABLE IF NOT EXISTS `user_institution` (
   PRIMARY KEY (`username`,`institution_id`),
   KEY `institution_id` (`institution_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `user_institution`
---
-
-INSERT INTO `user_institution` (`username`, `institution_id`, `role`, `referer`) VALUES
-('azam', 2, 'member', 'shafiul'),
-('giga', 2, 'pending', 'ibrahim'),
-('giga', 6, 'pending', 'ibrahim'),
-('ibrahim', 1, 'owner', NULL),
-('ibrahim', 2, 'owner', NULL),
-('ibrahim', 3, 'owner', NULL),
-('ibrahim', 4, 'owner', NULL),
-('ibrahim', 6, 'owner', NULL),
-('shafiul', 2, 'member', 'azam'),
-('shafiul', 7, 'owner', NULL);
 
 --
 -- Constraints for dumped tables
