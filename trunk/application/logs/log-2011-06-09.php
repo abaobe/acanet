@@ -14350,3 +14350,183 @@ DEBUG - 2011-06-09 01:53:07 --> File loaded: application/views/default/general/r
 DEBUG - 2011-06-09 01:53:07 --> File loaded: application/views/default/general/footer.php
 DEBUG - 2011-06-09 01:53:07 --> Final output sent to browser
 DEBUG - 2011-06-09 01:53:07 --> Total execution time: 0.1107
+DEBUG - 2011-06-09 02:03:37 --> Config Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Hooks Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Utf8 Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> UTF-8 Support Enabled
+DEBUG - 2011-06-09 02:03:37 --> URI Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Router Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Output Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Input Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Security Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> XSS Filtering completed
+DEBUG - 2011-06-09 02:03:37 --> XSS Filtering completed
+DEBUG - 2011-06-09 02:03:37 --> Global POST and COOKIE data sanitized
+DEBUG - 2011-06-09 02:03:37 --> Language Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Loader Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Helper loaded: url_helper
+DEBUG - 2011-06-09 02:03:37 --> Helper loaded: form_helper
+DEBUG - 2011-06-09 02:03:37 --> Database Driver Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Session Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Helper loaded: string_helper
+DEBUG - 2011-06-09 02:03:37 --> Session routines successfully run
+DEBUG - 2011-06-09 02:03:37 --> Model Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Model Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Model Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Model Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Model Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Model Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Table Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Table class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:03:37 --> Form Validation Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:03:37 --> Util class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:03:37 --> Controller Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Model Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Model Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Util class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:03:37 --> Model Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> Model Class Initialized
+DEBUG - 2011-06-09 02:03:37 --> File loaded: application/views/default/general/header.php
+DEBUG - 2011-06-09 02:06:19 --> Config Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Hooks Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Utf8 Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> UTF-8 Support Enabled
+DEBUG - 2011-06-09 02:06:19 --> URI Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Router Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Output Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Input Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Security Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> XSS Filtering completed
+DEBUG - 2011-06-09 02:06:19 --> XSS Filtering completed
+DEBUG - 2011-06-09 02:06:19 --> Global POST and COOKIE data sanitized
+DEBUG - 2011-06-09 02:06:19 --> Language Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Loader Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Helper loaded: url_helper
+DEBUG - 2011-06-09 02:06:19 --> Helper loaded: form_helper
+DEBUG - 2011-06-09 02:06:19 --> Database Driver Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Session Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Helper loaded: string_helper
+DEBUG - 2011-06-09 02:06:19 --> Session routines successfully run
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Table Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Table class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:06:19 --> Form Validation Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:06:19 --> Util class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:06:19 --> Controller Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Util class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/general/header.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/sidebars/welcome.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/sidebars/homeTabActions.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/sidebars/communities.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/sidebars/institution.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/general/left_sidebar.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/forms/make_post.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/forms/link_share.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/forms/create_event.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/forms/create_news.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/home.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/general/contentWrapper.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/general/content.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/sidebars/referer_requests.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/general/right_sidebarWrapper.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/sidebars/events.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/general/right_sidebarWrapper.php
+ERROR - 2011-06-09 02:06:19 --> Severity: Notice  --> Undefined variable: row E:\wamp\www\htdocs\projects\acanet\application\views\default\sidebars\news.php 2
+ERROR - 2011-06-09 02:06:19 --> Severity: Notice  --> Trying to get property of non-object E:\wamp\www\htdocs\projects\acanet\application\views\default\sidebars\news.php 2
+ERROR - 2011-06-09 02:06:19 --> Severity: Notice  --> Undefined variable: row E:\wamp\www\htdocs\projects\acanet\application\views\default\sidebars\news.php 3
+ERROR - 2011-06-09 02:06:19 --> Severity: Notice  --> Trying to get property of non-object E:\wamp\www\htdocs\projects\acanet\application\views\default\sidebars\news.php 3
+ERROR - 2011-06-09 02:06:19 --> Severity: Notice  --> Undefined variable: row E:\wamp\www\htdocs\projects\acanet\application\views\default\sidebars\news.php 4
+ERROR - 2011-06-09 02:06:19 --> Severity: Notice  --> Trying to get property of non-object E:\wamp\www\htdocs\projects\acanet\application\views\default\sidebars\news.php 4
+ERROR - 2011-06-09 02:06:19 --> Severity: Notice  --> Undefined variable: row E:\wamp\www\htdocs\projects\acanet\application\views\default\sidebars\news.php 4
+ERROR - 2011-06-09 02:06:19 --> Severity: Notice  --> Trying to get property of non-object E:\wamp\www\htdocs\projects\acanet\application\views\default\sidebars\news.php 4
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/sidebars/news.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/general/right_sidebarWrapper.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/general/right_sidebar.php
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/general/footer.php
+DEBUG - 2011-06-09 02:06:19 --> Final output sent to browser
+DEBUG - 2011-06-09 02:06:19 --> Total execution time: 0.2101
+DEBUG - 2011-06-09 02:06:19 --> Config Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Hooks Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Utf8 Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> UTF-8 Support Enabled
+DEBUG - 2011-06-09 02:06:19 --> URI Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Router Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Output Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Input Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Security Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> XSS Filtering completed
+DEBUG - 2011-06-09 02:06:19 --> XSS Filtering completed
+DEBUG - 2011-06-09 02:06:19 --> XSS Filtering completed
+DEBUG - 2011-06-09 02:06:19 --> Global POST and COOKIE data sanitized
+DEBUG - 2011-06-09 02:06:19 --> Language Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Loader Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Helper loaded: url_helper
+DEBUG - 2011-06-09 02:06:19 --> Helper loaded: form_helper
+DEBUG - 2011-06-09 02:06:19 --> Database Driver Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Session Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Helper loaded: string_helper
+DEBUG - 2011-06-09 02:06:19 --> Session routines successfully run
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Table Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Table class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:06:19 --> Form Validation Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:06:19 --> Util class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:06:19 --> Controller Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:19 --> File loaded: application/views/default/ajax_request/community_load_list.php
+DEBUG - 2011-06-09 02:06:19 --> Final output sent to browser
+DEBUG - 2011-06-09 02:06:19 --> Total execution time: 0.0765
+DEBUG - 2011-06-09 02:06:20 --> Config Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Hooks Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Utf8 Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> UTF-8 Support Enabled
+DEBUG - 2011-06-09 02:06:20 --> URI Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Router Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Output Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Input Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Security Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> XSS Filtering completed
+DEBUG - 2011-06-09 02:06:20 --> XSS Filtering completed
+DEBUG - 2011-06-09 02:06:20 --> XSS Filtering completed
+DEBUG - 2011-06-09 02:06:20 --> Global POST and COOKIE data sanitized
+DEBUG - 2011-06-09 02:06:20 --> Language Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Loader Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Helper loaded: url_helper
+DEBUG - 2011-06-09 02:06:20 --> Helper loaded: form_helper
+DEBUG - 2011-06-09 02:06:20 --> Database Driver Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Session Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Helper loaded: string_helper
+DEBUG - 2011-06-09 02:06:20 --> Session routines successfully run
+DEBUG - 2011-06-09 02:06:20 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Table Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Table class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:06:20 --> Form Validation Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Session class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:06:20 --> Util class already loaded. Second attempt ignored.
+DEBUG - 2011-06-09 02:06:20 --> Controller Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> Model Class Initialized
+DEBUG - 2011-06-09 02:06:20 --> File loaded: application/views/default/recent_posts.php
+DEBUG - 2011-06-09 02:06:20 --> Final output sent to browser
+DEBUG - 2011-06-09 02:06:20 --> Total execution time: 0.0809
