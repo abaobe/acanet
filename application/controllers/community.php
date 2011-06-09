@@ -16,10 +16,7 @@ class Community extends CI_Controller {
             redirect("community_list");
         }
         $this->load->model('Model_user');
-	$username = $this->Model_user->Authenticate();
-        if($username==false){
-            return;
-        }
+
 	$this->load->model('Field');
         $this->load->model('Institution');
 	$this->load->model('User_field');
@@ -31,6 +28,13 @@ class Community extends CI_Controller {
             redirect(site_url("/community_list"));
         }
         $community = $community[0];
+
+        if( $community->type == "institution" || $community->type == "field" ){
+            $username = $this->Model_user->Authenticate();
+            if($username==false){
+                return;
+            }
+        }
 
         if($community->type == "institution"){
             $this->User_inst->username = $username;
@@ -133,8 +137,8 @@ class Community extends CI_Controller {
             "$community->name" => site_url("community/index/$community->community_id")
         );
 
-        $left_sidebar[0] = array('Actions', 'sidebars/community_tab_action');
-        $left_sidebar[1] = array('Information', 'sidebars/community_tab_info');
+        if($this->isPublicView==false)$left_sidebar[] = array('Actions', 'sidebars/community_tab_action');
+        $left_sidebar[] = array('Information', 'sidebars/community_tab_info');
 
 
 
