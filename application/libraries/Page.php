@@ -31,8 +31,13 @@ class Page {
     public $nav1;
 
     public $nav2;
-    public $breadcrumbs; 
-    
+    public $breadcrumbs;
+
+    public $allCommunities;
+    public $allFields;
+    public $allInstitution;
+
+    public $currentUser;
 
     function  __construct() {
         $this->CI = & get_instance();
@@ -62,33 +67,90 @@ class Page {
 
         // dummy nav2 : Should be set in the controller page
         //multidimention array --> ([]([main name,url])([subnames]=>url))
-        $this->nav2 = array(
-            array(
-                  array(
-                        "Home", base_url()
-                       )
-                ),
-            array(
-                array(
-                      "Communities", "community/index"
-                    ),
-                    array(
-                        "CSE" => "community/index/cse",
-                        "EEE" => "community/index/eee",
-                        "MME" => "community/index/mme"
-                    )
-                ),
-            array(
-                array(
-                       "Institutions", "institute/index"
-                    ),
-                    array(
-                        "BUET" => "community/buet",
-                        "DU" => "community/du",
-                        "DMC" => "community/dmc"
-                    )
-                )
-        );
+        //----------------------------------------------------
+            $this->CI->load->model('Model_user');
+            $this->CI->load->model('User_community');
+            $this->CI->load->model('Model_community');
+            $this->CI->load->model('Institution');
+            $this->CI->load->model('Field');
+            $this->CI->load->library('util');
+            
+            $allCommunities = array();
+            $allFields = array();
+            $allInstitution = array();
+            $limit = 10;
+            $this->currentUser = $this->CI->Model_user->GetLoggedInUsername();
+            if($this->currentUser!==FALSE){
+                $allCommunities = $this->CI->User_community->GetByUserName($this->currentUser,"",0,$limit);
+                $allFields = $this->CI->Field->GetByUserName($this->currentUser);
+                $allInstitution = $this->CI->Institution->GetByUserName($this->currentUser);
+            }
+            else{
+                $allCommunities = $this->CI->Model_community->GetByType('groups',$limit);
+                $allFields = $this->CI->Field->GetAllPublic();
+            }
+            $this->allCommunities = $allCommunities;
+            $this->allFields = $allFields;
+            $this->allInstitution = $allInstitution;
+
+
+            $comLinks = array();
+            foreach($allCommunities as $aCommunity){
+                $comLinks[$aCommunity->name] = site_url('community').'/'.$aCommunity->community_id;
+            }
+            $insLinks = array();
+            foreach($allInstitution as $aIns){
+                $insLinks[$aIns->short_name] = site_url('institute').'/view/'.$aIns->institution_id;
+            }
+            $fieldsLinks =array();
+            foreach($allFields as $aField){
+                $fieldsLinks[$aField->short_name] = site_url('field').'/view/'.$aField->field_id;
+            }
+            $nav2 = array();
+            $nav2EntryHeader1 = array("Home", base_url());
+            $nav2EntryHeader2 = array( "Communities", "community/index/");
+            $nav2EntryHeader3 = array("Institutions", "institute/index");
+            $nav2EntryHeader4 = array( "Fields", "fields/index");
+
+            $nav2EntryDropDown1 = array();
+            $nav2EntryDropDown2 = $comLinks;
+            $nav2EntryDropDown3 = $insLinks;
+            $nav2EntryDropDown4 = $fieldsLinks;
+
+            $nav2[0] = array($nav2EntryHeader1,$nav2EntryDropDown1);
+            $nav2[1] = array($nav2EntryHeader2,$nav2EntryDropDown2);
+            $nav2[2] = array($nav2EntryHeader3,$nav2EntryDropDown3);
+            $nav2[3] = array($nav2EntryHeader4,$nav2EntryDropDown4);
+
+            $this->nav2 = $nav2;
+        //---------------------------------------------
+//        $this->nav2 = array(
+//            array(
+//                  array(
+//                        "Home", base_url()
+//                       )
+//                ),
+//            array(
+//                array(
+//                      "Communities", "community/index"
+//                    ),
+//                    array(
+//                        "CSE" => "community/index/cse",
+//                        "EEE" => "community/index/eee",
+//                        "MME" => "community/index/mme"
+//                    )
+//                ),
+//            array(
+//                array(
+//                       "Institutions", "institute/index"
+//                    ),
+//                    array(
+//                        "BUET" => "community/buet",
+//                        "DU" => "community/du",
+//                        "DMC" => "community/dmc"
+//                    )
+//                )
+//        );
     }
 
     function set($array, $type='css'){       
