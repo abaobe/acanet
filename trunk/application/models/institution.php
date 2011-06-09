@@ -137,12 +137,12 @@
        }
        
     function GetInstitute_idByCommunity_id($communityId){
-        $this->db->select('institute_id');
-        $query = $this->db->get_where('institute', array(
+        $this->db->select('institution_id');
+        $query = $this->db->get_where('institution', array(
             'community_id' => $communityId
         ));
         foreach($query->result() as $row){
-            return $row->institute_id;  //  just the first row.
+            return $row->institution_id;  //  just the first row.
         }
     }
        

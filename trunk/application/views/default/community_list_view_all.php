@@ -8,6 +8,12 @@ function isJoinedAlready($communities, $community_id) {
     }
     return false;
 }
+
+
+
+
+
+
 ?>
 <!-- Content unit - One column -->
 <h1 class="block"><a href="<?= site_url("/community_list/index/institution") ?>">Institute communities</a></h1>
@@ -27,7 +33,7 @@ function isJoinedAlready($communities, $community_id) {
             <td><?php echo $row->short_description; ?></td>
             <?php
             if (isJoinedAlready($communities, $row->community_id) == false) {
-                echo '<td><a href= ' . site_url('/institute/join/id_chosen/' . $row->community_id) . '>Join</a></td>';
+                echo '<td><a href= ' . site_url('converter/index/' . $row->community_id) . '>Join</a></td>';
             } else {
                 echo '<td>Already Joined!</td>';
             }
@@ -59,7 +65,7 @@ function isJoinedAlready($communities, $community_id) {
             <td><?php echo $row->short_description; ?></td>
             <?php
                 if (isJoinedAlready($communities, $row->community_id) == false) {
-                    echo '<td><a href= ' . site_url('/fields/join/id_chosen/' . $row->community_id) . '>Join</a></td>';
+                    echo '<td><a href= ' . site_url('converter/index/' . $row->community_id) . '>Join</a></td>';
                 } else {
                     echo '<td>Already Joined!</td>';
                 }

@@ -29,10 +29,10 @@ function isJoinedAlready($communities, $community_id) {
             <?php
 
                 if (isJoinedAlready($communities, $row->community_id) == false) {
-                    if($type == "institute")
-                        echo '<td><a href= ' . site_url('/institute/join/id_chosen/' . $row->community_id) . '>Join</a></td>';
+                    if($type == "institution")
+                        echo '<td><a href= ' . site_url('/converter/index/' . $row->community_id) . '>Join</a></td>';
                     else if($type == "field")
-                        echo '<td><a href= ' . site_url('/field/join/id_chosen/' . $row->community_id) . '>Join</a></td>';
+                        echo '<td><a href= ' . site_url('/converter/index/' . $row->community_id) . '>Join</a></td>';
                     else{
                         echo '<td><a href= ' . site_url('/joinCommunity/index/' . $row->community_id).'>Join</a></td>';
                     }
