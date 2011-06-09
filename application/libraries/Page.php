@@ -148,36 +148,37 @@ class Page {
        // Set CSS
         $this->set(array('layout1_setup', 'layout1_text'),'css');
         // Load actual views
-        if($_SERVER['HTTP_REFERER']){
-            $content = "
-                <b>$content</b>
-                <br /><br /><br /><br />
-                
-                <div style = 'display:block' id = 'taker'><i>Taking you to previous page...</i></div>
-                
-                <script>
-                    function takeMeBack(){
-                        window.location = '" . $_SERVER['HTTP_REFERER'] ."';
-                    }
-                    setTimeout('takeMeBack();',5000);
-                    
-                    //design
-                    
-                    function blinker(){
-                        if($('#taker').css('display') == 'block'){
-                            $('#taker').fadeOut('slow');
-                        }else{
-                            $('#taker').fadeIn('slow');
-                        }
-                        
-                        setTimeout('blinker();', 1500);
-                    }
-                    
-                    blinker();
-                </script>
+        if(isset($_SERVER['HTTP_REFERER']))
+            if($_SERVER['HTTP_REFERER']){
+                $content = "
+                    <b>$content</b>
+                    <br /><br /><br /><br />
 
-                ";
-        }
+                    <div style = 'display:block' id = 'taker'><i>Taking you to previous page...</i></div>
+
+                    <script>
+                        function takeMeBack(){
+                            window.location = '" . $_SERVER['HTTP_REFERER'] ."';
+                        }
+                        setTimeout('takeMeBack();',5000);
+
+                        //design
+
+                        function blinker(){
+                            if($('#taker').css('display') == 'block'){
+                                $('#taker').fadeOut('slow');
+                            }else{
+                                $('#taker').fadeIn('slow');
+                            }
+
+                            setTimeout('blinker();', 1500);
+                        }
+
+                        blinker();
+                    </script>
+
+                    ";
+            }
         $this->CI->load->view($this->theme . "general/header");
         $this->CI->load->view($this->theme . "general/content",array('html' => "<div style = 'font-size:18px;' align = 'center'>$content</div>"));
         $this->CI->load->view($this->theme . "general/footer");

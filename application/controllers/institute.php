@@ -163,6 +163,10 @@ class Institute extends CI_Controller {
 
     function join($mode = "", $id = "") {
         // Join an Institution
+        
+        
+        $this->load->model('User_inst');
+        
         $this->page->title = "Join An Institution";
         $this->defaultBreadcrumb['Join An Institution'] = "";
         $this->page->breadcrumbs = $this->defaultBreadcrumb;
@@ -194,7 +198,6 @@ class Institute extends CI_Controller {
                         return;
                     }
                     // Future implementation: check if the referer valid
-                    $this->load->model('User_inst');
                     $this->User_inst->username = $uname;
                     $this->User_inst->institution_id = $id;
                     $this->User_inst->referer = $this->input->post('referer');
@@ -211,19 +214,24 @@ class Institute extends CI_Controller {
             $this->defaultBreadcrumb['Join An Institution'] = site_url('institute/join');
             $this->defaultBreadcrumb['Choose Referer'] = "";
             $this->page->breadcrumbs = $this->defaultBreadcrumb;
+            
             $this->page->loadViews(
                     array(
                 array("Institutions", "sidebars/inst_common"),
                 array("Administration", "sidebars/inst_admin")
                     ), array(
                 array("Choose A Referer", "forms/choose_referer", array("id" => $id, "controller" => "institute")),
-                    ), null);
+                    ), null
+                    );
             return;
         }
 
         // Load  Models
 //       $this->load->model('Institution');
         $instList = $this->Institution->GetAllApproved();
+        
+        // Get referer requests
+        $refData = $this->User_inst->GetRefererRequests($uname);
 
         $this->page->loadViews(
                 array(
@@ -231,7 +239,11 @@ class Institute extends CI_Controller {
             array("Administration", "sidebars/inst_admin")
                 ), array(
             array("Join An Instituion", "institution/listAll", array("list" => $instList)),
-                ), null);
+                ), 
+                array(
+                    array("Requests", "sidebars/referer_requests", array("instData" => $refData))
+                )
+                );
     }
 
     function modify($mode = "", $id = "") {
