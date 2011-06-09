@@ -138,7 +138,7 @@
                        $this->Community->name = "Community for " . $this->Field->name;
                        $this->Community->type = "institution";
                        $this->Community->short_description = $this->Field->short_description;
-                       $this->Community->Insert();  //  Created
+                       $this->Community->DirectInsert();  //  Created
                        
                        if(!$this->Community->community_id){
                            $this->page->showMesssage("Failed to create community!");
@@ -437,6 +437,12 @@
 
                     if(empty($chosenUsername)){
                         $this->page->showMessage("No Username Chosen");
+                        return;
+                    }
+
+                    $statusArr = array("member", "banned");
+                    if(!in_array($status, $statusArr)){
+                        $this->page->showMessage("Fatal error: invalid status");
                         return;
                     }
 

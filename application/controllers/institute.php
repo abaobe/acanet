@@ -396,6 +396,12 @@ class Institute extends CI_Controller {
                     $this->page->showMessage("No Username Chosen");
                     return;
                 }
+
+                $statusArr = array("member", "banned");
+                if(!in_array($status, $statusArr)){
+                    $this->page->showMessage("Fatal error: invalid status");
+                    return;
+                }
                 
                 // Try to update
                 
