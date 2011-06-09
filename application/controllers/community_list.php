@@ -28,6 +28,12 @@ class Community_list extends CI_Controller {
         $communities = $this->User_community->GetByUserName($username);
         
         $this->page->title = "List of Communities By Type";
+
+        $this->page->breadcrumbs = array(
+            "Home" => base_url(),
+            "Community_list" => site_url("community_list"),
+        );
+
         
         $data['query1_result'] = $this->Model_community->GetByType('institution',5);
         $data['query2_result'] = $this->Model_community->GetByType('field',5);
@@ -51,6 +57,14 @@ class Community_list extends CI_Controller {
 
         switch($community_type){case 'institution': case 'field': case 'subject': case 'course': case 'group': break; default: echo '<h1>bad community type<h1>';return;break;}
         $this->page->title = "List of Communities of type : $community_type";
+
+
+        $this->page->breadcrumbs = array(
+            "Home" => base_url(),
+            "Community" => site_url("community_list"),
+            "$community_type" => site_url("community_list/$community_type")
+        );
+
 
         $data['query_result'] = $this->Model_community->GetByType($community_type);
         $data['communities'] = $communities;

@@ -34,8 +34,8 @@ class Community extends CI_Controller {
 
         if($community->type == "institution"){
             $this->User_inst->username = $username;
-            $this->User_inst->institution_id = $this->Institution->GetField_idByCommunity_id($community_id);
-            $role = $this->User_inst->GetRole();
+            $this->User_inst->institution_id = $this->Institution->GetInstitute_idByCommunity_id($community_id);
+            $role = $this->User_inst->GetRole(); 
         }else if($community->type == "field"){
             $this->User_field->username = $username;
             $this->User_field->field_id = $this->Field->GetField_idByCommunity_id($community_id);
@@ -46,6 +46,7 @@ class Community extends CI_Controller {
             return;
             
         }
+              
 
         if($role){
             switch($role){
@@ -58,7 +59,7 @@ class Community extends CI_Controller {
                     break;
             }
         }else{
-            $url = site_url('/institute/join/id_chosen/' . $community_id);
+            $url = site_url('/converter/index/'. $community_id);
             $this->page->showMessage("You need permission to get access to this community.<br/>
                 Get <a href='$url'>refferal</a> for access to this community.");
             return;
@@ -85,6 +86,7 @@ class Community extends CI_Controller {
             redirect(site_url("/community_list"));
         }
         $community = $community[0];
+
         //===============Get community basic info from ID===========
 
         //===============Public or private view=====================
@@ -92,15 +94,7 @@ class Community extends CI_Controller {
               if($this->currentUsername!==false)
                  $this->isPublicView=false;
 
-
-              $this->page->title = "Home";
-
-              $this->page->breadcrumbs = array(
-                  "Home" => base_url()
-              );
-
               $nav1 = array();
-
               if($this->isPublicView){
                 $nav1["Login"]=site_url('login');
                 $nav1["Registration"] = site_url('register');
@@ -147,9 +141,7 @@ class Community extends CI_Controller {
         //--------Loading main content--------------------------------------------
         $data = null;
         $data['communityId'] = $community_id;
-
         $data['userName'] = $this->Model_user->GetLoggedInUsername();
-
         $data['communityName'] = $community->name;
 
 
