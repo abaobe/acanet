@@ -117,6 +117,8 @@ class Institute extends CI_Controller {
                     $this->Community->short_description = $this->Institution->short_description;
                     $this->Community->DirectInsert();  //  Created
 
+                    
+
                     if (!$this->Community->community_id) {
                         $this->page->showMesssage("Failed to create community!");
                         return;
@@ -416,6 +418,17 @@ class Institute extends CI_Controller {
                 $this->User_inst->referer = $uname;
                 $this->User_inst->role = $status;
                 $this->User_inst->Update();
+
+                // insert in user_community
+
+                // fetch comm id
+
+                if($status == "member"){
+                    $this->Institution->institution_id = $id;
+                    $this->Institution->Load();
+                    $this->load->model('User_community');
+                    $this->User_community->Insert($chosenUsername, $this->Institution->community_id);
+                }
                 
                 $this->page->showMessage("Updated Successfully!");
                 return;
