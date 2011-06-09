@@ -53,10 +53,10 @@ class Community extends CI_Controller {
                 case 'owner': case 'member': break;
                 case 'pending':
                     $this->page->showMessage("Your Request to join this community is pending.");
-                    break;
+                    return;
                 case 'banned':
                     $this->page->showMessage("Sorry! You have been banned form this community.");
-                    break;
+                    return;
             }
         }else{
             $url = site_url('/converter/index/'. $community_id);
