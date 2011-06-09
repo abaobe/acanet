@@ -213,6 +213,8 @@ $(document).ready(function(){
                 $("#recent-post-load-div").html(data);
                 $("#recent-post-load-div").slideDown('slow');
 
+                
+
 
 
             //UpdateRecentPostList(data);
@@ -267,7 +269,8 @@ $(document).ready(function(){
                   postId : postId
                }),
          success: function(msg){
-            LoadRecentPosts();
+            window.location = site_url() + "/community/index/" + cId;
+            //LoadRecentPosts();
          }
       })
    }
