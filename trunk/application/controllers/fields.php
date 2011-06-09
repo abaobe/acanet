@@ -136,9 +136,11 @@
                        $this->load->model("model_community","Community");
                        // Create Instance
                        $this->Community->name = "Community for " . $this->Field->name;
-                       $this->Community->type = "institution";
+                       $this->Community->type = "field";
                        $this->Community->short_description = $this->Field->short_description;
                        $this->Community->DirectInsert();  //  Created
+
+                       
                        
                        if(!$this->Community->community_id){
                            $this->page->showMesssage("Failed to create community!");
@@ -459,6 +461,14 @@
                     $this->User_field->referer = $uname;
                     $this->User_field->role = $status;
                     $this->User_field->Update();
+
+                    // fetch comm id
+                    if($status == "member"){
+                        $this->Field->field_id = $id;
+                        $this->Field->Load();
+                        $this->load->model('User_community');
+                        $this->User_community->Insert($chosenUsername, $this->Field->community_id);
+                    }
 
                     $this->page->showMessage("Updated Successfully!");
                     return;

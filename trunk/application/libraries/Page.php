@@ -107,7 +107,7 @@ class Page {
             }
             $fieldsLinks =array();
             foreach($allFields as $aField){
-                $fieldsLinks[$aField->short_name] = site_url('field').'/view/'.$aField->field_id;
+                $fieldsLinks[$aField->short_name] = site_url('fields').'/view/'.$aField->field_id;
             }
             $nav2 = array();
             $nav2EntryHeader1 = array("Home", base_url());

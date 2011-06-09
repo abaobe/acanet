@@ -255,9 +255,8 @@ $(document).ready(function(){
       var actionUrl = $(this).parent().parent().parent().attr("action");
       var publisherName = $(".link-share-publisher-name").val();
       var contentLinkDesc = $("#contact_link_desc").val();
-      var communityId = $(this).find(".select-community-id").val();
-      var contactlink = $("#contact_link").val();
-           
+      var communityId = $(this).parent().parent().parent().find(".select-community-id").val();
+      var contactlink = $("#contact_link").val();      
       $("#jq_linkShare p,input,select,textarea").attr("disabled","disabled");
       $("#jq_linkShare").animate({opacity: 0.4});
 
