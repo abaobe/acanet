@@ -17,7 +17,7 @@
             <textarea name="contact_link_desc" id="contact_link_desc" cols="45" rows="10"tabindex="5"></textarea>
         </p>
         <p><label for="Type" class="left">Type:</label>
-            <select name="contact-link-community-type"  class="combo select-community-type">
+            <select name="contact-link-community-type"  id="select-community-type-1" class="combo">
                  <option value="institution">Institution</option>
                  <option value="field">Field</option>
                  <option value="course">Course</option>
@@ -26,7 +26,7 @@
             </select>
         </p>
         <p><label for="Communities" class="left">Community: </label>
-            <select name="contact-link-community-id" class="combo select-community-id">
+            <select name="contact-link-community-id" id="select-community-id-1"  class="combo ">
                 <option>Select Type</option>
             </select>
         </p>
