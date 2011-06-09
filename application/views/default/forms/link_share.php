@@ -22,6 +22,7 @@
                 <option>Field</option>
                 <option>Course</option>
                 <option>Subject</option>
+                <option>Groups</option>
             </select>
         </p>
         <p><label for="Communities" class="left">Community: </label>
