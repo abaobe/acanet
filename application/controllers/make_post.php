@@ -23,8 +23,7 @@
                   return;
               }
               $type = $this->input->post('type');
-              if($type == 'post'){
-                                                  
+              if($type == 'post'){                                                  
                   $title = $this->input->post('title');                                                  
                   $postId = $this->post->Add($description,$publisherName,$title);
                   $this->post->SetPostCommunityRelation($postId,$cId);                    

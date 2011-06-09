@@ -49,6 +49,7 @@ $(document).ready(function(){
        var postId = $(div).attr("postId");
        var cId = $(div).attr("cId");
        SaveReply(desc,cId,postId);
+       return false;
    });
    
    function SaveReply(description,cId,postId)  //postId parentId
@@ -58,6 +59,7 @@ $(document).ready(function(){
         $.ajax({
          url: url,
          type: "POST",
+         async:false,
          data: ({
                   description : description,
                   cId: cId,

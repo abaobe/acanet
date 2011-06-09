@@ -10,9 +10,10 @@
             <p><label for="contact_message" class="left">Message:</label>
                <textarea name="description" id="contact_message" cols="45" rows="10"tabindex="5"></textarea></p>
                 <input type="hidden" name="cId"  class="field" value="<? echo $communityId?>" tabindex="4" />
-                <input type="hidden" name="publisherName"  class="field" value="<? echo $userName?>" tabindex="4" />
+                <input type="hidden" name="publisherName" id="loggedUsername" class="field" value="<? echo $userName?>" tabindex="4" />
 <!--                 for redirect-->
                 <input type="hidden" name="redirect"  class="field" value= "<?php echo "/community/index/".$community_id ;?>" tabindex="4" />
+                <input type="hidden" name="type"  class="field" value= "post" tabindex="4" />
             <p><input type="submit" name="submit" id="submit" class="button" value="Submit" tabindex="6" /></p>
          </fieldset>
       <?php echo form_close()?>
@@ -36,6 +37,7 @@
                 <input type="hidden" name="publisherName"  class="field" value="<? echo $userName?>" tabindex="4" />
 <!--                 for redirect-->
                 <input type="hidden" name="redirect"  class="field" value= "<?php echo "/community/index/".$community_id ;?>" tabindex="4" />
+                <input type="hidden" name="type"  class="field" value= "post" tabindex="4" />
             <p><input type="submit" name="submit" id="submit" class="button" value="Submit" tabindex="6" /></p>
          </fieldset>
       <?php echo form_close()?>
@@ -60,6 +62,7 @@
                 <input type="hidden" name="publisherName"  class="field" value="<? echo $userName?>" tabindex="4" />
 <!--                 for redirect-->
                 <input type="hidden" name="redirect"  class="field" value= "<?php echo "/community/index/".$community_id ;?>" tabindex="4" />
+                <input type="hidden" name="type"  class="field" value= "post" tabindex="4" />
             <p><input type="submit" name="submit" id="submit" class="button" value="Submit" tabindex="6" /></p>
          </fieldset>
       <?php echo form_close()?>
@@ -83,6 +86,7 @@
                 <input type="hidden" name="publisherName"  class="field" value="<? echo $userName?>" tabindex="4" />
 <!--                 for redirect-->
                 <input type="hidden" name="redirect"  class="field" value= "<?php echo "/community/index/".$community_id ;?>" tabindex="4" />
+                <input type="hidden" name="type"  class="field" value= "post" tabindex="4" />
             <p><input type="submit" name="submit" id="submit" class="button" value="Submit" tabindex="6" /></p>
          </fieldset>
       <?php echo form_close()?>
